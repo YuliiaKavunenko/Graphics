@@ -336,6 +336,10 @@ def clean_old_gr():
     third_func_down_label.place_forget()
     a_th_drob.place_forget()
     third_func_button.place_forget()
+    third_s_dev_label.place_forget()
+    third_f_dev_label.place_forget()
+    second_dev_sdrob.place_forget()
+    first_dev_sdrob.place_forget()
 
     fourth_func_l.place_forget()
     fourth_func_drob_label.place_forget()
@@ -345,6 +349,10 @@ def clean_old_gr():
     a4_drob.place_forget()
     a4_drob.lift()
     fourth_func_button.place_forget()
+    second_dev_fourth.place_forget()
+    first_dev_fourth.place_forget()
+    fourth_f_dev_label.place_forget()
+    fourth_s_dev_label.place_forget()
 
     get_grachic_1.place_forget()
 

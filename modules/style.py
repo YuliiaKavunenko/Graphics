@@ -516,7 +516,7 @@ fourth_func_up_label.configure(
     anchor = 'center'
 )
 fourth_func_down_label.configure(
-    text = 'x² +          ²',
+    text = 'x² +          ',
     font = ("Roboto Slab", 15),
     text_color = text_color,
     bg_color = frame_background,

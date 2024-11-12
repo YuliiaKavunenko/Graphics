@@ -7,6 +7,7 @@ import matplotlib.pyplot as plot
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 main = ctk.CTk()
+intrd_window = ctk.CTk()
 
 frame_first = ctk.CTkFrame(
     master = main,

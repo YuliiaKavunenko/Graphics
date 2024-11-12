@@ -168,10 +168,10 @@ def find_intervals(first_dev, function):
                 local_min.append((point, function.subs(x, point)))
 
     # if len(local_max) == 0:
-    #     local_max.append('немає')
+    #     local_max.append('не існує')
 
     # if len(local_min) == 0:
-    #     local_min.append('немає')
+    #     local_min.append('не існує')
         
 
     # Знаходимо максимальне і мінімальне значення функції на інтервалі [-10, 10]
@@ -316,7 +316,7 @@ def plot_graph(ax, canvas):
             if len(intervals_data['інтервали']) != 0:
                 interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
             else:
-                interval_text = "Інтервалів зростання/спадання немає"
+                interval_text = "Інтервалів зростання/спадання не існує"
 
             interval_label.configure(text=f'3) {interval_text}')
 
@@ -324,24 +324,24 @@ def plot_graph(ax, canvas):
             if len(intervals_data['локальний максимум']) != 0:
                 local_max_text = "4) Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
             else:
-                local_max_text = "4) Локальний максимум: немає"
+                local_max_text = "4) Локальний максимум: не існує"
 
             if len(intervals_data['локальний мінімум']) != 0:
                 local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
             else:
-                local_min_text = "Локальний мінімум: немає"
+                local_min_text = "Локальний мінімум: не існує"
 
             # макс значення функції
             if intervals_data['макс. значення ф-ції']:
                 funct_max_text = f"5) Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
             else:
-                funct_max_text = "5) Максимальне значення функції: немає"
+                funct_max_text = "5) Максимальне значення функції: не існує"
 
             # Мінімальне значення функції
             if intervals_data['мін. значення ф-ції']:
                 func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
             else:
-                func_min_text = "Мінімальне значення функції: немає"
+                func_min_text = "Мінімальне значення функції: не існує"
 
             local_max_min_text =f'{local_max_text}\n{local_min_text}'
             local_max_min_label.configure(text = local_max_min_text)
@@ -598,16 +598,16 @@ def check_first_dev():
                 canvas.draw()
 
     # спадання зростання
-                points_0x_0y = points_ox_oy(expr, 'green', False, True)
-                ox_points = points_0x_0y['0x']
-                oy_points = points_0x_0y['0y']
-                h_lines = points_0x_0y['points_zero']
+                # points_0x_0y = points_ox_oy(expr, 'green', False, True)
+                # ox_points = points_0x_0y['0x']
+                # oy_points = points_0x_0y['0y']
+                # h_lines = points_0x_0y['points_zero']
 
                 intervals_data = find_intervals(expr, function)
                 if len(intervals_data['інтервали']) != 0:
                     interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
                 else:
-                    interval_text = "Інтервалів зростання/спадання немає"
+                    interval_text = "Інтервалів зростання/спадання не існує"
 
                 interval_label.configure(text=f'4) {interval_text}')
 
@@ -638,25 +638,25 @@ def check_first_dev():
                 if len(intervals_data['локальний максимум']) != 0:
                     local_max_text = "5) Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
                 else:
-                    local_max_text = "5) Локальний максимум: немає"
+                    local_max_text = "5) Локальний максимум: не існує"
 
                 if len(intervals_data['локальний мінімум']) != 0:
                     local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
                 else:
-                    local_min_text = "Локальний мінімум: немає"
+                    local_min_text = "Локальний мінімум: не існує"
 
 
                 # макс значення функції
                 if intervals_data['макс. значення ф-ції']:
                     funct_max_text = f"6) Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
                 else:
-                    funct_max_text = "6) Максимальне значення функції: немає"
+                    funct_max_text = "6) Максимальне значення функції: не існує"
 
                 # Мінімальне значення функції
                 if intervals_data['мін. значення ф-ції']:
                     func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
                 else:
-                    func_min_text = "Мінімальне значення функції: немає"
+                    func_min_text = "Мінімальне значення функції: не існує"
                 local_max_min_text =f'{local_max_text}\n{local_min_text}'
                 local_max_min_label.configure(text = local_max_min_text)
 
@@ -672,30 +672,30 @@ def check_first_dev():
         plot_2.remove()
         plots.remove(plot_2)
         # Видаляємо точки і лінії
-        # if ox_points:
-        #     for point in ox_points:
-        #         point.remove()
-        #     ox_points = []
+        if ox_points:
+            for point in ox_points:
+                point.remove()
+            ox_points = []
 
-        # if oy_points:
-        #     oy_points.remove()
-        #     oy_points = None
+        if oy_points:
+            oy_points.remove()
+            oy_points = None
 
-        # if h_lines:
-        #     for line in h_lines:
-        #         line.remove()
-        #     h_lines = []
+        if h_lines:
+            for line in h_lines:
+                line.remove()
+            h_lines = []
 
-        # if local_max_scatter:
-        #     local_max_scatter.remove()
-        #     local_max_scatter_text.remove()
-        #     local_max_scatter = None
-        #     local_max_scatter_text = None
-        # if local_min_scatter:
-        #     local_min_scatter.remove()
-        #     local_min_scatter_text.remove()
-        #     local_min_scatter = None
-        #     local_min_scatter_text = None
+        if local_max_scatter:
+            local_max_scatter.remove()
+            local_max_scatter_text.remove()
+            local_max_scatter = None
+            local_max_scatter_text = None
+        if local_min_scatter:
+            local_min_scatter.remove()
+            local_min_scatter_text.remove()
+            local_min_scatter = None
+            local_min_scatter_text = None
 
         
         ax.legend().remove()
@@ -733,7 +733,7 @@ def check_second_dev():
 
                 ax.legend()
                 legend = ax.legend()
-                points_0x_0y = points_ox_oy(expr, 'blue', False, True)
+                # points_0x_0y = points_ox_oy(expr, 'blue', False, True)
                 for text in legend.get_texts():
                     text.set_color('red')
                 canvas.draw()
@@ -849,7 +849,7 @@ def drob_first_dev():
         if len(intervals_data['інтервали']) != 0:
             interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
         else:
-            interval_text = "Інтервалів зростання/спадання немає"
+            interval_text = "Інтервалів зростання/спадання не існує"
 
         interval_label.configure(text=f'4) {interval_text}')
 
@@ -857,24 +857,24 @@ def drob_first_dev():
         if len(intervals_data['локальний максимум']) != 0:
             local_max_text = "5) Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
         else:
-            local_max_text = "5) Локальний максимум: немає"
+            local_max_text = "5) Локальний максимум: не існує"
 
         if len(intervals_data['локальний мінімум']) != 0:
             local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
         else:
-            local_min_text = "Локальний мінімум: немає"
+            local_min_text = "Локальний мінімум: не існує"
 
         # макс значення функції
         if intervals_data['макс. значення ф-ції']:
             funct_max_text = f"6) Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
         else:
-            funct_max_text = "6) Максимальне значення функції: немає"
+            funct_max_text = "6) Максимальне значення функції: не існує"
 
         # Мінімальне значення функції
         if intervals_data['мін. значення ф-ції']:
             func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
         else:
-            func_min_text = "Мінімальне значення функції: немає"
+            func_min_text = "Мінімальне значення функції: не існує"
 
         local_max_min_text =f'{local_max_text}\n{local_min_text}'
         local_max_min_label.configure(text = local_max_min_text)
@@ -910,7 +910,7 @@ def drob_first_dev():
 
 
 
-        # госпади поможи даст бог даст бог ✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞
+
         # except Exception as e:
         #     print(f"Помилка першої дробовох похідної: {e}")
 
@@ -1002,29 +1002,29 @@ def build_third_func():
             domain_text = f"1) D(y) ∈ {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
 
-            # points_0x_0y = points_ox_oy(expr,'orange', True)
-            # points_0x_0y_text = f"7) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            # points_ox_oy_label.configure(text = points_0x_0y_text)
+            points_0x_0y = points_ox_oy(expr,'orange', True)
+            points_0x_0y_text = f"7) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
+            points_ox_oy_label.configure(text = points_0x_0y_text)
 
-            # # Отримуємо список точок нулів функції
-            # points_zero = points_0x_0y['points_zero']
+            # Отримуємо список точок нулів функції
+            points_zero = points_0x_0y['points_zero']
 
             # Формуємо текст для лейблу
-            # points_zero_text = "8) Нулі функції: " + ", ".join([f"x{i+1} = {point}" for i, point in enumerate(points_zero)])
+            points_zero_text = "8) Нулі функції: " + ", ".join([f"x{i+1} = {point}" for i, point in enumerate(points_zero)])
 
             # Встановлюємо текст лейблу
-            # points_zero_label.configure(text=points_zero_text)
+            points_zero_label.configure(text=points_zero_text)
 
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            # sign_intervals = find_sign_intervals(expr)
+            sign_intervals = find_sign_intervals(expr)
 
-            # all_sign_intervals_text = ""
-            # for interval, sign in sign_intervals:
-            #     all_sign_intervals_text += f"На інтервалі {interval}: {sign}\n"  # Добавляем каждый интервал в текст
+            all_sign_intervals_text = ""
+            for interval, sign in sign_intervals:
+                all_sign_intervals_text += f"На інтервалі {interval}: {sign}\n"  # Добавляем каждый интервал в текст
 
-            # intervals_identity_l.configure(text = all_sign_intervals_text)
+            intervals_identity_l.configure(text = all_sign_intervals_text)
 
 
             punctured_dots(expr)
@@ -1056,7 +1056,7 @@ def third_first_dev():
         if len(intervals_data['інтервали']) != 0:
             interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
         else:
-            interval_text = "Інтервалів зростання/спадання немає"
+            interval_text = "Інтервалів зростання/спадання не існує"
 
         interval_label.configure(text=f'4) {interval_text}')
 
@@ -1064,24 +1064,24 @@ def third_first_dev():
         if len(intervals_data['локальний максимум']) != 0:
             local_max_text = "5) Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
         else:
-            local_max_text = "5) Локальний максимум: немає"
+            local_max_text = "5) Локальний максимум: не існує"
 
         if len(intervals_data['локальний мінімум']) != 0:
             local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
         else:
-            local_min_text = "Локальний мінімум: немає"
+            local_min_text = "Локальний мінімум: не існує"
 
         # макс значення функції
         if intervals_data['макс. значення ф-ції']:
             funct_max_text = f"6) Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
         else:
-            funct_max_text = "6) Максимальне значення функції: немає"
+            funct_max_text = "6) Максимальне значення функції: не існує"
 
         # Мінімальне значення функції
         if intervals_data['мін. значення ф-ції']:
             func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
         else:
-            func_min_text = "Мінімальне значення функції: немає"
+            func_min_text = "Мінімальне значення функції: не існує"
 
         local_max_min_text =f'{local_max_text}\n{local_min_text}'
         local_max_min_label.configure(text = local_max_min_text)
@@ -1119,7 +1119,7 @@ def third_first_dev():
 
 
 
-        # госпади поможи даст бог даст бог ✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞✞
+
         # except Exception as e:
         #     print(f"Помилка першої дробовох похідної: {e}")
 
@@ -1180,7 +1180,7 @@ def build_fourth_func():
         
         x = sympy.symbols('x')
         a = float(a)
-#  (х**2-а**2)/(х)
+
         expr = (x)/(x**2+a)
         if isinstance(expr, sympy.Number):
             plot_constant_function(float(expr),'orange')
@@ -1209,29 +1209,29 @@ def build_fourth_func():
             domain_text = f"1) D(y) ∈ {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
 
-            # points_0x_0y = points_ox_oy(expr,'orange', True)
-            # points_0x_0y_text = f"7) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            # points_ox_oy_label.configure(text = points_0x_0y_text)
+            points_0x_0y = points_ox_oy(expr,'orange', True)
+            points_0x_0y_text = f"7) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
+            points_ox_oy_label.configure(text = points_0x_0y_text)
 
-            # # Отримуємо список точок нулів функції
-            # points_zero = points_0x_0y['points_zero']
+            # Отримуємо список точок нулів функції
+            points_zero = points_0x_0y['points_zero']
 
             # Формуємо текст для лейблу
-            # points_zero_text = "8) Нулі функції: " + ", ".join([f"x{i+1} = {point}" for i, point in enumerate(points_zero)])
+            points_zero_text = "8) Нулі функції: " + ", ".join([f"x{i+1} = {point}" for i, point in enumerate(points_zero)])
 
             # Встановлюємо текст лейблу
-            # points_zero_label.configure(text=points_zero_text)
+            points_zero_label.configure(text=points_zero_text)
 
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            # sign_intervals = find_sign_intervals(expr)
+            sign_intervals = find_sign_intervals(expr)
 
-            # all_sign_intervals_text = ""
-            # for interval, sign in sign_intervals:
-            #     all_sign_intervals_text += f"На інтервалі {interval}: {sign}\n"  # Добавляем каждый интервал в текст
+            all_sign_intervals_text = ""
+            for interval, sign in sign_intervals:
+                all_sign_intervals_text += f"На інтервалі {interval}: {sign}\n"  # Добавляем каждый интервал в текст
 
-            # intervals_identity_l.configure(text = all_sign_intervals_text)
+            intervals_identity_l.configure(text = all_sign_intervals_text)
 
 
             punctured_dots(expr)
@@ -1263,7 +1263,7 @@ def fourth_first_dev():
         if len(intervals_data['інтервали']) != 0:
             interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
         else:
-            interval_text = "Інтервалів зростання/спадання немає"
+            interval_text = "Інтервалів зростання/спадання не існує"
 
         interval_label.configure(text=f'4) {interval_text}')
 
@@ -1271,24 +1271,24 @@ def fourth_first_dev():
         if len(intervals_data['локальний максимум']) != 0:
             local_max_text = "5) Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
         else:
-            local_max_text = "5) Локальний максимум: немає"
+            local_max_text = "5) Локальний максимум: не існує"
 
         if len(intervals_data['локальний мінімум']) != 0:
             local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
         else:
-            local_min_text = "Локальний мінімум: немає"
+            local_min_text = "Локальний мінімум: не існує"
 
         # макс значення функції
         if intervals_data['макс. значення ф-ції']:
             funct_max_text = f"6) Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
         else:
-            funct_max_text = "6) Максимальне значення функції: немає"
+            funct_max_text = "6) Максимальне значення функції: не існує"
 
         # Мінімальне значення функції
         if intervals_data['мін. значення ф-ції']:
             func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
         else:
-            func_min_text = "Мінімальне значення функції: немає"
+            func_min_text = "Мінімальне значення функції: не існує"
 
         local_max_min_text =f'{local_max_text}\n{local_min_text}'
         local_max_min_label.configure(text = local_max_min_text)
