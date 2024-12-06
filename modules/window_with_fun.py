@@ -47,15 +47,15 @@ def functions_window():
     height = 40
     )
     first_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у = ax³ + bx² + cx + d',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = first_fn_on
+        bg_color = background,
+        fg_color = frame_background,
+        text = 'у = ax³ + bx² + cx + d',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = first_fn_on
     )
 
     # другий графік
@@ -65,16 +65,16 @@ def functions_window():
     height = 90
     )
     second_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = '',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = second_fn_on,
-    image = image_gr_2
+        bg_color = background,
+        fg_color = frame_background,
+        text = '',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = second_fn_on,
+        image = image_gr_2
     )
     third_fun_button = ctk.CTkButton(
     master = window_with_fun,
@@ -82,16 +82,16 @@ def functions_window():
     height = 90
     )
     third_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = '',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = third_fn_on,
-    image = image_gr_1
+        bg_color = background,
+        fg_color = frame_background,
+        text = '',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = third_fn_on,
+        image = image_gr_1
     )
 
     fourth_fun_button = ctk.CTkButton(
@@ -100,16 +100,16 @@ def functions_window():
     height = 90
     )
     fourth_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = '',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = fourth_fn_on,
-    image = image_gr_3
+        bg_color = background,
+        fg_color = frame_background,
+        text = '',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = fourth_fn_on,
+        image = image_gr_3
     )
     # поки неготові графіки:
 

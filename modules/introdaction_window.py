@@ -1,3 +1,7 @@
+'''
+Файл, де створюється і відображається титульне вікно
+'''
+
 import customtkinter as ctk
 import matplotlib.ticker as ticker
 from .main_elements import *
@@ -41,9 +45,75 @@ def introdaction():
     # Устанавливаем размеры и позицию окна
     intrd_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
+    school_name_l = ctk.CTkLabel(
+        master = intrd_window,
+        width = 800,
+        height = 65,
+        text = "Дніпровський науковий ліцей інформаційних\nтехнологій Дніпровської міської ради"
+    )
+
+    proj_title_l = ctk.CTkLabel(
+        master = intrd_window,
+        width = 800,
+        height = 98,
+        text = "ВИПУСКНА РОБОТА\nна тему:\n“Дослідження графіків функцій  за допомогою похідної”"
+    )
+
+    school_name_l.configure(
+        fg_color = background,
+        # bg_color = ,
+        font = ("Roboto Slab", 22),
+        text_color = text_color,
+        anchor = "center"
+    )
+    proj_title_l.configure(
+        fg_color = background,
+        # bg_color = ,
+        font = ("Roboto Slab", 24),
+        text_color = text_color,
+        anchor = "center"
+    )
+    teachers_names_l = ctk.CTkLabel(
+        master = intrd_window,
+        width = 800,
+        height = 145,
+        text = "Виконала учениця 11-Г класу,\nКавуненко Юлія Сергіївна\nКерівники роботи –\nБоровик Людмила Іванівна,\nЯкименко Наталія Михайлівна",
+        # сделать по левому краю
+    )
+
+    teachers_names_l.configure(
+        fg_color = background,
+        # bg_color = ,
+        font = ("Roboto Slab", 22),
+        text_color = text_color,
+        anchor = "e"
+    )
+    city_data_l = ctk.CTkLabel(
+        master = intrd_window,
+        width = 101,
+        height = 52,
+        text = "м. Дніпро\n2024"
+    )
+
+    city_data_l.configure(
+        fg_color = background,
+        # bg_color = ,
+        font = ("Roboto Slab", 20),
+        text_color = text_color,
+        anchor = "e"
+    )
+
+
+
+    school_name_l.place(x = 75, y = 74)
+    proj_title_l.place(x = 75, y = 273)
+    teachers_names_l.place(x = 75, y = 421)
+    city_data_l.place(x = 425, y = 582)
+    
+
     def open_main_window(event):
         run_main()
-        intrd_window.destroy()
+        
     intrd_window.bind("<Double-Button-1>", open_main_window)
 
     intrd_window.mainloop()

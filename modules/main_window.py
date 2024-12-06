@@ -16,9 +16,22 @@ def run_main():
     ctk.set_default_color_theme("dark-blue")
 
     # главное окно приложения
-
     main.title("Випускна робота")
-    main.geometry("1400x780")
+    # main.geometry("1400x780")
+    # Задать желаемый размер окна
+    window_width = 1400
+    window_height = 780
+
+    # Получаем размеры экрана
+    screen_width = main.winfo_screenwidth()
+    screen_height = main.winfo_screenheight()
+
+    # Вычисляем позицию окна для центрирования
+    x = (screen_width - window_width) // 2
+    y = (screen_height - window_height) // 2
+
+    # Устанавливаем размеры и позицию окна
+    main.geometry(f"{window_width}x{window_height}+{x}+{y}")
     main.resizable(False, False)
 
     # РАЗМЕЩЕНИЕ 
@@ -49,25 +62,31 @@ def run_main():
     l_exploration.bind('<Button-1>', focus_on_elements)
 
     # у = 245 норм
+    # Область визначення
     scope_label.place(x = 690, y = 390)
-    range_of_function.place(x = 690, y = 420)
     scope_label.bind('<Button-1>', focus_on_elements)
-    even_or_odd_func_l.place(x = 690, y = 450)
-
+    # Парна чи не парна функція
+    even_or_odd_func_l.place(x = 690, y = 420)
+    # Проміжок спадання і проміжок зростання
     interval_label.place(x = 690, y = 480)
     interval_label.bind('<Button-1>', focus_on_elements)
 
-
+    # Локал макс і мін
     local_max_min_label.place(x = 690, y = 545)
     local_max_min_label.bind('<Button-1>', focus_on_elements)
+    # Мін і макс знач. функції
     zn_function_label.place(x = 690, y = 630)
     zn_function_label.bind('<Button-1>', focus_on_elements)
-
+    # Точки перетину ох і оу
     points_ox_oy_label.place(x = 690, y = 680)
-
+    # нулі функції
     points_zero_label.place(x = 690, y = 725)
-
-    intervals_identity_l.place(x = 1050, y = 390)
+    # проміжки знакосталості
+    intervals_identity_l.place(x = 1060, y = 390)
+    # 725 - у, 690 - х
+    inflection_points_label.place(x = 1060, y = 475)
+    convexity_intervals.place(x = 1060, y = 540)
+    slope_asymptote.place(x = 1060, y = 625)
 
 
     purple_gr.place(x = 685, y = 15)

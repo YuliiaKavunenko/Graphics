@@ -3,7 +3,7 @@
 '''
 
 from .main_elements import *
-from .elements_functions import build_graphic, build_graphic_1, clean_button, check_second_dev, check_first_dev, build_drob_graphic, build_third_func, build_fourth_func
+from .elements_functions import build_graphic, build_graphic_1, clean_button, check_second_dev, check_first_dev, build_drob_graphic, build_third_func, build_fourth_func, drob_first_dev
 from .window_with_fun import functions_window
 
 background = "#A76E56"
@@ -247,7 +247,7 @@ l_exploration.configure(
     fg_color = frame_background
 )
 interval_label.configure(
-    text = '4) Проміжок спадання і зростання функції',
+    text = '3) Проміжок спадання і зростання функції',
     font = ("Roboto Slab", 15),
     text_color = text_color,
     bg_color = frame_background,
@@ -315,7 +315,7 @@ drob_first_dev_lable.configure(
     anchor = 'w'
 )
 local_max_min_label.configure(
-    text = '5) Локальний макс. і мін. функції',
+    text = '4) Локальний макс. і мін. функції',
     font = ("Roboto Slab", 15),
     text_color = text_color,
     bg_color = frame_background,
@@ -323,7 +323,7 @@ local_max_min_label.configure(
     anchor = 'w'
 )
 zn_function_label.configure(
-    text = '6) Мін. і макс. значення функції',
+    text = '5) Мін. і макс. значення функції',
     font = ("Roboto Slab", 15),
     text_color = text_color,
     bg_color = frame_background,
@@ -341,35 +341,29 @@ points_ox_oy_label.configure(
     bg_color = frame_background,
     text_color = text_color,
     font = ("Roboto Slab", 16),
-    text = "7) Точки перетину з осями ох і оу",
+    text = "6) Точки перетину з осями ох і оу",
     anchor = 'w'
 )
-range_of_function.configure(
-    bg_color = frame_background,
-    text_color = text_color,
-    font = ("Roboto Slab", 16),
-    text = "2) Область значень функції",
-    anchor = 'w'
-)
+
 points_zero_label.configure(
     bg_color = frame_background,
     text_color = text_color,
     font = ("Roboto Slab", 16),
-    text = "8) Нулі функції",
+    text = "7) Нулі функції",
     anchor = 'w'
 )
 even_or_odd_func_l.configure(
     bg_color = frame_background,
     text_color = text_color,
     font = ("Roboto Slab", 16),
-    text = "3) Парна чи непарна ф-ція",
+    text = "2) Парна чи непарна ф-ція",
     anchor = 'w'    
 )
 intervals_identity_l.configure(
     bg_color = frame_background,
     text_color = text_color,
     font = ("Roboto Slab", 16),
-    text = "9) Проміжки знакосталості ф-ції",
+    text = "8) Проміжки знакосталості ф-ції",
     anchor = 'w'
 )
 
@@ -582,4 +576,33 @@ second_dev_fourth.configure(
     # command = check_first_dev,
     # цвет галочки
     checkmark_color = text_color
+)
+
+inflection_points_label.configure(
+    text = '9) Точки перегину',
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    bg_color = frame_background,
+    fg_color = frame_background,
+    anchor = 'w'
+)
+convexity_intervals.configure(
+    text = '10) Проміжки опуклості',
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    bg_color = frame_background,
+    fg_color = frame_background,
+    anchor = 'w'
+)
+slope_asymptote.configure(
+    text = '11) Похила асімптота',
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    bg_color = frame_background,
+    fg_color = frame_background,
+    anchor = 'w'
+)
+first_dev_fdrob.configure(
+    # ,
+    command = drob_first_dev
 )
