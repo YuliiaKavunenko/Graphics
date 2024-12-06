@@ -68,30 +68,30 @@ def run_main():
     # Парна чи не парна функція
     even_or_odd_func_l.place(x = 690, y = 420)
     # Проміжок спадання і проміжок зростання
-    interval_label.place(x = 690, y = 480)
+    interval_label.place(x = 690, y = 450)#480
     interval_label.bind('<Button-1>', focus_on_elements)
 
     # Локал макс і мін
-    local_max_min_label.place(x = 690, y = 545)
+    local_max_min_label.place(x = 690, y = 515)#545
     local_max_min_label.bind('<Button-1>', focus_on_elements)
     # Мін і макс знач. функції
-    zn_function_label.place(x = 690, y = 630)
+    zn_function_label.place(x = 690, y = 600)#630
     zn_function_label.bind('<Button-1>', focus_on_elements)
     # Точки перетину ох і оу
-    points_ox_oy_label.place(x = 690, y = 680)
+    points_ox_oy_label.place(x = 690, y = 640)#680
     # нулі функції
-    points_zero_label.place(x = 690, y = 725)
+    points_zero_label.place(x = 690, y = 725)#725
     # проміжки знакосталості
     intervals_identity_l.place(x = 1060, y = 390)
     # 725 - у, 690 - х
     inflection_points_label.place(x = 1060, y = 475)
-    convexity_intervals.place(x = 1060, y = 540)
+    convexity_intervals_label.place(x = 1060, y = 540)
     slope_asymptote.place(x = 1060, y = 625)
 
 
     purple_gr.place(x = 685, y = 15)
 
-    # СТРОИМ ДСК!!!!1
+    # СТРОИМ ДСК!!!!
     build_DSK()
     
     canvas.get_tk_widget().place(x=10, y=10, width=830, height=955)  # Редактирования холста

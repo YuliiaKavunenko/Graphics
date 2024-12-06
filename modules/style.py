@@ -3,7 +3,7 @@
 '''
 
 from .main_elements import *
-from .elements_functions import build_graphic, build_graphic_1, clean_button, check_second_dev, check_first_dev, build_drob_graphic, build_third_func, build_fourth_func, drob_first_dev
+from .elements_functions import build_graphic, build_graphic_1, clean_button, check_second_dev, check_first_dev, build_drob_graphic, build_third_func, build_fourth_func, drob_first_dev, drob_second_dev, third_first_dev, third_second_dev, fourth_first_dev, fourth_second_dev
 from .window_with_fun import functions_window
 
 background = "#A76E56"
@@ -199,27 +199,27 @@ clean_graphic.configure(
 )
 
 first_dev.configure(
-    width = 20,
-    height = 20,
     bg_color = frame_background,
-    text = '',
+    text = 'Відображення похідної №1',
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
     border_width = 2,
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
     border_color = input_border_color,
     command = check_first_dev,
     # цвет галочки
     checkmark_color = text_color
 )
 second_dev.configure(
-    width = 20,
-    height = 20,
     bg_color = frame_background,
-    text = '',
+    text = 'Відображення похідної №2',
     fg_color = input_color,
     hover_color=checkbox_hover_color,
     border_width = 2,
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
     border_color = input_border_color,
     command = check_second_dev,
     checkmark_color = text_color
@@ -312,7 +312,8 @@ drob_first_dev_lable.configure(
     text_color = text_color,
     font = ("Roboto Slab", 15),
     text = "y' = очікування введення даних",
-    anchor = 'w'
+    anchor = 'w',
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу
 )
 local_max_min_label.configure(
     text = '4) Локальний макс. і мін. функції',
@@ -335,7 +336,8 @@ drob_second_dev_lable.configure(
     text_color = text_color,
     font = ("Roboto Slab", 16),
     text = "y'' = очікування введення даних",
-    anchor = 'w'    
+    anchor = 'w',
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу
 )
 points_ox_oy_label.configure(
     bg_color = frame_background,
@@ -403,7 +405,8 @@ third_f_dev_label.configure(
     text_color = text_color,
     bg_color = frame_background,
     fg_color = frame_background,
-    anchor = 'w'
+    anchor = 'w',
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу
 )
 third_s_dev_label.configure(
     text = "y'' = очікування введення даних",
@@ -411,7 +414,8 @@ third_s_dev_label.configure(
     text_color = text_color,
     bg_color = frame_background,
     fg_color = frame_background,
-    anchor = 'w'
+    anchor = 'w',
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу
 )
 third_func_button.configure(
     bg_color = frame_background,
@@ -529,7 +533,8 @@ fourth_f_dev_label.configure(
     text_color = text_color,
     bg_color = frame_background,
     fg_color = frame_background,
-    anchor = 'w'
+    anchor = 'w',
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу
 )
 fourth_s_dev_label.configure(
     text = "y'' = очікування введення даних",
@@ -537,7 +542,8 @@ fourth_s_dev_label.configure(
     text_color = text_color,
     bg_color = frame_background,
     fg_color = frame_background,
-    anchor = 'w'
+    anchor = 'w',
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу
 )
 
 fourth_func_button.configure(
@@ -550,30 +556,30 @@ fourth_func_button.configure(
     command = build_fourth_func
 )
 first_dev_fourth.configure(
-    width = 20,
-    height = 20,
     bg_color = frame_background,
-    text = '',
+    text = 'Відображення похідної №1',
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
     border_width = 2,
     border_color = input_border_color,
-    # command = check_first_dev,
+    command = fourth_first_dev,
     # цвет галочки
     checkmark_color = text_color
 )
 second_dev_fourth.configure(
-    width = 20,
-    height = 20,
     bg_color = frame_background,
-    text = '',
+    text = 'Відображення похідної №2',
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
     border_width = 2,
     border_color = input_border_color,
-    # command = check_first_dev,
+    command = fourth_second_dev,
     # цвет галочки
     checkmark_color = text_color
 )
@@ -586,7 +592,7 @@ inflection_points_label.configure(
     fg_color = frame_background,
     anchor = 'w'
 )
-convexity_intervals.configure(
+convexity_intervals_label.configure(
     text = '10) Проміжки опуклості',
     font = ("Roboto Slab", 15),
     text_color = text_color,
@@ -595,14 +601,77 @@ convexity_intervals.configure(
     anchor = 'w'
 )
 slope_asymptote.configure(
-    text = '11) Похила асімптота',
+    text = '11) Похила асимптота',
     font = ("Roboto Slab", 15),
     text_color = text_color,
     bg_color = frame_background,
     fg_color = frame_background,
     anchor = 'w'
 )
+# стілі для чекбоксів
 first_dev_fdrob.configure(
-    # ,
+    bg_color = frame_background,
+    text = 'Відображення похідної №1',
+    fg_color = input_color,
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    # bg_color = 'green',
+    hover_color=checkbox_hover_color,
+    border_width = 2,
+    border_color = input_border_color,
+    # цвет галочки
+    checkmark_color = text_color,
     command = drob_first_dev
+)
+first_dev_sdrob.configure(
+    bg_color = frame_background,
+    text = 'Відображення похідної №1',
+    fg_color = input_color,
+    # bg_color = 'green',
+    hover_color=checkbox_hover_color,
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    border_width = 2,
+    border_color = input_border_color,
+    # цвет галочки
+    checkmark_color = text_color,
+    command = third_first_dev
+)
+
+second_dev_sdrob.configure(
+    bg_color = frame_background,
+    text = 'Відображення похідної №2',
+    fg_color = input_color,
+    # bg_color = 'green',
+    hover_color=checkbox_hover_color,
+    border_width = 2,
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    border_color = input_border_color,
+    # цвет галочки
+    checkmark_color = text_color,
+    command = third_second_dev
+)
+
+second_dev_fdrob.configure(
+    bg_color = frame_background,
+    text = 'Відображення похідної №2',
+    fg_color = input_color,
+    # bg_color = 'green',
+    hover_color=checkbox_hover_color,
+    border_width = 2,
+    border_color = input_border_color,
+    # цвет галочки
+    checkmark_color = text_color,
+    command = drob_second_dev,
+    font = ("Roboto Slab", 15),
+    text_color = text_color
+)
+main_graphic_label.configure(
+    font = ("Roboto Slab", 15),
+    text_color = text_color,
+    bg_color = frame_background,
+    fg_color = frame_background,
+    anchor = 'w',
+    text = 'Головний графік'
 )

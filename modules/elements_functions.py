@@ -16,9 +16,15 @@ plots_2d = []
 plot_2_2 = None
 plot_3_2 = None
 
-ox_points = []
-oy_points = None
-h_lines = []
+# для першої похідної
+ox_points_first = []
+h_lines_first = []
+
+# для другої похідної
+ox_points_second = []
+h_lines_second = []
+inflection_points_scatter = []  # Для точек перегиба
+
 
 local_max_scatter = None
 local_min_scatter = None
@@ -34,6 +40,38 @@ local_min_scatter_2 = None
 local_max_scatter_text_2 = None
 local_min_scatter_text_2 = None
 
+# для першої похідної 3 графік - початок
+ox_points_third_first = []
+h_lines_third_first = []
+
+# для другої похідної 3 графік
+ox_points_third_second = []
+h_lines_third_second = []
+inflection_points_third_scatter = []
+
+plot_third_first = None
+plot_third_second = None
+
+# для локальних максимумів і мінімумів
+local_max_third_first = None
+local_min_third_first = None
+local_max_text_third_first = None
+local_min_text_third_first = None
+
+# для 4 функції
+plot_fourth_first = None
+plot_fourth_second = None
+ox_points_fourth_first = []
+h_lines_fourth_first = []
+local_max_fourth_first = None
+local_min_fourth_first = None
+local_max_text_fourth_first = None
+local_min_text_fourth_first = None
+ox_points_fourth_second = []
+h_lines_fourth_second = []
+inflection_points_fourth_scatter = []
+
+# стилі, кольори
 background = "#A76E56"
 frame_background = "#BA7D65"
 text_color = "#392D20"
@@ -315,15 +353,15 @@ def plot_graph(ax, canvas):
 
             # макс значення функції
             if intervals_data['макс. значення ф-ції']:
-                funct_max_text = f"5) Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+                funct_max_text = f"5) Макс. значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
             else:
-                funct_max_text = "5) Максимальне значення функції: не існує"
+                funct_max_text = "5) Макс. значення функції: не існує"
 
             # Мінімальне значення функції
             if intervals_data['мін. значення ф-ції']:
-                func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+                func_min_text = f"Мін. значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
             else:
-                func_min_text = "Мінімальне значення функції: не існує"
+                func_min_text = "Мін. значення функції: не існує"
 
             local_max_min_text =f'{local_max_text}\n{local_min_text}'
             local_max_min_label.configure(text = local_max_min_text)
@@ -332,8 +370,26 @@ def plot_graph(ax, canvas):
             zn_function_label.configure(text =zn_function_text)
 
             points_0x_0y = points_ox_oy(expr,'purple', True)
-            points_0x_0y_text = f"6) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            points_ox_oy_label.configure(text = points_0x_0y_text)
+            # перетин 0х і 0у
+            points_zero = points_0x_0y['points_zero']
+
+            points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # 0x-координаты
+
+            # отримуємл координати і точку 0у
+            oy_point = points_0x_0y['0y']
+            oy_text = "не існує"
+            if oy_point:
+                offsets = oy_point.get_offsets()  # координати точки
+                if len(offsets) > 0:
+                    oy_coords = offsets[0]  # перша точка
+                    oy_text = f"(0, {oy_coords[1]:.2f})"
+
+            points_0x_0y_text = (
+                f"6) Точки перетину з Ox:\n{points_0x_text}\n"
+                f"Точка перетину з Oy:\n{oy_text}"
+            )
+
+            points_ox_oy_label.configure(text=points_0x_0y_text)
 
             # Отримуємо список точок нулів функції
             points_zero = points_0x_0y['points_zero']
@@ -347,13 +403,16 @@ def plot_graph(ax, canvas):
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            sign_intervals = find_sign_intervals(expr)
+            try:
+                sign_intervals = find_sign_intervals(expr)
+                all_sign_intervals_text = ""
+                for interval, sign in sign_intervals:
+                    all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # додаємо кожний інтервал у текст
 
-            all_sign_intervals_text = ""
-            for interval, sign in sign_intervals:
-                all_sign_intervals_text += f"На інтервалі {interval}: {sign}\n"  # Добавляем каждый интервал в текст
-
-            intervals_identity_l.configure(text = all_sign_intervals_text)
+                intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+            except Exception as e:
+                print(f"Помилка обчислення проміжків знакосталості: {e}")
+                intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")
 
             punctured_dots(expr)
 
@@ -396,6 +455,7 @@ def build_graphic_1():
         # ставим чекбоксы
         first_dev.place(x = 1055, y = 70)
         second_dev.place(x = 1055, y = 115)
+        main_graphic_label.place(x = 1055, y = 25)
         build_colors_labels()
         # Удаления значения в похідних что  б не было ошибки повторения символов
         a_2.delete(0,"end")
@@ -448,14 +508,32 @@ def build_graphic_1():
             #     second_dev.toggle(1)
             # else:
             #     check_second_dev()
-            # D(y) хіхіхіхі    
+            # D(y)  
             domain = scope_of_function(expr)
             domain_text = f"1) D(y) = {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
 
-            points_0x_0y = points_ox_oy(expr, 'red', True)
-            points_0x_0y_text = f"6) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            points_ox_oy_label.configure(text = points_0x_0y_text)
+            # перетин 0х і 0у
+            points_0x_0y = points_ox_oy(expr,'red', True)
+            points_zero = points_0x_0y['points_zero']
+
+            points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # 0x-координаты
+
+            # отримуємл координати і точку 0у
+            oy_point = points_0x_0y['0y']
+            oy_text = "не існує"
+            if oy_point:
+                offsets = oy_point.get_offsets()  # координати точки
+                if len(offsets) > 0:
+                    oy_coords = offsets[0]  # перша точка
+                    oy_text = f"(0, {oy_coords[1]:.2f})"
+
+            points_0x_0y_text = (
+                f"6) Точки перетину з Ox:\n{points_0x_text}\n"
+                f"Точка перетину з Oy:\n{oy_text}"
+            )
+
+            points_ox_oy_label.configure(text=points_0x_0y_text)
 
             # Отримуємо список точок нулів функції
             points_zero = points_0x_0y['points_zero']
@@ -469,13 +547,16 @@ def build_graphic_1():
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            sign_intervals = find_sign_intervals(expr)
+            try:
+                sign_intervals = find_sign_intervals(expr)
+                all_sign_intervals_text = ""
+                for interval, sign in sign_intervals:
+                    all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # додаємо кожний інтервал у текст
 
-            all_sign_intervals_text = ""
-            for interval, sign in sign_intervals:
-                all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # Добавляем каждый интервал в текст
-
-            intervals_identity_l.configure(text = f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+                intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+            except Exception as e:
+                print(f"Помилка обчислення проміжків знакосталості: {e}")
+                intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")
 
             punctured_dots(expr)
 
@@ -524,17 +605,31 @@ def clean_button():
     drob_first_dev_lable.configure(text = "y' = ")
     drob_second_dev_lable.configure(text = "y'' = ")
 
+    third_f_dev_label.configure(text = "y' = ")
+    third_s_dev_label.configure(text = "y'' = ")
+
+    fourth_f_dev_label.configure(text = "y' = ")
+    fourth_s_dev_label.configure(text = "y'' = ")
+
     points_ox_oy_label.configure(text="6) Точки перетину з осями ох і оу")
 
     points_zero_label.configure(text="7) Нулі функції")
 
     intervals_identity_l.configure(text = '8) Проміжки знакосталості ф-ції')
 
+    inflection_points_label.configure(text = '9) Точки перегину')
+
+    convexity_intervals_label.configure(text = '10) Проміжки опуклості')
+
+    slope_asymptote.configure(text = '11) Похила асимптота')
+
+    main_graphic_label.place_forget()
+
     build_DSK()
 
 def check_first_dev():
     global plots, plot_2, local_max_scatter, local_min_scatter, local_max_scatter_text, local_min_scatter_text
-    global ox_points, oy_points, h_lines
+    global ox_points_first, h_lines_first
 
     check = first_dev.get()
     if check == 1:
@@ -578,12 +673,7 @@ def check_first_dev():
                     text.set_color('red')
                 canvas.draw()
 
-                # спадання зростання
-                points_0x_0y = points_ox_oy(expr, 'green', False, True)
-#                 # ox_points = points_0x_0y['0x']
-#                 # oy_points = points_0x_0y['0y']
-#                 # h_lines = points_0x_0y['points_zero']
-
+                
 
             # Обчислення точок локального максимуму та мінімуму
             intervals_data = find_intervals(expr, function)
@@ -600,7 +690,22 @@ def check_first_dev():
                 local_min_scatter = None
                 local_min_scatter_text = None
 
-            # Додавання нових точок
+            # видалення старих точок перетину и пунктирних ліній
+            if ox_points_first:
+                for point in ox_points_first:
+                    point.remove()
+                ox_points_first.clear()
+            if h_lines_first:
+                for line in h_lines_first:
+                    line.remove()
+                h_lines_first.clear()
+
+            # 0х і пунктирні лінії
+            points_0x_0y = points_ox_oy(expr, 'green', label=False, lines=True, include_oy=False)
+            ox_points_first = points_0x_0y['0x']
+            h_lines_first = points_0x_0y['lines']
+
+            # додавання нових точок
             if len(intervals_data['локальний максимум']) != 0:
                 local_max = intervals_data['локальний максимум'][0]
                 l_max_x, l_max_y = local_max
@@ -645,15 +750,15 @@ def check_first_dev():
 
             # макс значення функції
             if intervals_data['макс. значення ф-ції']:
-                funct_max_text = f"Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+                funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
             else:
-                funct_max_text = "Максимальне значення функції: не існує"
+                funct_max_text = "Макс. значення ф-ції: не існує"
 
             # Мінімальне значення функції
             if intervals_data['мін. значення ф-ції']:
-                func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+                func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
             else:
-                func_min_text = "Мінімальне значення функції: не існує"
+                func_min_text = "Мін. значення ф-ції: не існує"
             local_max_min_text =f'4) {local_max_text}\n{local_min_text}'
             local_max_min_label.configure(text = local_max_min_text)
 
@@ -685,6 +790,17 @@ def check_first_dev():
             local_min_scatter = None
             local_min_scatter_text = None
 
+        # видалення точек пересечения и пунктирных линий
+
+        if ox_points_first:
+            for point in ox_points_first:
+                point.remove()
+            ox_points_first.clear()
+        if h_lines_first:
+            for line in h_lines_first:
+                line.remove()
+            h_lines_first.clear()
+
         ax.legend().remove()
         ax.legend()
         legend = ax.legend()
@@ -695,7 +811,8 @@ def check_first_dev():
 
 
 def check_second_dev():
-    global plots, plot_3, func1
+    global plots, plot_3, func1, ox_points_second, h_lines_second, inflection_points_scatter, inflection_points_l
+
     check = second_dev.get()
     if check == 1:  
         a = a_3.get()
@@ -715,20 +832,29 @@ def check_second_dev():
             else:
                 # Отримуємо точки перегину
                 inflection_points = find_inflection_points(expr)
+
+                inflection_points_scatter = []  # лист для точек перегиба
+                inflection_points_l = [] # підпис точки
+
+                # форматований рядок для лейбла
+                formatted_points = "; ".join([f"x{i+1} = {point}" for i, point in enumerate(inflection_points)])
+
+                # виводимо точки перегину на графіку
                 for point in inflection_points:
                     # Обчислюємо значення функції в точці перегину
                     y_inflection = func1(point)
-                    
                     # Малюємо точки перегину на графіку
-                    ax.scatter(point, y_inflection, color='blue', zorder=5)
-                    ax.annotate(f'({point:.2f}, {y_inflection:.2f})',  # виправлено: y_inflection без індексу
+                    scatter = ax.scatter(point, y_inflection, color='blue', zorder=5)
+                    inflection_points_scatter.append(scatter)  # Сохраняем объект точки
+                    label_point_inflection = ax.annotate(f'({point:.1f}, {y_inflection:.1f})', # з округленням
                                 (point, y_inflection),
                                 textcoords="offset points", 
                                 xytext=(0, 10),
                                 ha='center', color='blue')
+                    inflection_points_l.append(label_point_inflection)
 
                 # Оновлюємо лейбл з точками перегину
-                inflection_points_label.configure(text=f"9) Точки перегину: {inflection_points}")
+                inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")
                 func = sympy.lambdify(x, expr, 'numpy')
 
                 x_vals = numpy.linspace(-10, 10, 400)
@@ -737,9 +863,27 @@ def check_second_dev():
                 plot_3, = ax.plot(x_vals, y_vals, label=f'y = 6*{a}x + 2 * {b}', color='blue')
                 plots.append(plot_3)
 
+                # Построение точек пересечения 0x и пунктирных линий
+                points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
+                ox_points_second = points_0x_0y['0x']  # Графические объекты точек пересечения
+                h_lines_second = points_0x_0y['lines']  # Графические объекты пунктирных линий
+
+                # знайти проміжки опуклості
+                convexity_intervals = find_convexity_intervals(expr)
+
+                # створити текст для лейблу
+                convexity_text = "Проміжки опуклості графіка:\n"
+                for interval, convexity in convexity_intervals:
+                    left, right = interval
+                    left = "-∞" if left == float('-inf') else f"{left:.2f}"
+                    right = "+∞" if right == float('inf') else f"{right:.2f}"
+                    convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"
+
+                # вивести у лейбл
+                convexity_intervals_label.configure(text=convexity_text)
                 ax.legend()
                 legend = ax.legend()
-                points_0x_0y = points_ox_oy(expr, 'blue', False, True)
+
                 for text in legend.get_texts():
                     text.set_color('red')
                 canvas.draw()
@@ -749,6 +893,28 @@ def check_second_dev():
     elif check == 0 and plot_3 in plots:
         plot_3.remove()
         plots.remove(plot_3)
+
+        # видалення точок перетину і пунктирних ліній
+        if ox_points_second:
+            for point in ox_points_second:
+                point.remove()
+            ox_points_second.clear()
+        if h_lines_second:
+            for line in h_lines_second:
+                line.remove()
+            h_lines_second.clear()
+
+        # видалення точок перегину
+        for scatter in inflection_points_scatter:
+            scatter.remove()
+        inflection_points_scatter.clear()
+        # видалення підпису точок
+        for label in inflection_points_l:
+            label.remove()
+        inflection_points_l.clear()
+
+
+
         ax.legend().remove()
         ax.legend()
         legend = ax.legend()
@@ -756,16 +922,17 @@ def check_second_dev():
             text.set_color('red')
         canvas.draw()
         print("NOT SECOND DEV!")
-# второй график с похидной
+# второй график с похидними
 def build_drob_graphic():
     global plots
     ax.clear()
     build_DSK()
     a = a_drob_1.get()
-    # a_2 = a_drob_2.get()
     b_data_3 = a_drob_3.get()
+    # чекбокси
     first_dev_fdrob.place(x = 1055, y =70)
     second_dev_fdrob.place(x = 1055, y = 115)
+    main_graphic_label.place(x = 1055, y = 25)
     build_colors_labels()
     if a and b_data_3:
         # try:
@@ -783,7 +950,7 @@ def build_drob_graphic():
             x_vals = numpy.linspace(-10, 10, 400)
             y_vals = func(x_vals)
 
-            plot, = ax.plot(x_vals, y_vals, label=f'y = (х²-{a})/(х-{a_3})', color='red')
+            plot, = ax.plot(x_vals, y_vals, label=f'y = (х²-{a})/(х-{b_data_3})', color='red')
             plots.append(plot)
 
             ax.legend()
@@ -794,16 +961,33 @@ def build_drob_graphic():
             # похідні додати потрібно умову з чекбоксами
             # drob_first_dev()
             # drob_second_dev()
-            # замена значения для похідних (будет) ne budet tam palka
+            # замена значения для похідних (будет) ne budet
 
             
             domain = scope_of_function(expr)
             domain_text = f"1) D(y) = {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
-
+            # перетин 0х і 0у
             points_0x_0y = points_ox_oy(expr,'red', True)
-            points_0x_0y_text = f"6) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            points_ox_oy_label.configure(text = points_0x_0y_text)
+            points_zero = points_0x_0y['points_zero']
+
+            points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # 0x-координаты
+
+            # отримуємл координати і точку 0у
+            oy_point = points_0x_0y['0y']
+            oy_text = "не існує"
+            if oy_point:
+                offsets = oy_point.get_offsets()  # координати точки
+                if len(offsets) > 0:
+                    oy_coords = offsets[0]  # перша точка
+                    oy_text = f"(0, {oy_coords[1]:.2f})"
+
+            points_0x_0y_text = (
+                f"6) Точки перетину з Ox:\n{points_0x_text}\n"
+                f"Точка перетину з Oy:\n{oy_text}"
+            )
+
+            points_ox_oy_label.configure(text=points_0x_0y_text)
 
             # Отримуємо список точок нулів функції
             points_zero = points_0x_0y['points_zero']
@@ -817,13 +1001,19 @@ def build_drob_graphic():
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            sign_intervals = find_sign_intervals(expr)
+            try:
+                sign_intervals = find_sign_intervals(expr)
+                all_sign_intervals_text = ""
+                for interval, sign in sign_intervals:
+                    all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # додаємо кожний інтервал у текст
 
-            all_sign_intervals_text = ""
-            for interval, sign in sign_intervals:
-                all_sign_intervals_text += f"Н{sign} при х ∈ {interval}\n"  # Добавляем каждый интервал в текст
+                intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+            except Exception as e:
+                print(f"Помилка обчислення проміжків знакосталості: {e}")
+                intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")
 
-            intervals_identity_l.configure(text = f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+            slant_asymptote_label = slope_asymptote  # рівняння асимптоти
+            find_and_plot_slant_asymptote(expr, x, label_widget = slope_asymptote)
 
 
             punctured_dots(expr)
@@ -834,7 +1024,8 @@ def build_drob_graphic():
             print(plots)
 
 def drob_first_dev():
-    global plots_2d, plot_2_2, local_max_scatter_2, local_min_scatter_2, local_max_scatter_text_2, local_min_scatter_text_2
+    global plots_2d, plot_2_2, ox_points_first, h_lines_first, local_max_scatter_2, local_min_scatter_2
+    global local_max_scatter_text_2, local_min_scatter_text_2
 
     check = first_dev_fdrob.get()
     if check == 1:
@@ -850,10 +1041,10 @@ def drob_first_dev():
             dev_of_function = sympy.diff(function, x)
 
 
-            # спадання зростання
+            # обчислення локальних максимумів, мінімумів та інтервалів зростання/спадання
             intervals_data = find_intervals(dev_of_function, function)
 
-            # Видалення старих точок, якщо вони є
+            # видалення старих точок, якщо вони є
             if local_max_scatter_2:
                 local_max_scatter_2.remove()
                 local_max_scatter_text_2.remove()
@@ -864,6 +1055,45 @@ def drob_first_dev():
                 local_min_scatter_text_2.remove()
                 local_min_scatter_2 = None
                 local_min_scatter_text_2 = None
+
+            # видалення точок перетину і пунктирних ліній
+            if ox_points_first:
+                for point in ox_points_first:
+                    point.remove()
+                ox_points_first.clear()
+            if h_lines_first:
+                for line in h_lines_first:
+                    line.remove()
+                h_lines_first.clear()
+
+            # побудова нових точок перетину і пунктирних ліній
+            points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)
+            ox_points_first = points_0x_0y['0x']  # точки 0х
+            h_lines_first = points_0x_0y['lines']  # пунктирні лінії
+
+            # додавання нових точок локальних максимумів і мінімумів
+            if len(intervals_data['локальний максимум']) != 0:
+                local_max = intervals_data['локальний максимум'][0]
+                l_max_x, l_max_y = local_max
+                local_max_scatter_2 = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40)
+                local_max_scatter_text_2 = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
+                                                       (l_max_x, l_max_y),
+                                                       textcoords="offset points",
+                                                       xytext=(15, 15),
+                                                       ha='center')
+
+            if len(intervals_data['локальний мінімум']) != 0:
+                local_min = intervals_data['локальний мінімум'][0]
+                l_min_x, l_min_y = local_min
+                local_min_scatter_2 = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40)
+                local_min_scatter_text_2 = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
+                                                       (l_min_x, l_min_y),
+                                                       textcoords="offset points",
+                                                       xytext=(15, 15),
+                                                       ha='center')
+
+            # оновлення тексту похідної
+            drob_first_dev_lable.configure(text=f"y' = {dev_of_function}")
 
             if len(intervals_data['інтервали']) != 0:
                 interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
@@ -885,15 +1115,15 @@ def drob_first_dev():
 
             # макс значення функції
             if intervals_data['макс. значення ф-ції']:
-                funct_max_text = f"Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+                funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
             else:
-                funct_max_text = "Максимальне значення функції: не існує"
+                funct_max_text = "Макс. значення ф-ції: не існує"
 
             # Мінімальне значення функції
             if intervals_data['мін. значення ф-ції']:
-                func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+                func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
             else:
-                func_min_text = "Мінімальне значення функції: не існує"
+                func_min_text = "Мін. значення ф-ції: не існує"
 
             local_max_min_text =f'4) {local_max_text}\n{local_min_text}'
             local_max_min_label.configure(text = local_max_min_text)
@@ -902,7 +1132,8 @@ def drob_first_dev():
             zn_function_label.configure(text =zn_function_text)
 
             drob_first_dev_lable.configure(
-                text = f"y' = {dev_of_function}"
+                text = f"y' = {dev_of_function}",
+                
             )
 
             print(dev_of_function)
@@ -919,7 +1150,7 @@ def drob_first_dev():
 
             ax.legend()
             legend = ax.legend()
-            points_0x_0y = points_ox_oy(expr, 'green', False, True)
+
             for text in legend.get_texts():
                 text.set_color('red')
             canvas.draw()
@@ -932,11 +1163,12 @@ def drob_first_dev():
 
             # except Exception as e:
             #     print(f"Помилка першої дробовох похідної: {e}")
-    elif check == 0 and plot_2_2 in plots:
-        # Видалення графіка та точок
+    elif check == 0 and plot_2_2 in plots_2d:
+        # видалення графіка
         plot_2_2.remove()
-        plots.remove(plot_2_2)
+        plots_2d.remove(plot_2_2)
 
+        # видалення локальних максимумів та мінімумів
         if local_max_scatter_2:
             local_max_scatter_2.remove()
             local_max_scatter_text_2.remove()
@@ -949,6 +1181,16 @@ def drob_first_dev():
             local_min_scatter_2 = None
             local_min_scatter_text_2 = None
 
+        # видалення точок 0х та пунктирних ліній
+        if ox_points_first:
+            for point in ox_points_first:
+                point.remove()
+            ox_points_first.clear()
+        if h_lines_first:
+            for line in h_lines_first:
+                line.remove()
+            h_lines_first.clear()
+
         ax.legend().remove()
         ax.legend()
         legend = ax.legend()
@@ -958,47 +1200,130 @@ def drob_first_dev():
         print("NO FIRST DEV!")
 
 def drob_second_dev():
-    global plots
+    global plots_2d, plot_3_2, ox_points_second, h_lines_second, inflection_points_scatter, inflection_points_label
 
-    a = a_drob_1.get()
-    b_data_3 = a_drob_3.get()
+    check = second_dev_fdrob.get()
+    if check == 1:
+        a = a_drob_1.get()
+        b_data_3 = a_drob_3.get()
 
-    if a and b_data_3:
-        # try:
-        x = sympy.symbols('x')
-        a = float(a)
-        b_data_3 = float(b_data_3)
+        if a and b_data_3:
+            # try:
+            x = sympy.symbols('x')
+            a = float(a)
+            b_data_3 = float(b_data_3)
 
-        function = (x**2-a)/(x-b_data_3)
+            function = (x**2-a)/(x-b_data_3)
 
-        dev_of_function = sympy.diff(function, x)
 
-        second_dev_of_function = sympy.diff(dev_of_function, x)
+            dev_of_function = sympy.diff(function, x)
 
-        drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")
+            second_dev_of_function = sympy.diff(dev_of_function, x)
 
-        expr = second_dev_of_function
-        
-        func = sympy.lambdify(x, expr, 'numpy')
+            drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")
 
-        x_vals = numpy.linspace(-10, 10, 400)
-        y_vals = func(x_vals)
+            expr = second_dev_of_function
+            
+            func = sympy.lambdify(x, expr, 'numpy')
 
-        plot, = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
-        plots.append(plot)
+            # видалення старих точок перегину, пунктирних ліній і точок 0х
+            if inflection_points_scatter:
+                for point in inflection_points_scatter:
+                    point.remove()
+                inflection_points_scatter.clear()
 
+            if ox_points_second:
+                for point in ox_points_second:
+                    point.remove()
+                ox_points_second.clear()
+
+            if h_lines_second:
+                for line in h_lines_second:
+                    line.remove()
+                h_lines_second.clear()
+
+            # пошук і побудова точок перегину
+            inflection_points = find_inflection_points(second_dev_of_function)
+            for point in inflection_points:
+                y_val = function.subs(x, point)
+                scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)
+                inflection_points_scatter.append(scatter)
+
+                ax.annotate(f'({float(point):.2f}, {float(y_val):.2f})',
+                            (float(point), float(y_val)),
+                            textcoords="offset points",
+                            xytext=(0, 10),
+                            ha='center', color='blue')
+
+            # оновлення лейблу з точками перегину
+            if inflection_points:
+                formatted_points = "; ".join([f"x{i+1} = {float(pt):.2f}" for i, pt in enumerate(inflection_points)])
+                inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")
+            else:
+                inflection_points_label.configure(text="9) Точки перегину: не існує")
+
+            x_vals = numpy.linspace(-10, 10, 400)
+            y_vals = func(x_vals)
+
+            plot_3_2, = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
+            plots_2d.append(plot_3_2)
+
+             # побудова точок 0х і пунктирних ліній
+            points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
+            ox_points_second = points_0x_0y['0x']
+            h_lines_second = points_0x_0y['lines']
+
+            # # знайти проміжки опуклості
+            # convexity_intervals = find_convexity_intervals(expr)
+
+            # # створити текст для лейблу
+            # convexity_text = "Проміжки опуклості графіка:\n"
+            # for interval, convexity in convexity_intervals:
+            #     left, right = interval
+            #     left = "-∞" if left == float('-inf') else f"{left:.2f}"
+            #     right = "+∞" if right == float('inf') else f"{right:.2f}"
+            #     convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"
+
+            # # вивести у лейбл
+            # convexity_intervals_label.configure(text=convexity_text)
+
+            ax.legend()
+            legend = ax.legend()
+            
+            for text in legend.get_texts():
+                text.set_color('red')
+            canvas.draw()
+
+            # except Exception as e:
+            #     print(f"Помилка другої дробової похідної: {e}")
+    elif check == 0 and plot_3_2 in plots_2d:
+        # видалення графіка
+        plot_3_2.remove()
+        plots_2d.remove(plot_3_2)
+
+        # видалення точок 0х, пунктирних ліній і точок перегину
+        if inflection_points_scatter:
+            for point in inflection_points_scatter:
+                point.remove()
+            inflection_points_scatter.clear()
+
+        if ox_points_second:
+            for point in ox_points_second:
+                point.remove()
+            ox_points_second.clear()
+
+        if h_lines_second:
+            for line in h_lines_second:
+                line.remove()
+            h_lines_second.clear()
+
+        ax.legend().remove()
         ax.legend()
         legend = ax.legend()
-        points_0x_0y = points_ox_oy(expr, 'blue', False, True)
         for text in legend.get_texts():
             text.set_color('red')
         canvas.draw()
-
-        
-
-
-        # except Exception as e:
-        #     print(f"Помилка другої дробової похідної: {e}")
+        print("NO SECOND DEV!")
 
 def build_third_func():
     global plots
@@ -1006,11 +1331,11 @@ def build_third_func():
     build_DSK()
     print('build!')
     a = a_th_drob.get()
-
+    # чекбокси
     first_dev_sdrob.place(x = 1055, y = 70)
     second_dev_sdrob.place(x = 1055, y = 115)
+    main_graphic_label.place(x = 1055, y = 25)
     build_colors_labels()
-
     if a:
         # try:
         
@@ -1045,9 +1370,27 @@ def build_third_func():
             domain_text = f"1) D(y) = {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
 
+            # перетин 0х і 0у
             points_0x_0y = points_ox_oy(expr,'red', True)
-            points_0x_0y_text = f"6) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            points_ox_oy_label.configure(text = points_0x_0y_text)
+            points_zero = points_0x_0y['points_zero']
+
+            points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # 0x-координаты
+
+            # отримуємл координати і точку 0у
+            oy_point = points_0x_0y['0y']
+            oy_text = "не існує"
+            if oy_point:
+                offsets = oy_point.get_offsets()  # координати точки
+                if len(offsets) > 0:
+                    oy_coords = offsets[0]  # перша точка
+                    oy_text = f"(0, {oy_coords[1]:.2f})"
+
+            points_0x_0y_text = (
+                f"6) Точки перетину з Ox:\n{points_0x_text}\n"
+                f"Точка перетину з Oy:\n{oy_text}"
+            )
+
+            points_ox_oy_label.configure(text=points_0x_0y_text)
 
             # Отримуємо список точок нулів функції
             points_zero = points_0x_0y['points_zero']
@@ -1061,16 +1404,22 @@ def build_third_func():
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            sign_intervals = find_sign_intervals(expr)
+            try:
+                sign_intervals = find_sign_intervals(expr)
+                all_sign_intervals_text = ""
+                for interval, sign in sign_intervals:
+                    all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # додаємо кожний інтервал у текст
 
-            all_sign_intervals_text = ""
-            for interval, sign in sign_intervals:
-                all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # Добавляем каждый интервал в текст
-
-            intervals_identity_l.configure(text = f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+                intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+            except Exception as e:
+                print(f"Помилка обчислення проміжків знакосталості: {e}")
+                intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")
 
 
             punctured_dots(expr)
+
+            slant_asymptote_label = slope_asymptote  # рівняння асимптоти
+            find_and_plot_slant_asymptote(expr, x, label_widget = slope_asymptote)
 
             print(plots)
             # except Exception as e:
@@ -1078,130 +1427,301 @@ def build_third_func():
             print(plots)
 
 def third_first_dev():
-    global plots
+    global plots, plot_third_first, ox_points_third_first, h_lines_third_first
+    global local_max_third_first, local_min_third_first, local_max_text_third_first, local_min_text_third_first
 
-    a = a_th_drob.get()
-
-    if a:
-        # try:
-        x = sympy.symbols('x')
-        a = float(a)
-
-        function = (x**2-a**2)/(x)
-        dev_of_function = sympy.diff(function, x)
-
-
-        # спадання зростання
-        intervals_data = find_intervals(dev_of_function, function)
-        if len(intervals_data['інтервали']) != 0:
-            interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
-        else:
-            interval_text = "Інтервалів зростання/спадання не існує"
-
-        interval_label.configure(text=f'3) {interval_text}')
-
-        # Формуємо текст для локальних максимумів і мінімумів
-        if len(intervals_data['локальний максимум']) != 0:
-            local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
-        else:
-            local_max_text = "Локальний максимум: не існує"
-
-        if len(intervals_data['локальний мінімум']) != 0:
-            local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
-        else:
-            local_min_text = "Локальний мінімум: не існує"
-
-        # макс значення функції
-        if intervals_data['макс. значення ф-ції']:
-            funct_max_text = f"Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
-        else:
-            funct_max_text = "Максимальне значення функції: не існує"
-
-        # Мінімальне значення функції
-        if intervals_data['мін. значення ф-ції']:
-            func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
-        else:
-            func_min_text = "Мінімальне значення функції: не існує"
-
-        local_max_min_text =f'4) {local_max_text}\n{local_min_text}'
-        local_max_min_label.configure(text = local_max_min_text)
-
-        zn_function_text = f'5) {funct_max_text}\n{func_min_text}'
-        zn_function_label.configure(text =zn_function_text)
-
-        drob_first_dev_lable.configure(
-            text = f"y' = {dev_of_function}"
-        )
-
-        print(dev_of_function)
-
-        expr = dev_of_function
+    check = first_dev_sdrob.get()
+    
+    if check == 1:
         
-        func = sympy.lambdify(x, expr, 'numpy')
+        a = a_th_drob.get()
+        if a:
+            # try:
+            x = sympy.symbols('x')
+            a = float(a)
 
-        x_vals = numpy.linspace(-10, 10, 400)
-        y_vals = func(x_vals)
+            function = (x**2-a**2)/(x)
+            dev_of_function = sympy.diff(function, x)
 
-        plot, = ax.plot(x_vals, y_vals, label=f"y' ={dev_of_function}", color='green')
-        plots.append(plot)
+            # видалення старих точок, ліній, графіка, максимумів і мінімумів
+            if plot_third_first:
+                plot_third_first.remove()
+                plot_third_first = None
 
-        ax.legend()
-        legend = ax.legend()
+            if ox_points_third_first:
+                for point in ox_points_third_first:
+                    point.remove()
+                ox_points_third_first.clear()
 
-        third_f_dev_label.configure(
+            if h_lines_third_first:
+                for line in h_lines_third_first:
+                    line.remove()
+                h_lines_third_first.clear()
+
+            if local_max_third_first:
+                local_max_third_first.remove()
+                local_max_text_third_first.remove()
+                local_max_third_first = None
+                local_max_text_third_first = None
+
+            if local_min_third_first:
+                local_min_third_first.remove()
+                local_min_text_third_first.remove()
+                local_min_third_first = None
+                local_min_text_third_first = None
+
+
+
+            # спадання зростання
+            intervals_data = find_intervals(dev_of_function, function)
+            if len(intervals_data['інтервали']) != 0:
+                interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
+            else:
+                interval_text = "Інтервалів зростання/спадання не існує"
+
+            interval_label.configure(text=f'3) {interval_text}')
+
+            # Формуємо текст для локальних максимумів і мінімумів
+            if len(intervals_data['локальний максимум']) != 0:
+                local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
+            else:
+                local_max_text = "Локальний максимум: не існує"
+
+            if len(intervals_data['локальний мінімум']) != 0:
+                local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
+            else:
+                local_min_text = "Локальний мінімум: не існує"
+
+            # макс значення функції
+            if intervals_data['макс. значення ф-ції']:
+                funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+            else:
+                funct_max_text = "Макс. значення ф-ції: не існує"
+
+            # Мінімальне значення функції
+            if intervals_data['мін. значення ф-ції']:
+                func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+            else:
+                func_min_text = "Мін. значення ф-ції: не існує"
+
+            local_max_min_text =f'4) {local_max_text}\n{local_min_text}'
+            local_max_min_label.configure(text = local_max_min_text)
+
+            zn_function_text = f'5) {funct_max_text}\n{func_min_text}'
+            zn_function_label.configure(text =zn_function_text)
+
+            drob_first_dev_lable.configure(
                 text = f"y' = {dev_of_function}"
             )
-        # points_0x_0y = points_ox_oy(expr, 'green', False, True)
-        for text in legend.get_texts():
-            text.set_color('red')
-        canvas.draw()
+
+            print(dev_of_function)
+
+            expr = dev_of_function
+            
+            func = sympy.lambdify(x, expr, 'numpy')
+
+            x_vals = numpy.linspace(-10, 10, 400)
+            y_vals = func(x_vals)
+
+            plot_third_first, = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')
+            # plots.append(plot)
+            # пошук точок перетину з Ox
+            points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)
+            ox_points_third_first = points_0x_0y['0x']
+            h_lines_third_first = points_0x_0y['lines']
+
+            # пошук локальних максимумів і мінімумів
+            intervals_data = find_intervals(dev_of_function, function)
+            if len(intervals_data['локальний максимум']) != 0:
+                max_point = intervals_data['локальний максимум'][0]
+                local_max_third_first = ax.scatter(max_point[0], max_point[1], color='#FF0899', s=40)
+                local_max_text_third_first = ax.annotate(
+                    f'({max_point[0]:.2f}, {max_point[1]:.2f})',
+                    (max_point[0], max_point[1]),
+                    textcoords="offset points",
+                    xytext=(15, 15),
+                    ha='center'
+                )
+
+            if len(intervals_data['локальний мінімум']) != 0:
+                min_point = intervals_data['локальний мінімум'][0]
+                local_min_third_first = ax.scatter(min_point[0], min_point[1], color='#FF0899', s=40)
+                local_min_text_third_first = ax.annotate(
+                    f'({min_point[0]:.2f}, {min_point[1]:.2f})',
+                    (min_point[0], min_point[1]),
+                    textcoords="offset points",
+                    xytext=(15, 15),
+                    ha='center'
+                )
+
+            ax.legend()
+            legend = ax.legend()
+
+            third_f_dev_label.configure(
+                    text = f"y' = {dev_of_function}"
+                )
+            
+            for text in legend.get_texts():
+                text.set_color('red')
+            canvas.draw()
         
 
 
 
 
-        # except Exception as e:
-        #     print(f"Помилка першої дробовох похідної: {e}")
+            # except Exception as e:
+            #     print(f"Помилка першої дробовох похідної: {e}")
+    elif check == 0 and plot_third_first:
+        # видалення графіка першої похідної
+        plot_third_first.remove()
+        plot_third_first = None
+
+        # видалення точок і пунктирних ліній
+        if ox_points_third_first:
+            for point in ox_points_third_first:
+                point.remove()
+            ox_points_third_first.clear()
+
+        if h_lines_third_first:
+            for line in h_lines_third_first:
+                line.remove()
+            h_lines_third_first.clear()
+
+        # видалення локальних максимумів і мінімумів
+        if local_max_third_first:
+            local_max_third_first.remove()
+            local_max_text_third_first.remove()
+            local_max_third_first = None
+            local_max_text_third_first = None
+
+        if local_min_third_first:
+            local_min_third_first.remove()
+            local_min_text_third_first.remove()
+            local_min_third_first = None
+            local_min_text_third_first = None
+
+        ax.legend().remove()
+        canvas.draw()
 
 def third_second_dev():
-    global plots
+    global plots, plot_third_second, ox_points_third_second, h_lines_third_second, inflection_points_third_scatter, inflection_points_th
+    check = second_dev_sdrob.get()
+    
+    
+    if check == 1:
+        inflection_points_th = []
+        a = a_th_drob.get()
+        if a:
+            # try:
+            x = sympy.symbols('x')
+            a = float(a)
 
-    a = a_th_drob.get()
+            function = (x**2-a**2)/(x)
 
-    if a:
-        # try:
-        x = sympy.symbols('x')
-        a = float(a)
+            dev_of_function = sympy.diff(function, x)
 
-        function = (x**2-a**2)/(x)
+            second_dev_of_function = sympy.diff(dev_of_function, x)
+            print(second_dev_of_function)
 
-        dev_of_function = sympy.diff(function, x)
+            drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")
 
-        second_dev_of_function = sympy.diff(dev_of_function, x)
-        print(second_dev_of_function)
+            expr = second_dev_of_function
+            
+            func = sympy.lambdify(x, expr, 'numpy')
 
-        drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")
+            x_vals = numpy.linspace(-10, 10, 400)
+            y_vals = func(x_vals)
 
-        expr = second_dev_of_function
-        
-        func = sympy.lambdify(x, expr, 'numpy')
+            # видалення старих елементів
+            if plot_third_second:
+                plot_third_second.remove()
+                plot_third_second = None
 
-        x_vals = numpy.linspace(-10, 10, 400)
-        y_vals = func(x_vals)
+            if inflection_points_third_scatter:
+                for point in inflection_points_third_scatter:
+                    point.remove()
+                inflection_points_third_scatter.clear()
 
-        plot, = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
-        plots.append(plot)
+            if ox_points_third_second:
+                for point in ox_points_third_second:
+                    point.remove()
+                ox_points_third_second.clear()
 
-        ax.legend()
-        legend = ax.legend()
+            if h_lines_third_second:
+                for line in h_lines_third_second:
+                    line.remove()
+                h_lines_third_second.clear()
 
-        third_s_dev_label.configure(
-            text = f"y'' = {second_dev_of_function}"
-        )
-        
-        points_0x_0y = points_ox_oy(expr, 'blue', False, True)
-        for text in legend.get_texts():
-            text.set_color('red')
+            plot_third_second, = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
+            # plots.append(plot)
+
+            # пошук точок перегину
+            inflection_points = find_inflection_points(second_dev_of_function)
+            for point in inflection_points:
+                y_val = function.subs(x, point)
+                scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)
+                inflection_points_third_scatter.append(scatter)
+                inflection_points_th_l = ax.annotate(
+                    f'({float(point):.2f}, {float(y_val):.2f})',
+                    (float(point), float(y_val)),
+                    textcoords="offset points",
+                    xytext=(0, 10),
+                    ha='center',
+                    color='blue'
+                )
+                inflection_points_th.append(inflection_points_th_l)
+
+            # пошук точок пересічення з Ox і побудова пунктирних ліній
+            points_0x_0y = points_ox_oy(second_dev_of_function, 'blue', label=False, lines=True, include_oy=False)
+            ox_points_third_second = points_0x_0y['0x']
+            h_lines_third_second = points_0x_0y['lines']
+
+            ax.legend()
+            legend = ax.legend()
+
+            third_s_dev_label.configure(
+                text = f"y'' = {second_dev_of_function}"
+            )
+
+            # оновлення лейблу з точками перегину
+            if inflection_points:
+                formatted_points = "; ".join([f"x{i+1} = {float(pt):.2f}" for i, pt in enumerate(inflection_points)])
+                inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")
+            else:
+                inflection_points_label.configure(text="9) Точки перегину: не існує")
+            
+            points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
+            for text in legend.get_texts():
+                text.set_color('red')
+            canvas.draw()
+    elif check == 0 and plot_third_second:
+        # видалення графіка другої похідної
+        plot_third_second.remove()
+        plot_third_second = None
+
+        # видалення точок перегину
+        if inflection_points_third_scatter:
+            for point in inflection_points_third_scatter:
+                point.remove()
+            inflection_points_third_scatter.clear()
+                # видалення підпису точок
+        for label in inflection_points_th:
+            label.remove()
+        inflection_points_th.clear()
+
+        # видалення точок перетину з Ox і пунктирних ліній
+        if ox_points_third_second:
+            for point in ox_points_third_second:
+                point.remove()
+            ox_points_third_second.clear()
+
+        if h_lines_third_second:
+            for line in h_lines_third_second:
+                line.remove()
+            h_lines_third_second.clear()
+
+        # оновлення легенди
+        ax.legend().remove()
         canvas.draw()
 
 def build_fourth_func():
@@ -1210,9 +1730,10 @@ def build_fourth_func():
     build_DSK()
     print('build!')
     a = a4_drob.get()
-
+    # чекбокси
     first_dev_fourth.place(x = 1055, y = 70)
     second_dev_fourth.place(x = 1055, y = 115)
+    main_graphic_label.place(x = 1055, y = 25)
     build_colors_labels()#😱
 
     if a:
@@ -1249,9 +1770,27 @@ def build_fourth_func():
             domain_text = f"1) D(y) = {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
 
+            # перетин 0х і 0у
             points_0x_0y = points_ox_oy(expr,'red', True)
-            points_0x_0y_text = f"6) Точки перетину з Ox: {'; '.join([f'({x}, {y})' for x, y in points_0x_0y['0x']])}\nточка перетину з Oy: {points_0x_0y['0y']}"
-            points_ox_oy_label.configure(text = points_0x_0y_text)
+            points_zero = points_0x_0y['points_zero']
+
+            points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # 0x-координаты
+
+            # отримуємл координати і точку 0у
+            oy_point = points_0x_0y['0y']
+            oy_text = "не існує"
+            if oy_point:
+                offsets = oy_point.get_offsets()  # координати точки
+                if len(offsets) > 0:
+                    oy_coords = offsets[0]  # перша точка
+                    oy_text = f"(0, {oy_coords[1]:.2f})"
+
+            points_0x_0y_text = (
+                f"6) Точки перетину з Ox:\n{points_0x_text}\n"
+                f"Точка перетину з Oy:\n{oy_text}"
+            )
+
+            points_ox_oy_label.configure(text=points_0x_0y_text)
 
             # Отримуємо список точок нулів функції
             points_zero = points_0x_0y['points_zero']
@@ -1265,16 +1804,22 @@ def build_fourth_func():
             even_or_odd = check_even_odd_func(expr)
             even_or_odd_func_l.configure(text = f'{even_or_odd}')
 
-            sign_intervals = find_sign_intervals(expr)
+            try:
+                sign_intervals = find_sign_intervals(expr)
+                all_sign_intervals_text = ""
+                for interval, sign in sign_intervals:
+                    all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # додаємо кожний інтервал у текст
 
-            all_sign_intervals_text = ""
-            for interval, sign in sign_intervals:
-                all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # Добавляем каждый интервал в текст
-
-            intervals_identity_l.configure(text = f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+                intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
+            except Exception as e:
+                print(f"Помилка обчислення проміжків знакосталості: {e}")
+                intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")
 
 
             punctured_dots(expr)
+
+            slant_asymptote_label = slope_asymptote  # рівняння асимптоти
+            find_and_plot_slant_asymptote(expr, x, label_widget = slope_asymptote)
 
             print(plots)
             # except Exception as e:
@@ -1282,129 +1827,294 @@ def build_fourth_func():
             print(plots)
 
 def fourth_first_dev():
-    global plots
+    global plots, plot_fourth_first, ox_points_fourth_first, h_lines_fourth_first
+    global local_max_fourth_first, local_min_fourth_first, local_max_text_fourth_first, local_min_text_fourth_first
 
-    a = a4_drob.get()
+    check = first_dev_fourth.get()
+    if check == 1:
 
-    if a:
-        # try:
-        x = sympy.symbols('x')
-        a = float(a)
+        a = a4_drob.get()
+        if a:
+            # try:
+            x = sympy.symbols('x')
+            a = float(a)
 
-        function = x/(x**2+a)
-        dev_of_function = sympy.diff(function, x)
+            function = x/(x**2+a)
+            dev_of_function = sympy.diff(function, x)
+
+            # видалення старих графіків, точок, ліній, максимумів і мінімумів
+            if plot_fourth_first:
+                plot_fourth_first.remove()
+                plot_fourth_first = None
+
+            if ox_points_fourth_first:
+                for point in ox_points_fourth_first:
+                    point.remove()
+                ox_points_fourth_first.clear()
+
+            if h_lines_fourth_first:
+                for line in h_lines_fourth_first:
+                    line.remove()
+                h_lines_fourth_first.clear()
+
+            if local_max_fourth_first:
+                local_max_fourth_first.remove()
+                local_max_text_fourth_first.remove()
+                local_max_fourth_first = None
+                local_max_text_fourth_first = None
+
+            if local_min_fourth_first:
+                local_min_fourth_first.remove()
+                local_min_text_fourth_first.remove()
+                local_min_fourth_first = None
+                local_min_text_fourth_first = None
+
+            # спадання зростання
+            intervals_data = find_intervals(dev_of_function, function)
+            if len(intervals_data['інтервали']) != 0:
+                interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
+            else:
+                interval_text = "Інтервалів зростання/спадання не існує"
+
+            interval_label.configure(text=f'3) {interval_text}')
+
+            # Формуємо текст для локальних максимумів і мінімумів
+            if len(intervals_data['локальний максимум']) != 0:
+                local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
+            else:
+                local_max_text = "Локальний максимум: не існує"
+
+            if len(intervals_data['локальний мінімум']) != 0:
+                local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
+            else:
+                local_min_text = "Локальний мінімум: не існує"
+
+            # макс значення функції
+            if intervals_data['макс. значення ф-ції']:
+                funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+            else:
+                funct_max_text = "Макс. значення ф-ції: не існує"
+
+            # Мінімальне значення функції
+            if intervals_data['мін. значення ф-ції']:
+                func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+            else:
+                func_min_text = "Мін. значення ф-ції: не існує"
+
+            local_max_min_text =f'4) {local_max_text}\n{local_min_text}'
+            local_max_min_label.configure(text = local_max_min_text)
+
+            zn_function_text = f'5) {funct_max_text}\n{func_min_text}'
+            zn_function_label.configure(text =zn_function_text)
+
+            drob_first_dev_lable.configure(
+                text = f"y' = {dev_of_function}"
+            )
+
+            print(dev_of_function)
+
+            expr = dev_of_function
+            
+            func = sympy.lambdify(x, expr, 'numpy')
+
+            x_vals = numpy.linspace(-10, 10, 400)
+            y_vals = func(x_vals)
+
+            plot_fourth_first, = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')
+            # plots.append(plot)
+            # пошук точок перетину з Ox
+            points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)
+            ox_points_fourth_first = points_0x_0y['0x']
+            h_lines_fourth_first = points_0x_0y['lines']
+
+            # пошук локальних максимумів і мінімумів
+            intervals_data = find_intervals(dev_of_function, function)
+            if len(intervals_data['локальний максимум']) != 0:
+                max_point = intervals_data['локальний максимум'][0]
+                local_max_fourth_first = ax.scatter(max_point[0], max_point[1], color='#FF0899', s=40)
+                local_max_text_fourth_first = ax.annotate(
+                    f'({max_point[0]:.2f}, {max_point[1]:.2f})',
+                    (max_point[0], max_point[1]),
+                    textcoords="offset points",
+                    xytext=(15, 15),
+                    ha='center'
+                )
+
+            if len(intervals_data['локальний мінімум']) != 0:
+                min_point = intervals_data['локальний мінімум'][0]
+                local_min_fourth_first = ax.scatter(min_point[0], min_point[1], color='#FF0899', s=40)
+                local_min_text_fourth_first = ax.annotate(
+                    f'({min_point[0]:.2f}, {min_point[1]:.2f})',
+                    (min_point[0], min_point[1]),
+                    textcoords="offset points",
+                    xytext=(15, 15),
+                    ha='center'
+                )
 
 
-        # спадання зростання
-        intervals_data = find_intervals(dev_of_function, function)
-        if len(intervals_data['інтервали']) != 0:
-            interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
-        else:
-            interval_text = "Інтервалів зростання/спадання не існує"
+            ax.legend()
+            legend = ax.legend()
 
-        interval_label.configure(text=f'3) {interval_text}')
+            fourth_f_dev_label.configure(
+                text = f"y' = {dev_of_function}"
+            )
+            
+            for text in legend.get_texts():
+                text.set_color('red')
+            canvas.draw()
 
-        # Формуємо текст для локальних максимумів і мінімумів
-        if len(intervals_data['локальний максимум']) != 0:
-            local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
-        else:
-            local_max_text = "Локальний максимум: не існує"
+            # 
+            # except Exception as e:
+            #     print(f"Помилка першої дробовох похідної: {e}")
+    elif check == 0 and plot_fourth_first:
+        # видалення графіка
+        plot_fourth_first.remove()
+        plot_fourth_first = None
 
-        if len(intervals_data['локальний мінімум']) != 0:
-            local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
-        else:
-            local_min_text = "Локальний мінімум: не існує"
+        # видалення точок, ліній, максимумів і мінімумів
+        if ox_points_fourth_first:
+            for point in ox_points_fourth_first:
+                point.remove()
+            ox_points_fourth_first.clear()
 
-        # макс значення функції
-        if intervals_data['макс. значення ф-ції']:
-            funct_max_text = f"Максимальне значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
-        else:
-            funct_max_text = "Максимальне значення функції: не існує"
+        if h_lines_fourth_first:
+            for line in h_lines_fourth_first:
+                line.remove()
+            h_lines_fourth_first.clear()
 
-        # Мінімальне значення функції
-        if intervals_data['мін. значення ф-ції']:
-            func_min_text = f"Мінімальне значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
-        else:
-            func_min_text = "Мінімальне значення функції: не існує"
+        if local_max_fourth_first:
+            local_max_fourth_first.remove()
+            local_max_text_fourth_first.remove()
+            local_max_fourth_first = None
+            local_max_text_fourth_first = None
 
-        local_max_min_text =f'4) {local_max_text}\n{local_min_text}'
-        local_max_min_label.configure(text = local_max_min_text)
+        if local_min_fourth_first:
+            local_min_fourth_first.remove()
+            local_min_text_fourth_first.remove()
+            local_min_fourth_first = None
+            local_min_text_fourth_first = None
 
-        zn_function_text = f'5) {funct_max_text}\n{func_min_text}'
-        zn_function_label.configure(text =zn_function_text)
-
-        drob_first_dev_lable.configure(
-            text = f"y' = {dev_of_function}"
-        )
-
-        print(dev_of_function)
-
-        expr = dev_of_function
-        
-        func = sympy.lambdify(x, expr, 'numpy')
-
-        x_vals = numpy.linspace(-10, 10, 400)
-        y_vals = func(x_vals)
-
-        plot, = ax.plot(x_vals, y_vals, label=f"y' ={dev_of_function}", color='green')
-        plots.append(plot)
-
-        ax.legend()
-        legend = ax.legend()
-
-        fourth_f_dev_label.configure(
-            text = f"y' = {dev_of_function}"
-        )
-        # points_0x_0y = points_ox_oy(expr, 'green', False, True)
-        for text in legend.get_texts():
-            text.set_color('red')
+        ax.legend().remove()
         canvas.draw()
-
-        # госпади поможи исправить эту ошибку
-        # except Exception as e:
-        #     print(f"Помилка першої дробовох похідної: {e}")
 
 def fourth_second_dev():
-    global plots
+    global plots, plot_fourth_second, ox_points_fourth_second, h_lines_fourth_second, inflection_points_fourth_scatter, inflection_points_l_3
 
-    a = a4_drob.get()
+    check = second_dev_fourth.get()
+    if check == 1:
+        a = a4_drob.get()
 
-    if a:
-        # try:
-        x = sympy.symbols('x')
-        a = float(a)
+        if a:
+            inflection_points_l_3 = []
+            # try:
+            x = sympy.symbols('x')
+            a = float(a)
 
-        function = x/(x**2+a)
+            function = x/(x**2+a)
 
-        dev_of_function = sympy.diff(function, x)
+            dev_of_function = sympy.diff(function, x)
 
-        second_dev_of_function = sympy.diff(dev_of_function, x)
-        print(second_dev_of_function)
+            second_dev_of_function = sympy.diff(dev_of_function, x)
+            print(second_dev_of_function)
 
-        drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")
+            drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")
 
-        expr = second_dev_of_function
-        
-        func = sympy.lambdify(x, expr, 'numpy')
+            expr = second_dev_of_function
+            
+            func = sympy.lambdify(x, expr, 'numpy')
 
-        x_vals = numpy.linspace(-10, 10, 400)
-        y_vals = func(x_vals)
+            x_vals = numpy.linspace(-10, 10, 400)
+            y_vals = func(x_vals)
 
-        plot, = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
-        plots.append(plot)
+            # видалення старих елементів
+            if plot_fourth_second:
+                plot_fourth_second.remove()
+                plot_fourth_second = None
 
-        ax.legend()
-        legend = ax.legend()
+            if inflection_points_fourth_scatter:
+                for point in inflection_points_fourth_scatter:
+                    point.remove()
+                inflection_points_fourth_scatter.clear()
 
-        fourth_s_dev_label.configure(
-            text = f"y'' = {second_dev_of_function}"
-        )
+            if ox_points_fourth_second:
+                for point in ox_points_fourth_second:
+                    point.remove()
+                ox_points_fourth_second.clear()
 
-        points_0x_0y = points_ox_oy(expr, 'blue', False, True)
-        for text in legend.get_texts():
-            text.set_color('red')
+            if h_lines_fourth_second:
+                for line in h_lines_fourth_second:
+                    line.remove()
+                h_lines_fourth_second.clear()
+
+            plot_fourth_second, = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
+            # plots.append(plot)
+            # пошук точок перегину
+            inflection_points = find_inflection_points(second_dev_of_function)
+            for point in inflection_points:
+                y_val = function.subs(x, point)
+                scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)
+                inflection_points_fourth_scatter.append(scatter)
+                label_point_inflection_3 = ax.annotate(
+                    f'({float(point):.2f}, {float(y_val):.2f})',
+                    (float(point), float(y_val)),
+                    textcoords="offset points",
+                    xytext=(0, 10),
+                    ha='center',
+                    color='blue'
+                )
+                inflection_points_l_3.append(label_point_inflection_3)
+
+            # пошук точок пересічення з Ox
+            points_0x_0y = points_ox_oy(second_dev_of_function, 'blue', label=False, lines=True, include_oy=False)
+            ox_points_fourth_second = points_0x_0y['0x']
+            h_lines_fourth_second = points_0x_0y['lines']
+
+            # оновлення лейблу з точками перегину
+            if inflection_points:
+                formatted_points = "; ".join([f"x{i+1} = {float(pt):.2f}" for i, pt in enumerate(inflection_points)])
+                inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")
+            else:
+                inflection_points_label.configure(text="9) Точки перегину: не існує")
+
+            ax.legend()
+            legend = ax.legend()
+
+            fourth_s_dev_label.configure(
+                text = f"y'' = {second_dev_of_function}"
+            )
+
+            # points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
+            for text in legend.get_texts():
+                text.set_color('red')
+            canvas.draw()
+    elif check == 0 and plot_fourth_second:
+        # видалення графіка
+        plot_fourth_second.remove()
+        plot_fourth_second = None
+
+        # видалення точок, ліній і точок перегину
+        if inflection_points_fourth_scatter:
+            for point in inflection_points_fourth_scatter:
+                point.remove()
+            inflection_points_fourth_scatter.clear()
+
+        # видалення підпису точок
+        for label in inflection_points_l_3:
+            label.remove()
+        inflection_points_l_3.clear()
+
+        if ox_points_fourth_second:
+            for point in ox_points_fourth_second:
+                point.remove()
+            ox_points_fourth_second.clear()
+
+        if h_lines_fourth_second:
+            for line in h_lines_fourth_second:
+                line.remove()
+            h_lines_fourth_second.clear()
+
+        ax.legend().remove()
         canvas.draw()
-
 
 def frame_buttons_func(funct): 
     print(funct)
@@ -1454,9 +2164,8 @@ def punctured_dots(function):
                         ha='center')  
     canvas.draw()
 
-def points_ox_oy(graphic, color, label = False, lines = False):
-    # from .main_elements import ax
-    
+def points_ox_oy(graphic, color, label=False, lines=False, include_oy=True):
+    global ax
     x = sympy.symbols('x')
 
     # знаходимо точку перетину з віссю 0y (x = 0)
@@ -1471,57 +2180,48 @@ def points_ox_oy(graphic, color, label = False, lines = False):
     # округляємо тільки після перевірки, що це дійсне число
     x_intercepts = [round(float(root), 1) for root in x_intercepts]
 
-    points_zero = []
+    points_zero = []  # нулі функції
+    ox_points = []  # 0х
+    dashed_lines = []  # пунктирні лінії
 
-    print(f'{x_intercepts} x_intercepts iiii {y_intercept} - yyyy')
-
-    
     if x_intercepts:
         for x_cor in x_intercepts:
-            print(x_cor)
-            print(type(x_cor))  
-            ax.scatter(x_cor, 0, color=color, s=40)  # add points to the plot s - size
-                
-            if label == True:
-                ax.annotate(f'({x_cor:.2f}, 0)',
-                        (x_cor, 0),
-                        textcoords="offset points",  # Відносні координати для підпису
-                        xytext=(10,10),  # Відступ від точки (в пікселях)
-                        ha='center')  # Горизонтальне вирівнювання підпису
-            else:
-                ax.plot([x_cor, x_cor], [-10**6, 10**6], color=color, linestyle='--', linewidth=1)
-            points_zero.append(x_cor)
-            canvas.draw()
+            # 0х
+            point = ax.scatter(x_cor, 0, color=color, s=40)
+            ox_points.append(point)  # точку зберегти
+            points_zero.append(x_cor)  # знач точки зберегти
 
-    if y_intercept:
-        if y_intercept.is_real:#перевірка на комплексне число
-            y_cor = round(float(y_intercept), 2)
-            ax.scatter(0, y_cor, color=color, s=40)  # add points to the plot s - size
-            if label == True:
-                ax.annotate(f'(0, {y_cor})',
+            # підпис
+            if label != False:
+                ax.annotate(f'({x_cor:.2f}, 0)',
+                            (x_cor, 0),
+                            textcoords="offset points",
+                            xytext=(10, 10),
+                            ha='center')
+            if lines:  # пунктирні лінії
+                line = ax.axvline(x=x_cor, color=color, linestyle='--', linewidth=1)
+                dashed_lines.append(line)
+
+    oy_point = None
+    if include_oy and y_intercept.is_real:
+        y_cor = round(float(y_intercept), 2)
+        oy_point = ax.scatter(0, y_cor, color=color, s=40)
+        if label:
+            ax.annotate(f'(0, {y_cor})',
                         (0, y_cor),
-                        textcoords="offset points",  # Відносні координати для підпису
-                        xytext=(10,10),  # Відступ від точки (в пікселях)
-                        ha='center')  # Горизонтальне вирівнювання підпису
-            canvas.draw()
-        else:
-            y_cor = y_intercept
-            print(y_cor)
-            print(type(y_cor))
-            ax.scatter(0, y_cor, color=color, s=40)  # add points to the plot s - size
-            if label == True:
-                ax.annotate(f'(0, {y_cor})',
-                        (0, y_cor),
-                        textcoords="offset points",  # Відносні координати для підпису
-                        xytext=(10,10),  # Відступ від точки (в пікселях)
-                        ha='center')  # Горизонтальне вирівнювання підпису
-            canvas.draw()
+                        textcoords="offset points",
+                        xytext=(10, 10),
+                        ha='center')
+
+    canvas.draw()
 
     return {
-        '0y': (0, round(float(y_intercept), 1)),
-        '0x': [(root, 0) for root in x_intercepts],
-        'points_zero': points_zero
+        '0y': oy_point,  # 0у
+        '0x': ox_points,  # 0х
+        'points_zero': points_zero,  # нулі функції
+        'lines': dashed_lines  #пунктирні лінії для наглядного розуміння локал макс. і локал мін. + друга похідна - точка перегину
     }
+
 
 def check_even_odd_func(function):
     x = sympy.symbols('x')  # создаем символ x
@@ -1538,48 +2238,54 @@ def check_even_odd_func(function):
     return "2) Функція загального вигляду"
 
 def find_sign_intervals(func):
-    x = sympy.symbols('x')  # создаем символ x
+    x = sympy.symbols('x')  # створюємо символ x
 
-    # корені функції (де f(x) = 0)
+    # знаходимо корені функції (де f(x) = 0)
     roots = sympy.solveset(func, x, domain=sympy.S.Reals)
-    roots = sorted([float(root) for root in roots if root.is_real])  # Преобразуем корни в числа и сортируем
+    roots = sorted([float(root) for root in roots if root.is_real])  # перетворюємо корені в числа і сортуємо
 
-    # додаємо мінус і плюс нескінченності для створення інтервалу
+    # додаємо -∞ і +∞ для побудови інтервалів
     intervals = [(-sympy.oo, roots[0])] if roots else [(-sympy.oo, sympy.oo)]
     for i in range(len(roots) - 1):
         intervals.append((roots[i], roots[i + 1]))
     intervals.append((roots[-1], sympy.oo))
 
-    # лист для збереження інтервалів знакосталості
+    # створюємо список для збереження результатів
     sign_intervals = []
 
-    # визначаємо знак функції на кожному інтервалі
+    # обробляємо кожний інтервал
     for interval in intervals:
-        # Похідна точки в інтервалі (середня точка)
+        # перевіряємо, чи межі інтервалу визначені у функції
         if interval[0] == -sympy.oo:
-            test_point = interval[1] - 1  # Берем точку трохи лівіше, якщо ліва межа -∞
+            test_point = interval[1] - 1  # беремо точку трохи лівіше, якщо ліва межа -∞
         elif interval[1] == sympy.oo:
-            test_point = interval[0] + 1  # Берем точку трохи правіше, якщо права межа ∞
+            test_point = interval[0] + 1  # беремо точку трохи правіше, якщо права межа ∞
         else:
-            test_point = (interval[0] + interval[1]) / 2  # Середня точка інтервалу
+            test_point = (interval[0] + interval[1]) / 2  # середня точка інтервалу
 
-        # визначаємо значення функції в тест точці
-        sign_at_point = func.subs(x, test_point)
+        # перевіряємо, чи визначена функція в тестовій точці
+        try:
+            sign_at_point = func.subs(x, test_point)
+        except (sympy.SympifyError, ZeroDivisionError):
+            sign_at_point = None
 
-        # округляем границы интервалов до 1 знака після коми
-        rounded_interval = (round(interval[0], 1), round(interval[1], 1))
+        # округлюємо межі інтервалу до одного знака після коми
+        rounded_interval = (round(interval[0], 1) if interval[0] != -sympy.oo else '-∞',
+                            round(interval[1], 1) if interval[1] != sympy.oo else '+∞')
 
-        # визначаємо знак і добаємо інтервал до результату
-        if sign_at_point > 0:
-            sign_intervals.append((rounded_interval, 'y > 0'))
-        elif sign_at_point < 0:
-            sign_intervals.append((rounded_interval, 'y < 0'))
-        else:
-            sign_intervals.append((rounded_interval, 'y = 0'))
+        # визначаємо знак і додаємо результат
+        if sign_at_point is not None:
+            if sign_at_point > 0:
+                sign_intervals.append((rounded_interval, 'y > 0'))
+            elif sign_at_point < 0:
+                sign_intervals.append((rounded_interval, 'y < 0'))
+            else:
+                sign_intervals.append((rounded_interval, 'y = 0'))
 
     return sign_intervals
 
-# Функція для пошуку точок перегину
+
+# Точки перегину
 def find_inflection_points(second_derivative):
     x = sympy.symbols('x')
 
@@ -1587,7 +2293,82 @@ def find_inflection_points(second_derivative):
     inflection_points = sympy.solve(second_derivative, x)
 
     # Округлюємо кожну точку до заданої точності
-    inflection_points_rounded = [round(point, 2) for point in inflection_points]
+    inflection_points_rounded = [round(point, 1) for point in inflection_points]
 
     # Повертаємо список точок перегину
     return inflection_points_rounded
+def find_and_plot_slant_asymptote(expr, x_symbol, label_widget=None):
+    global ax
+    
+    try:
+        # визначаємо k як границю f(x)/x при x -> ±∞
+        k = sympy.limit(expr / x_symbol, x_symbol, sympy.oo)
+
+        # перевіряємо, чи k є числом
+        if not k.is_real:
+            if label_widget:
+                label_widget.configure(text="11) Похила асимптота: немає")
+            return
+
+        # визначаємо b як границю f(x) - kx при x є ±∞
+        b = sympy.limit(expr - k * x_symbol, x_symbol, sympy.oo)
+
+        # перевіряємо, чи b є числом
+        if not b.is_real:
+            if label_widget:
+                label_widget.configure(text="11) Похила асимптота: немає")
+            return
+
+        # формуємо рівняння асимптоти
+        asymptote_expr = k * x_symbol + b
+        asymptote_func = sympy.lambdify(x_symbol, asymptote_expr, 'numpy')
+
+        # будуємо асимптоту
+        x_vals = numpy.linspace(-10, 10, 400)
+        y_vals = asymptote_func(x_vals)
+
+        ax.plot(x_vals, y_vals, linestyle='--', color='brown', label=f"y = {k:.2f}x + {b:.2f}")
+
+        # додаємо текст рівняння в лейбл
+        if label_widget:
+            label_widget.configure(text=f"11) Похила асимптота: y = {k:.2f}x + {b:.2f}")
+
+        # оновлюємо легенду
+        ax.legend()
+        canvas.draw()
+
+    except Exception as e:
+        print(f"Помилка: {e}")
+        if label_widget:
+            label_widget.configure(text="11) Похилої асимптоти не існує")
+
+def find_convexity_intervals(second_derivative):
+    x = sympy.symbols('x')
+    intervals = []
+
+    # знайти критичні точки другої похідної
+    critical_points = sympy.solveset(second_derivative, x, domain=sympy.S.Reals)
+    critical_points = sorted([float(pt) for pt in critical_points if pt.is_real])
+
+    # розділити область на проміжки
+    test_points = []
+    if len(critical_points) > 0:
+        test_points.append(float('-inf'))  # зліва від першої критичної точки
+        test_points.extend(critical_points)
+        test_points.append(float('inf'))  # справа від останньої критичної точки
+    else:
+        test_points = [float('-inf'), float('inf')]  # якщо критичних точок немає
+
+    # визначити знаки другої похідної на кожному інтервалі
+    for i in range(len(test_points) - 1):
+        left, right = test_points[i], test_points[i + 1]
+        test_value = (left + right) / 2  # точка всередині інтервалу
+        value = second_derivative.subs(x, test_value)
+
+        if value > 0:
+            intervals.append(((left, right), "опуклість вверх"))
+        elif value < 0:
+            intervals.append(((left, right), "опуклість вниз"))
+
+    return intervals
+

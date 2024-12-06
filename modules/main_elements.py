@@ -434,16 +434,21 @@ fourth_func_button = ctk.CTkButton(
 
 inflection_points_label = ctk.CTkLabel(
     master = main,
-    width = 350,
+    width = 300,
     height = 35
 )
-convexity_intervals = ctk.CTkLabel(
+convexity_intervals_label = ctk.CTkLabel(
     master = main,
-    width = 350,
+    width = 300,
     height = 35
 )
 slope_asymptote = ctk.CTkLabel(
     master = main,
-    width = 350,
+    width = 300,
+    height = 35
+)
+main_graphic_label = ctk.CTkLabel(
+    master = main,
+    width = 300,
     height = 35
 )

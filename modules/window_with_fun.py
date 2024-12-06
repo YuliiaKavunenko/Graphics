@@ -356,6 +356,8 @@ def clean_old_gr():
 
     get_grachic_1.place_forget()
 
+    main_graphic_label.place_forget()
+
 # першій графік
 def first_fn_on():
     clean_old_gr()

@@ -86,7 +86,9 @@ def introdaction():
         # bg_color = ,
         font = ("Roboto Slab", 22),
         text_color = text_color,
-        anchor = "e"
+        anchor = "e",
+        # тіпа по одной лініі с начальним текстом слєва
+        justify="left"
     )
     city_data_l = ctk.CTkLabel(
         master = intrd_window,
