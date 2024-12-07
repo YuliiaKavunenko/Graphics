@@ -200,7 +200,7 @@ clean_graphic.configure(
 
 first_dev.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №1',
+    text = "Відображення похідної y'",
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
@@ -214,7 +214,7 @@ first_dev.configure(
 )
 second_dev.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №2',
+    text = "Відображення похідної y''",
     fg_color = input_color,
     hover_color=checkbox_hover_color,
     border_width = 2,
@@ -557,7 +557,7 @@ fourth_func_button.configure(
 )
 first_dev_fourth.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №1',
+    text = "Відображення похідної y'",
     font = ("Roboto Slab", 15),
     text_color = text_color,
     fg_color = input_color,
@@ -571,7 +571,7 @@ first_dev_fourth.configure(
 )
 second_dev_fourth.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №2',
+    text = "Відображення похідної y''",
     font = ("Roboto Slab", 15),
     text_color = text_color,
     fg_color = input_color,
@@ -611,7 +611,7 @@ slope_asymptote.configure(
 # стілі для чекбоксів
 first_dev_fdrob.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №1',
+    text = "Відображення похідної y'",
     fg_color = input_color,
     font = ("Roboto Slab", 15),
     text_color = text_color,
@@ -625,7 +625,7 @@ first_dev_fdrob.configure(
 )
 first_dev_sdrob.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №1',
+    text = "Відображення похідної y'",
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
@@ -640,7 +640,7 @@ first_dev_sdrob.configure(
 
 second_dev_sdrob.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №2',
+    text = "Відображення похідної y''",
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
@@ -655,7 +655,7 @@ second_dev_sdrob.configure(
 
 second_dev_fdrob.configure(
     bg_color = frame_background,
-    text = 'Відображення похідної №2',
+    text = "Відображення похідної y''",
     fg_color = input_color,
     # bg_color = 'green',
     hover_color=checkbox_hover_color,
