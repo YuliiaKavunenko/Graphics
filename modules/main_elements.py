@@ -1,44 +1,50 @@
 '''
 Файл для створення головних елементів на вікні.
 '''
-
+# 
 import customtkinter as ctk
+# 
 import matplotlib.pyplot as plot
+# 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+# створення головного вікна main
 main = ctk.CTk()
+# створення титульного вікна програми
 intrd_window = ctk.CTk()
 
+# створення фрейму для роботи і побудови функцій
 frame_first = ctk.CTkFrame(
     master = main,
     width = 343,
     height = 345
 )
+# створення фрейму для позначення відображення і не скриття похідних (checkbox)
 frame_for_options = ctk.CTkFrame(
     master = main,
     width = 360,
     height = 345
 )
-
+# створення фрейму для виведення дослідження функцій
 frame_exploration = ctk.CTkFrame(
     master = main,
     width = 710,
     height = 420
 )
 
-# кнопка для получения данных рисования графика
+# кнопка для отримання даних малювання графика
 button_get = ctk.CTkButton(
     master=main,
     width= 40,
     height=40
 )
-# Инпут для графика
+# input для введення любих графіків
 input_graphic = ctk.CTkEntry(
     master=main,
     width=230,
     height=40
 )
-
+# фрейм для вибору базових функцій
 frame_menu = ctk.CTkScrollableFrame(
     master = main,
     width = 205,
@@ -46,32 +52,32 @@ frame_menu = ctk.CTkScrollableFrame(
     orientation="vertical"
 )
 
-# Создаем фигуру и оси для графика
+# створення фігури і осей ох, оу
 fig, ax = plot.subplots(figsize=(6, 6), facecolor='white')
-# Создаем холст для размещения графика в окне Tkinter
+# Створення холста для розміщення побудови графіків
 canvas = FigureCanvasTkAgg(figure = fig, master=main)
-
+# лейбл "y =" для введення різних графіків
 label_y = ctk.CTkLabel(
     master = main,
     width = 22,
     height = 40,
     text = 'y ='
 )
-
+# створення лейблу для першого нашого графіку функції
 y_1 = ctk.CTkLabel(
     master = main,
     width = 325,
     height = 40,
     text = 'y =          х³ +          x² +          x +'
 )
-
+# 
 y_2 = ctk.CTkLabel(
     master = main,
     width = 325,
     height = 40,
     text = "y’ = 3*          x² + 2*          x +"
 )
-
+# 
 y_3 = ctk.CTkLabel(
     master = main,
     width = 325,

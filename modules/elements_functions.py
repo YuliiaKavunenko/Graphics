@@ -71,18 +71,30 @@ ox_points_fourth_second = []
 h_lines_fourth_second = []
 inflection_points_fourth_scatter = []
 
-# стилі, кольори
+# кольори для елементів у вікні  / # colors for elements in the window
+# колір для фону вікна / # color for window background
 background = "#A76E56"
+# колір для фону фреймів / # color for frame background
 frame_background = "#BA7D65"
+# колір для тексту label / # color for label text
 text_color = "#392D20"
+# колір для фону кнопки / # color for button background
 button_color = "#7B4C39"
+# колір для тексту кнопки / # color for button text
 text_button_color = "#F1D5BA"
+# колір для фону input / # color for input background
 input_color = "#FAF0E6"
+# колір для бортиків input / # color for input borders
 input_border_color = "#EAD1B8"
+# колір для внутрішнього тексту input / # color for input placeholder text
 input_textholder_color = "#CAA37D"
+# колір при наведенні на кнопку scroll frame (меню усіх базових функцій) / # color when hovering over the scroll frame button (menu of all basic functions)
 hover_color_menu = "#F3E4D5"
+# колір при наведенні на кнопку / # color when hovering over the button
 button_hover_color = "#9D6249"
+# колір при наведенні на checkbox / # color when hovering over the checkbox
 checkbox_hover_color = "#EBCDAE"
+
 
 def build_colors_labels():
     red_gr.place(x = 1031, y = 25)
@@ -201,6 +213,7 @@ def find_intervals(first_dev, function):
             else:
                 intervals.append((left, right, "- проміжок спадання"))
         else:
+            # 
             intervals.append((left, right, "- не існує"))  # якщо похідна не визначена або комплексна
     
     # Знаходимо локальні максимуми та мінімуми
@@ -498,17 +511,6 @@ def build_graphic_1():
 
             a_3.insert(0,f"{int(a)}")
             b_3.insert(0,f"{int(b)}")
-            # ставим галочку, если ее нет (или построение автоматически производных)
-            # if first_dev.get() == 0:
-            #     # toggle - перемикає стан на поставлену галочку
-            #     first_dev.toggle(1)
-            # else:
-            #     check_first_dev()
-            # if second_dev.get() == 0:
-            #     second_dev.toggle(1)
-            # else:
-            #     check_second_dev()
-            # D(y)  
             domain = scope_of_function(expr)
             domain_text = f"1) D(y) = {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
@@ -958,11 +960,6 @@ def build_drob_graphic():
             for text in legend.get_texts():
                 text.set_color('red')
             canvas.draw()
-            # похідні додати потрібно умову з чекбоксами
-            # drob_first_dev()
-            # drob_second_dev()
-            # замена значения для похідних (будет) ne budet
-
             
             domain = scope_of_function(expr)
             domain_text = f"1) D(y) = {format_intervals(domain)}"
@@ -1362,10 +1359,7 @@ def build_third_func():
             # похідні (в путі)
             third_first_dev()
             third_second_dev()
-            # drob_second_dev()
-            # замена значения для похідних (будет) ne budet tam palka
-
-            
+            # drob_second_dev()            
             domain = scope_of_function(expr)
             domain_text = f"1) D(y) = {format_intervals(domain)}"
             scope_label.configure(text=domain_text)
