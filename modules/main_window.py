@@ -37,7 +37,7 @@ def run_main():
     # Встановлюємо неможливість змінити розміри вікна / Disable resizing of the window
     main.resizable(False, False)
 
-    # РАЗМЕЩЕНИЕ / PLACEMENT
+    # розташування усіх елементів на вікні / location of all elements on the window
 
     button_get.place(x = 978, y = 15)
 
@@ -46,8 +46,8 @@ def run_main():
     func_t_or_f.place(x = 688, y = 65)
     choose_gr.place(x = 688, y = 96)
 
-    input_graphic.bind('<FocusIn>', appear_menu) #привязка к ктк ентри, что когда каретка внутри, то меню появляется / bind to ctk entry, so when the cursor is inside, the menu appears
-    input_graphic.bind('<FocusOut>', disappear_menu) #привязка к ктк ентри, что когда каретка не в нем, то меню исчезает / bind to ctk entry, so when the cursor is not in it, the menu disappears
+    input_graphic.bind('<FocusIn>', appear_menu) #прив'язка до ктк ентрі, коли каретка всередині, то меню з'являється / bind to ctk entry, so when the cursor is inside, the menu appears
+    input_graphic.bind('<FocusOut>', disappear_menu) #прив'язка до ктк ентрі, що коли каретка не в ньому, то меню зникає / bind to ctk entry, so when the cursor is not in it, the menu disappears
 
     label_y.place(x = 711, y = 15)
 

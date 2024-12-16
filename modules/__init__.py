@@ -12,5 +12,5 @@ from .elements_functions import *
 from .style import *
 # імпортуємо функцію functions_window з файлу window_with_fun для запуску вікна для вибору функцій / import the functions_window function from window_with_fun to run the function selection window
 from .window_with_fun import functions_window
-# імпортуємо функцію introdaction з файлу introdaction_window для запуску титульного вікна / import the introdaction function from introdaction_window to run the title window
-from .introdaction_window import introdaction
+# імпортуємо функцію introduction з файлу introduction_window для запуску титульного вікна / import the introduction function from introduction_window to run the title window
+from .introduction_window import introduction

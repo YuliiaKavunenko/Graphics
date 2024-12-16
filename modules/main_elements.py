@@ -84,19 +84,19 @@ y_3 = ctk.CTkLabel(
     height = 40,
     text = "y'' = 6*          *x + 2*           "
 )
-
+# 
 a_1 = ctk.CTkEntry(
     master=main,
     width = 30,
     height = 30
 )
-
+# 
 b_1 = ctk.CTkEntry(
     master=main,
     width = 30,
     height = 30
 )
-
+# 
 c_1 = ctk.CTkEntry(
     master=main,
     width = 30,

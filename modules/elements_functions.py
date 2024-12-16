@@ -1,11 +1,11 @@
 '''
 Файл де створюються потрібні функції для прив'язки до кнопок/чекбоксів на вікні.
 '''
-
+# 
 import numpy, sympy
+# 
 import matplotlib.ticker as ticker
-# import matplotlib.pyplot as plot
-
+# 
 from .main_elements import *
 
 plots = []

@@ -1,9 +1,11 @@
 '''
 Файл для задання стилю елементам.
 '''
-
+# 
 from .main_elements import *
+# 
 from .elements_functions import build_graphic, build_graphic_1, clean_button, check_second_dev, check_first_dev, build_drob_graphic, build_third_func, build_fourth_func, drob_first_dev, drob_second_dev, third_first_dev, third_second_dev, fourth_first_dev, fourth_second_dev
+# 
 from .window_with_fun import functions_window
 
 # кольори для елементів у вікні  / # colors for elements in the window

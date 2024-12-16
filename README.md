@@ -45,6 +45,34 @@ a = 1, b = 2, c = -3, d = 4.
 
 ### Структура проєкту:
 
+## Блок-схема проєкту
+```mermaid
+%%{ init : { "theme" : "forest", "flowchart" : { "curve" : "basis" }, "themeVariables": { "fontFamily": "Nunito" } }}%%
+
+flowchart LR
+
+   A(FunctionGraphsKavunenko) --> C(modules)
+   A(FunctionGraphsKavunenko) --> В(img)
+   A(FunctionGraphsKavunenko) --> D([.gitignore])
+   A(FunctionGraphsKavunenko) --> E([main.py])
+   A(FunctionGraphsKavunenko) --> F([README.md])
+   A(FunctionGraphsKavunenko) --> G([requirements.txt])
+
+   CA(auth page dummy):::hidden --> KB([__ init __.py])
+   CA(auth page dummy):::hidden --> KC([elements_functions.py])
+   CA(auth page dummy):::hidden --> KD([introdaction_window.py])
+   CA(auth page dummy):::hidden --> KE([main_elements.py])
+   CA(auth page dummy):::hidden --> KF([main_window.py])
+   CA(auth page dummy):::hidden --> KG([style.py])
+   CA(auth page dummy):::hidden --> KH([window_with_fun.py])
+
+   C --> CA
+
+   classDef hidden display: none
+
+```
+
+
 - **ОП система:** Windows.  
 - **Програмні засоби:**  
   - Мова програмування: Python.  
