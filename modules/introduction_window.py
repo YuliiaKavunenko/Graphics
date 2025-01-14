@@ -35,8 +35,9 @@ checkbox_hover_color = "#EBCDAE"
 def introduction():
     # імпортуємо функцію запуску основного додатку / import the function to launch the main application
     from .main_window import run_main
+    from .document_window import run_document
     # створюємо титульний додаток / create the title application
-    intrd_window = ctk.CTk()
+    # intrd_window = ctk.CTk()
     # задаємо ім'я для титульного додатку / set the name for the title application
     intrd_window.title("Титульна сторінка")
     # задаємо неможливість змінювати розмір вікна / make the window size non-resizable
@@ -124,10 +125,45 @@ def introduction():
     teachers_names_l.place(x = 75, y = 421)
     city_data_l.place(x = 425, y = 582)
 
+    button_app_start = ctk.CTkButton(
+        master = intrd_window,
+        width = 311,
+        height = 62
+    )
+    button_document_start = ctk.CTkButton(
+        master = intrd_window,
+        width = 311,
+        height = 62
+    )
+
+
+    button_app_start.place(x = 125, y = 421)
+    button_document_start.place(x = 125, y = 504)
+
     # створюємо функцію для запуску основного додатку / create a function to start the main application
-    def open_main_window(event):
+    def open_main_window():
         run_main()
+    def open_document_window():
+        run_document()
+
+    button_app_start.configure(
+        text='Перейти до роботи', # текст на кнопці / text on the button
+        fg_color=button_color, # колір кнопки / button color
+        text_color=text_button_color, # колір тексту кнопки / button text color
+        hover_color=button_hover_color, # колір кнопки при наведенні / button hover color
+        font=("Roboto Slab", 22), # шрифт тексту кнопки / button text font
+        command = open_main_window, # команда для виконання при натисканні кнопки / command to execute on button press
+    )
+    button_document_start.configure(
+        text='Перейти до документації', # текст на кнопці / text on the button
+        fg_color=button_color, # колір кнопки / button color
+        text_color=text_button_color, # колір тексту кнопки / button text color
+        hover_color=button_hover_color, # колір кнопки при наведенні / button hover color
+        font=("Roboto Slab", 22), # шрифт тексту кнопки / button text font
+        command = open_document_window, # команда для виконання при натисканні кнопки / command to execute on button press        
+    )
+    
     # встановлюємо, що запуск відбувається по двійному кліку на титульний додаток / set the start to occur on a double-click on the title application
-    intrd_window.bind("<Double-Button-1>", open_main_window)
+    # intrd_window.bind("<Double-Button-1>", open_main_window)
     # запуск титульного додатку / run the title application
     intrd_window.mainloop()

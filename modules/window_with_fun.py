@@ -47,13 +47,16 @@ image_gr_1 = ctk.CTkImage(Image.open(os.path.join(PATH,"function1.png")), size=(
 # графік у = x/(x**2 + a) / graph y = x/(x**2 + a)
 image_gr_3 = ctk.CTkImage(Image.open(os.path.join(PATH,"function3.png")), size=(250, 85))
 
+image_gr_5 = ctk.CTkImage(Image.open(os.path.join(PATH,"function5.png")), size=(250, 85))
+image_gr_6 = ctk.CTkImage(Image.open(os.path.join(PATH,"function6.png")), size=(250, 85))
+image_gr_7 = ctk.CTkImage(Image.open(os.path.join(PATH,"function7.png")), size=(250, 85))
+
 # запуск вікна / window launch
 def functions_window():
-    global window_with_fun
     # створення поверхневого вікна для вікна main / creating a top-level window for the main window
     window_with_fun = ctk.CTkToplevel(main)
     # задаємо розмір вікна / setting the window size
-    window_with_fun.geometry("630x510")
+    window_with_fun.geometry("630x360")
     # робимо, щоб не можна було змінити розмір вікна / making the window size unchangeable
     window_with_fun.resizable(False, False)
     # задаємо назву для вікна / setting the window title
@@ -64,7 +67,6 @@ def functions_window():
         bg_color = background
     )
     window_with_fun.attributes('-topmost', True)
-
     # створення кнопки для першого графіку, у = ax³ + bx² + cx + d / creating a button for the first graph, y = ax³ + bx² + cx + d
     first_fun_button = ctk.CTkButton(
         # задаємо вікно до якого прив'язана кнопка / setting the window to which the button is linked
@@ -195,163 +197,82 @@ def functions_window():
         image = image_gr_3
     )
 
-    # поки неготові графіки: / graphs not yet ready:
+    fifth_fun_button = ctk.CTkButton(
+    master = window_with_fun,
+    width = 300,
+    height = 90
+    )
+    # задаємо стилі для кнопки / set styles for the button
+    fifth_fun_button.configure(
+    bg_color = background,
+    fg_color = frame_background,
+    text = '',
+    hover_color = button_hover_color,
+    corner_radius = 10,
+    text_color = text_color,
+    font = ("Roboto Slab", 20),
+    anchor = "center",
+    command = fifth_fn_on,
+    # зображення для кнопки / image for the button
+    image = image_gr_5
+    )
 
-    a_fun_button = ctk.CTkButton(
+    sixth_fun_button = ctk.CTkButton(
+    master = window_with_fun,
+    width = 300,
+    height = 90
+    )
+    # задаємо стилі для кнопки / set styles for the button
+    sixth_fun_button.configure(
+    bg_color = background,
+    fg_color = frame_background,
+    text = '',
+    hover_color = button_hover_color,
+    corner_radius = 10,
+    text_color = text_color,
+    font = ("Roboto Slab", 20),
+    anchor = "center",
+    command = sixth_fn_on,
+    # зображення для кнопки / image for the button
+    image = image_gr_6
+    )
+
+    seventh_fun_button = ctk.CTkButton(
+    master = window_with_fun,
+    width = 300,
+    height = 90
+    )
+    # задаємо стилі для кнопки / set styles for the button
+    seventh_fun_button.configure(
+    bg_color = background,
+    fg_color = frame_background,
+    text = '',
+    hover_color = button_hover_color,
+    corner_radius = 10,
+    text_color = text_color,
+    font = ("Roboto Slab", 20),
+    anchor = "center",
+    command = seventh_fun_button,
+    # зображення для кнопки / image for the button
+    image = image_gr_7
+    )
+
+    eighth_fun_button = ctk.CTkButton(
     master = window_with_fun,
     width = 300,
     height = 40
     )
     # задаємо стилі для кнопки / set styles for the button
-    a_fun_button.configure(
+    eighth_fun_button.configure(
     bg_color = background,
     fg_color = frame_background,
-    text = 'у =',
+    text = 'у = x * ln(x - a)',
     hover_color = button_hover_color,
     corner_radius = 10,
     text_color = text_color,
     font = ("Roboto Slab", 20),
     anchor = "center",
-    command = fourth_fn_on
-    )
-
-    b_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 40
-    )
-    # задаємо стилі для кнопки / set styles for the button
-    b_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = b_fn_on
-    )
-
-    c_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 40
-    )
-    # задаємо стилі для кнопки / set styles for the button
-    c_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = c_fn_on
-    )
-
-    d_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 40
-    )
-    # задаємо стилі для кнопки / set styles for the button
-    d_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = d_fn_on
-    )
-
-    e_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 40
-    )
-    e_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = e_fn_on
-    )
-
-    j_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
-    )
-    j_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = j_fn_on
-    )
-    
-    k_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
-    )
-    k_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = k_fn_on
-    )
-    
-    h_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
-    )
-    h_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = h_fn_on
-    )
-    
-    i_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
-    )
-    i_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у =',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = i_fn_on
+    command = eighth_fun_button
     )
 
     # розміщення усіх кнопок на вікні / Placement of all buttons on the window
@@ -364,17 +285,12 @@ def functions_window():
     # кнопка для функції у = x/(x**2 + a) / Button for the function y = x/(x**2 + a)
     fourth_fun_button.place(x = 320, y = 210)
 
-    # кнопки для майбутніх функцій / Buttons for future functions
-    a_fun_button.place(x = 10, y = 60)
-    b_fun_button.place(x = 10, y = 110)
-    c_fun_button.place(x = 10, y = 160)
-    d_fun_button.place(x = 10, y = 210)
-    e_fun_button.place(x = 10, y = 260)
 
-    h_fun_button.place(x = 320, y = 310)
-    i_fun_button.place(x = 320, y = 410)
-    j_fun_button.place(x = 10, y = 310)
-    k_fun_button.place(x = 10, y = 410)
+    fifth_fun_button.place(x = 10, y = 60)
+    sixth_fun_button.place(x = 10, y = 160)
+    seventh_fun_button.place(x = 10, y = 260)
+    eighth_fun_button.place(x = 320, y = 310)
+
 
 # функція для видалення непотрібних елементів з вікна при зміні вибору функції / function to remove unnecessary elements from the window when changing the function selection
 def clean_old_gr():
@@ -448,187 +364,217 @@ def clean_old_gr():
 
     main_graphic_label.place_forget()
 
+    fifth_func_l.place_forget()
+    fifth_func_up_label.place_forget()
+    fifth_func_down_label.place_forget()
+    fifth_func_drob_label.place_forget()
+    fifth_f_dev_label.place_forget()
+    fifth_s_dev_label.place_forget()
+
+    a1_function5.place_forget()
+    fifth_func_button.place_forget()
+
+    a2_function5.place_forget()
+    first_dev_fifth.place_forget()
+    second_dev_fifth.place_forget()
+
+    sixth_func_button.place_forget()
+    sixth_f_dev_label.place_forget()
+    sixth_func_drob_label.place_forget()
+    sixth_func_drob_label_2.place_forget()
+    sixth_func_l.place_forget()
+    sixth_func_plus.place_forget()
+    sixth_s_dev_label.place_forget()
+    sixth_first_func_down_label.place_forget()
+    sixth_first_func_up_label.place_forget()
+
+
+    a1_sixth.place_forget()
+    a2_sixth.place_forget()
+
 # розміщення елементів для першого графіку, у = ax³ + bx² + cx + d / placing elements for the first graph, y = ax³ + bx² + cx + d
 def first_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
     # розміщуємо на main label "y =" / placing on main label "y ="
-    y_1.place(x = 688, y = 173)
+    y_1.place(x = 8, y = 168)
     # розміщуємо на main label "y' =" / placing on main label "y' ="
-    y_2.place(x = 688, y = 223)
+    y_2.place(x = 8, y = 218)
     # розміщуємо на main label "y'' =" / placing on main label "y'' ="
-    y_3.place(x = 688, y = 273)
+    y_3.place(x = 8, y = 268)
 
     # розміщуємо на main input для коєфіцієнта a / placing on main input for coefficient a
-    a_1.place(x = 715, y = 178)
+    a_1.place(x = 35, y = 173)
     # розміщуємо на main input для коєфіцієнта b / placing on main input for coefficient b
-    b_1.place(x = 784, y = 178)
+    b_1.place(x = 104, y = 173)
     # розміщуємо на main input для коєфіцієнта c / placing on main input for coefficient c
-    c_1.place(x = 851, y = 178)
+    c_1.place(x = 171, y = 173)
     # розміщуємо на main input для коєфіцієнта d / placing on main input for coefficient d
-    d_1.place(x = 911, y = 178)
+    d_1.place(x = 231, y = 173)
 
     # розміщуємо на main input для коєфіцієнта a / placing on main input for coefficient a
-    a_2.place(x = 735, y = 228)
+    a_2.place(x = 55, y = 223)
     # розміщуємо на main input для коєфіцієнта b / placing on main input for coefficient b
-    b_2.place(x = 822, y = 228)
+    b_2.place(x = 142, y = 223)
     # розміщуємо на main input для коєфіцієнта c / placing on main input for coefficient c
-    c_2.place(x = 884, y = 228)
+    c_2.place(x = 204, y = 223)
 
     # розміщуємо на main input для коєфіцієнта a / placing on main input for coefficient a
-    a_3.place(x = 740, y = 278)
+    a_3.place(x = 60, y = 273)
     # розміщуємо на main input для коєфіцієнта b / placing on main input for coefficient b
-    b_3.place(x = 827, y = 278)
+    b_3.place(x = 147, y = 273)
 
     # розміщуємо на main кнопку для побудови графіку / placing on main button for building the graph
-    get_grachic_1.place(x = 978, y = 173)
+    get_grachic_1.place(x = 298, y = 168)
 
     # прибираємо лейбл на вікні main "Графік для побудови не обрано!" / removing the label on the main window "Graph for building not selected!"
     func_t_or_f.place_forget()
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
+   
 
 # розміщення елементів для другого графіку, y = (x**2 - a)/(x - b) / placing elements for the second graph, y = (x**2 - a)/(x - b)
 def second_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
     # розміщуємо на main label "y =" / placing on main label "y ="
-    drob_y.place(x = 688, y = 173)
+    drob_y.place(x = 8, y = 168)
     # розміщуємо на main label чисельника функції "x**2 - a" / placing on main label numerator of the function "x**2 - a"
-    drob_y_ch.place(x = 737, y = 148)
+    drob_y_ch.place(x = 57, y = 143)
     # розміщуємо на main label з знаком дробу "-------" / placing on main label with the fraction sign "-------"
-    drob.place(x = 720, y = 188)
+    drob.place(x = 31, y = 185)
     # розміщуємо на main label значенника функції "x - b" / placing on main label denominator of the function "x - b"
-    drob_y_zn.place(x = 734, y = 196)
+    drob_y_zn.place(x = 56, y = 191)
 
     # розміщуємо на main input для коєфіцієнта a / placing on main input for coefficient a
-    a_drob_1.place(x = 829, y = 156)
+    a_drob_1.place(x = 149, y = 151)
     # розміщуємо на main input для коєфіцієнта b / placing on main input for coefficient b
-    a_drob_3.place(x = 826, y = 202)
+    a_drob_3.place(x = 146, y = 197)
 
     # розміщуємо на main кнопку для побудови графіку / placing on main button for building the graph
-    get_drob_grachic.place(x = 978, y = 173)
+    get_drob_grachic.place(x = 298, y = 168)
 
     # розміщуємо на main label з похідною y' / placing on main label with the derivative y'
-    drob_first_dev_lable.place(x = 688, y = 234)
+    drob_first_dev_lable.place(x = 8, y = 229)
     # розміщуємо на main label з похідною y'' / placing on main label with the derivative y''
-    drob_second_dev_lable.place(x = 688, y = 288)
+    drob_second_dev_lable.place(x = 8, y = 283)
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
+   
 
 # розміщення елементів для третього графіку, y = (x**2-a**2)/x / placing elements for the third graph, y = (x**2-a**2)/x
 def third_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
     # розміщуємо на main label "y =" / placing on main label "y ="
-    third_func_l.place(x = 688, y = 173)
+    third_func_l.place(x = 8, y = 168)
 
     # розміщуємо на main label знаку дробу "------" / placing on main label with the fraction sign "------"
-    third_func_drob_label.place(x = 711, y = 190)
+    third_func_drob_label.place(x = 31, y = 185)
     # розміщуємо на main label чисельника функції "x**2 - a**2" / placing on main label numerator of the function "x**2 - a**2"
-    third_func_up_label.place(x = 737, y = 148)
+    third_func_up_label.place(x = 60, y = 143)
     # переміщуємо лейбл чисельнику на передній план / moving the numerator label to the front
     third_func_up_label.lift()
     # розміщуємо на main label значенника функції "x" / placing on main label denominator of the function "x"
-    third_func_down_label.place(x = 736, y = 196)
+    third_func_down_label.place(x = 56, y = 191)
 
     # розміщуємо на main input для коєфіцієнту a / placing on main input for coefficient a
-    a_th_drob.place(x = 812, y = 156)
+    a_th_drob.place(x = 137, y = 151)
     # переміщуємо input на передній план / moving the input to the front
     a_th_drob.lift()
 
     # розміщуємо на main кнопку для побудови графіку / placing on main button for building the graph
-    third_func_button.place(x = 978, y = 173)
+    third_func_button.place(x = 298, y = 168)
 
     # розміщуємо на main label з похідною y' / placing on main label with the derivative y'
-    third_f_dev_label.place(x = 688, y = 234)
+    third_f_dev_label.place(x = 8, y = 229)
     # розміщуємо на main label з похідною y'' / placing on main label with the derivative y''
-    third_s_dev_label.place(x = 688, y = 288)
+    third_s_dev_label.place(x = 8, y = 283)
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
+   
 # розміщення елементів для четвертого графіку, у = x/(x**2 + a) / placing elements for the fourth graph, y = x/(x**2 + a)
 def fourth_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
     # розміщуємо на main label "y =" / placing on main label "y ="
-    fourth_func_l.place(x = 688, y = 173)
+    fourth_func_l.place(x = 8, y = 168)
     
     # розміщуємо на main label знаку дробу "------" / placing on main label with the fraction sign "------"
-    fourth_func_drob_label.place(x = 711, y = 190)
+    fourth_func_drob_label.place(x = 31, y = 185)
     # розміщуємо на main label чисельника функції "x" / placing on main label numerator of the function "x"
-    fourth_func_up_label.place(x = 737, y = 150)
+    fourth_func_up_label.place(x = 57, y = 143)
     # розміщуємо на main / placing on main
     fourth_func_up_label.lift()
-    # розміщуємо на main label значенника функції "x**2 + a" / placing on main label denominator of the function "x**2 + a"
-    fourth_func_down_label.place(x = 736, y = 200)
+    # розміщуємо на main label знаменника функції "x**2 + a" / placing on main label denominator of the function "x**2 + a"
+    fourth_func_down_label.place(x = 59, y = 191)
 
     # розміщуємо на main input для коєфіцієнту a / placing on main input for coefficient a
-    a4_drob.place(x = 812, y = 208)
+    a4_drob.place(x = 143, y = 197)
 
     # розміщуємо на main label з похідною y' / placing on main label with the derivative y'
-    fourth_f_dev_label.place(x = 688, y = 234)
+    fourth_f_dev_label.place(x = 8, y = 229)
     # розміщуємо на main label з похідною y'' / placing on main label with the derivative y''
-    fourth_s_dev_label.place(x = 688, y = 288)
+    fourth_s_dev_label.place(x = 8, y = 283)
 
     # переміщуємо input коєфіцієнту а чисельнику на передній план / moving input for coefficient a numerator to the front
     a4_drob.lift()
     
     # розміщуємо на main кнопку для побудови графіку / placing on main button for building the graph
-    fourth_func_button.place(x = 978, y = 173)
+    fourth_func_button.place(x = 298, y = 168)
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
+   
 
 #  на майбутнє розміщення елементів для останніх графіків / placing elements for future graphs
-def b_fn_on():
+def fifth_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
-    # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    fifth_func_l.place(x = 8, y = 168)
+    fifth_func_up_label.place(x = 47, y = 147)
+    fifth_func_down_label.place(x = 47, y = 191)
+    fifth_func_drob_label.place(x = 31, y = 185)
+    fifth_f_dev_label.place(x = 8, y = 229)
+    fifth_s_dev_label .place(x = 8, y = 283)
 
-def c_fn_on():
-    # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
-    clean_old_gr()
-    # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    a1_function5.place(x = 146, y = 155)
+    fifth_func_button.place(x = 298, y = 168)
+    a1_function5.lift()
 
-def d_fn_on():
-    # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
-    clean_old_gr()
+    a2_function5.place(x = 146, y = 197)
+    a2_function5.lift()
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
+   
 
-def e_fn_on():
+def sixth_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
-    # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    sixth_func_button.place(x = 298, y = 168)
+    sixth_f_dev_label.place(x = 8, y = 229)
+    sixth_func_drob_label.place(x = 40, y = 174)
+    sixth_func_drob_label_2.place(x = 122, y = 174)
+    sixth_func_l.place(x = 8, y = 162)
+    sixth_func_plus.place(x = 100, y = 174)
+    sixth_s_dev_label.place(x = 8, y = 283)
+    sixth_first_func_down_label.place(x = 42, y = 191)
+    sixth_first_func_up_label.place(x = 122, y = 149)
 
-def g_fn_on():
-    # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
-    clean_old_gr()
-    # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
 
-def h_fn_on():
-    # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
-    clean_old_gr()
+    a1_sixth.place(x = 51, y = 150)
+    a2_sixth.place(x = 132, y = 191)
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
+   
 
-def i_fn_on():
+def seventh_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
-
-def j_fn_on():
+    # window_with_fun.destroy()
+   
+def eigth_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
     # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
-
-def k_fn_on():
-    # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
-    clean_old_gr()
-    # закриваємо вікно з функціями / closing the window with functions
-    window_with_fun.destroy()
+    # window_with_fun.destroy()
