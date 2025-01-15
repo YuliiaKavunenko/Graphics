@@ -198,81 +198,63 @@ def functions_window():
     )
 
     fifth_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
+        master = window_with_fun,
+        width = 300,
+        height = 90
     )
     # задаємо стилі для кнопки / set styles for the button
     fifth_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = '',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = fifth_fn_on,
-    # зображення для кнопки / image for the button
-    image = image_gr_5
+        bg_color = background,
+        fg_color = frame_background,
+        text = '',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = fifth_fn_on,
+        # зображення для кнопки / image for the button
+        image = image_gr_5
     )
 
     sixth_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
+        master = window_with_fun,
+        width = 300,
+        height = 90
     )
     # задаємо стилі для кнопки / set styles for the button
     sixth_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = '',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = sixth_fn_on,
-    # зображення для кнопки / image for the button
-    image = image_gr_6
+        bg_color = background,
+        fg_color = frame_background,
+        text = '',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = sixth_fn_on,
+        # зображення для кнопки / image for the button
+        image = image_gr_6
     )
 
     seventh_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 90
+        master = window_with_fun,
+        width = 300,
+        height = 90
     )
     # задаємо стилі для кнопки / set styles for the button
     seventh_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = '',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = seventh_fun_button,
-    # зображення для кнопки / image for the button
-    image = image_gr_7
-    )
-
-    eighth_fun_button = ctk.CTkButton(
-    master = window_with_fun,
-    width = 300,
-    height = 40
-    )
-    # задаємо стилі для кнопки / set styles for the button
-    eighth_fun_button.configure(
-    bg_color = background,
-    fg_color = frame_background,
-    text = 'у = x * ln(x - a)',
-    hover_color = button_hover_color,
-    corner_radius = 10,
-    text_color = text_color,
-    font = ("Roboto Slab", 20),
-    anchor = "center",
-    command = eighth_fun_button
+        bg_color = background,
+        fg_color = frame_background,
+        text = '',
+        hover_color = button_hover_color,
+        corner_radius = 10,
+        text_color = text_color,
+        font = ("Roboto Slab", 20),
+        anchor = "center",
+        command = seventh_fn_on,
+        # зображення для кнопки / image for the button
+        image = image_gr_7
     )
 
     # розміщення усіх кнопок на вікні / Placement of all buttons on the window
@@ -289,7 +271,6 @@ def functions_window():
     fifth_fun_button.place(x = 10, y = 60)
     sixth_fun_button.place(x = 10, y = 160)
     seventh_fun_button.place(x = 10, y = 260)
-    eighth_fun_button.place(x = 320, y = 310)
 
 
 # функція для видалення непотрібних елементів з вікна при зміні вибору функції / function to remove unnecessary elements from the window when changing the function selection
@@ -391,6 +372,18 @@ def clean_old_gr():
 
     a1_sixth.place_forget()
     a2_sixth.place_forget()
+
+    seventh_func_l.place_forget()
+    seventh_func_up_label.place_forget()
+    seventh_func_down_label.place_forget()
+    seventh_func_drob_label.place_forget()
+    seventh_f_dev_label.place_forget()
+    seventh_s_dev_label.place_forget()
+
+    first_dev_seventh.place_forget()
+    second_dev_seventh.place_forget()
+    a1_seventh.place_forget()
+    seventh_func_button.place_forget()
 
 # розміщення елементів для першого графіку, у = ax³ + bx² + cx + d / placing elements for the first graph, y = ax³ + bx² + cx + d
 def first_fn_on():
@@ -570,11 +563,16 @@ def sixth_fn_on():
 def seventh_fn_on():
     # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
     clean_old_gr()
-    # закриваємо вікно з функціями / closing the window with functions
-    # window_with_fun.destroy()
-   
-def eigth_fn_on():
-    # прибираємо за допомогою функції усі зайві елементи на вікні main / removing all unnecessary elements from the main window using the function
-    clean_old_gr()
+
+    seventh_func_l.place(x = 8, y = 168)
+    seventh_func_up_label.place(x = 57, y = 143)
+    seventh_func_down_label.place(x = 56, y = 191)
+    seventh_func_drob_label.place(x = 31, y = 185)
+    seventh_f_dev_label.place(x = 8, y = 229)
+    seventh_s_dev_label.place(x = 8, y = 283)
+
+    a1_seventh.place(x = 162, y = 150)
+
+    seventh_func_button.place(x = 298, y = 168)
     # закриваємо вікно з функціями / closing the window with functions
     # window_with_fun.destroy()

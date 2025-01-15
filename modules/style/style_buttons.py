@@ -128,3 +128,13 @@ sixth_func_button.configure(
     font=("Arrial", 15), # шрифт тексту кнопки / button text font
     command = build_sixth_func # команда для виконання при натисканні кнопки / command to execute on button press
 )
+# кнопка для побудови і дослідження сьомого графіку / button to build and research the seventh graph
+seventh_func_button.configure(
+    bg_color=frame_background, # колір фону кнопки / button background color
+    text='✎', # текст на кнопці / text on the button
+    fg_color=button_color, # колір кнопки / button color
+    text_color=text_button_color, # колір тексту кнопки / button text color
+    hover_color=button_hover_color, # колір кнопки при наведенні / button hover color
+    font=("Arrial", 15), # шрифт тексту кнопки / button text font
+    command = build_seventh_func # команда для виконання при натисканні кнопки / command to execute on button press
+)

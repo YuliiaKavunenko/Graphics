@@ -5,7 +5,6 @@ from ..variables_constants import *
 from .plot_constant_function import plot_constant_function
 # функція для побудови і виконання дослідження похідної у' першого графіку функції / function to plot and analyze the first derivative of the first graph of the function
 def check_first_dev():
-    # from .plot_constant_function import plot_constant_function
     check = first_dev.get()  # отримуємо стан чекбоксу для першої похідної / getting the state of the checkbox for the first derivative
 
     plots = dictionary_of_variables['plots'] 

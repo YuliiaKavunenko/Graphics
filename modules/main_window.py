@@ -79,7 +79,7 @@ def run_main():
     local_max_min_label.place(x = 10, y = 170)
     local_max_min_label.bind('<Button-1>', focus_on_elements)
     # Label для виводу мінімального і максимального знач. функції / Label to display the minimum and maximum values of the function
-    zn_function_label.place(x = 10, y = 235)
+    zn_function_label.place(x = 10, y = 260)
     zn_function_label.bind('<Button-1>', focus_on_elements)
     # Label для виводу точок перетину графіку з осями ох і оу / Label to display the points of intersection of the graph with the x and y axes
     points_ox_oy_label.place(x = 10, y = 300)

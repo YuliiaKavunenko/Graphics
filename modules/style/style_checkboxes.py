@@ -183,3 +183,29 @@ second_dev_sixth.configure(
     checkmark_color = text_color, # колір галочки / checkmark color
     command = sixth_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
 )
+# похідна y' функції y = (x**2 + x + a)/x / derivative y' of the function y = (x**2 - a)/(x - b)
+first_dev_seventh.configure(
+    bg_color = frame_background, # колір фону чекбоксу / checkbox background color
+    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    fg_color = input_color, # колір фону інпуту / input background color
+    hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
+    border_width = 2, # ширина рамки чекбоксу / checkbox border width
+    font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
+    text_color = text_color, # колір тексту чекбоксу / checkbox text color
+    border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
+    checkmark_color = text_color, # колір галочки / checkmark color
+    command = seventh_first_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
+)
+# похідна y'' функції y = (x**2 + x + a)/x / derivative y'' of the function y = (x**2 - a)/(x - b)
+second_dev_seventh.configure(
+    bg_color = frame_background, # колір фону чекбоксу / checkbox background color
+    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    fg_color = input_color, # колір фону інпуту / input background color
+    hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
+    border_width = 2, # ширина рамки чекбоксу / checkbox border width
+    font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
+    text_color = text_color, # колір тексту чекбоксу / checkbox text color
+    border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
+    checkmark_color = text_color, # колір галочки / checkmark color
+    command = seventh_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
+)

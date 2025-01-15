@@ -317,7 +317,8 @@ inflection_points_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір переднього плану лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor,
+    wraplength = 300 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для лейблу відображення проміжків опуклості функції / setting the style for the label displaying the intervals of convexity of the function
 convexity_intervals_label.configure(
@@ -335,7 +336,8 @@ slope_asymptote.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір переднього плану лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 300 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # стиль для лейблу який зазначає якого кольору основний графік функції / setting the style for the label indicating the color of the main function graph
 main_graphic_label.configure(
@@ -457,4 +459,52 @@ sixth_func_plus.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
     bg_color = frame_background # колір фону лейблу / label background color
+)
+# Функція y = (x**2 + x + a)/x / Function y = (x**2 + x + a)/x
+seventh_func_l.configure(
+    font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
+    text_color = text_color, # колір тексту лейблу / label text color
+    bg_color = frame_background, # колір фону лейблу / label background color
+    fg_color = frame_background, # колір переднього плану лейблу / label foreground color
+    anchor = 'center' # прив'язка тексту лейблу / label text anchor
+)
+seventh_func_up_label.configure(
+    text = 'x² + x +      .', # текст на лейблі / label text
+    font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
+    text_color = text_color, # колір тексту лейблу / label text color
+    bg_color = frame_background, # колір фону лейблу / label background color
+    fg_color = frame_background, # колір переднього плану лейблу / label foreground color
+    anchor = 'center' # прив'язка тексту лейблу / label text anchor
+)
+seventh_func_down_label.configure(
+    text = 'x', # текст на лейблі / label text
+    font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
+    text_color = text_color, # колір тексту лейблу / label text color
+    bg_color = frame_background, # колір фону лейблу / label background color
+    fg_color = frame_background, # колір переднього плану лейблу / label foreground color
+    anchor = 'center' # прив'язка тексту лейблу / label text anchor
+)
+seventh_func_drob_label.configure(
+    bg_color = frame_background, # колір фону лейблу / label background color
+    text_color = text_color, # колір тексту лейблу / label text color
+    font = ("Normal", 12), # шрифт тексту лейблу / label text font
+    anchor = 'center' # прив'язка тексту лейблу / label text anchor
+)
+seventh_f_dev_label.configure(
+    text = "y' = очікування введення даних", # текст на лейблі / label text
+    font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
+    text_color = text_color, # колір тексту лейблу / label text color
+    bg_color = frame_background, # колір фону лейблу / label background color
+    fg_color = frame_background, # колір переднього плану лейблу / label foreground color
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
+)
+seventh_s_dev_label.configure(
+    text = "y'' = очікування введення даних", # текст на лейблі / label text
+    font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
+    text_color = text_color, # колір тексту лейблу / label text color
+    bg_color = frame_background, # колір фону лейблу / label background color
+    fg_color = frame_background, # колір переднього плану лейблу / label foreground color
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 327 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )

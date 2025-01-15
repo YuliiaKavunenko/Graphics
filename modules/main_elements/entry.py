@@ -111,3 +111,9 @@ a2_sixth = ctk.CTkEntry(
     width = 30,
     height = 30
 )
+# створення input для введення коєфіцієнта "a" функції y = (x**2 + x + a)/x / creating input for entering coefficient "a" of the function y = (x**2 + x + a)/x
+a1_seventh = ctk.CTkEntry(
+    master=frame_first,
+    width = 30,
+    height = 30
+)

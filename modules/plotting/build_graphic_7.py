@@ -19,23 +19,21 @@ def build_seventh_func():
     ax.clear()  # Очищення графічної області / Clearing the plotting area
     build_DSK()  # Виклик функції побудови ДСК / Calling the function to build DSK (not sure what DSK stands for)
     
-    # Отримання значень параметрів a і b з інтерфейсу / Getting the values of parameters a and b from the interface
-    a = a_drob_1.get()
-    b_data_3 = a_drob_3.get()
+    # Отримання значення параметра a з інтерфейсу / Getting the values of parameters a and b from the interface
+    a = a1_seventh.get()
     
     # Розміщення чекбоксів / Placing checkboxes
-    first_dev_fdrob.place(x=25, y=65)
-    second_dev_fdrob.place(x=25, y=110)
+    first_dev_seventh.place(x = 25, y = 65)
+    second_dev_seventh.place(x = 25, y = 110)
     main_graphic_label.place(x=25, y=20)
     
     # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
     build_colors_labels()
     
-    if a and b_data_3:  # Перевірка, чи існують значення a і b / Checking if a and b values exist
+    if a:  # Перевірка, чи існують значення a і b / Checking if a and b values exist
         x = sympy.symbols('x')  # Оголошення змінної x як символічної / Declaring x as a symbolic variable
         a = float(a)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
-        b_data_3 = float(b_data_3)  # Перетворення b у число з плаваючою крапкою / Converting b to a float
-        expr = (x**2 - a) / (x - b_data_3)  # Визначення виразу функції / Defining the function expression
+        expr = (x**2 + x + a)/x  # Визначення виразу функції / Defining the function expression
         
         if isinstance(expr, sympy.Number):  # Якщо вираз є числом / If the expression is a number
             plot_constant_function(float(expr), 'red')  # Побудова графіка для константи / Plotting the graph for the constant
@@ -46,7 +44,7 @@ def build_seventh_func():
             x_vals = numpy.linspace(-10, 10, 400)  # Визначення діапазону значень x / Defining the range of x values
             y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
-            plot, = ax.plot(x_vals, y_vals, label=f'y = (х²-{a})/(х-{b_data_3})', color='red')  # Побудова графіка функції / Plotting the function graph
+            plot = ax.plot(x_vals, y_vals, label=f'y = (x**2 + x + {a})/x ', color='red')  # Побудова графіка функції / Plotting the function graph
             plots.append(plot)  # Додавання графіка до списку / Adding the plot to the list
 
             ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph

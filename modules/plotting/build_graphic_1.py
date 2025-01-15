@@ -47,7 +47,7 @@ def build_graphic_1():
 
         expr = a*x**3 + b*x**2 + c*x + d  # створюємо вираз для функції / creating the expression for the function
         if isinstance(expr, sympy.Number):  # перевіряємо, чи є вираз числом / checking if the expression is a number
-            plot_constant_function(float(expr), 'blue')  # будуємо графік для константної функції / plot the constant function
+            plot_constant_function(float(expr), 'red')  # будуємо графік для константної функції / plot the constant function
         else:
             func1 = sympy.lambdify(x, expr, 'numpy') # перетворюємо функцію у форму, придатну для числових обчислень / convert the function to a form suitable for numerical calculations
             # list_functions.append(func1)

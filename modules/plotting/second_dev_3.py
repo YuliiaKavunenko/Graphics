@@ -28,80 +28,62 @@ def third_second_dev():
 
             expr = second_dev_of_function  # Встановлення виразу для другої похідної / Setting the expression for the second derivative
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу другої похідної у функцію для обчислень / Converting the second derivative expression to a function for calculations
-
-            # Визначення діапазону значень x / Defining the range of x values
-            x_vals = numpy.linspace(-10, 10, 400)
-            y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
-
-            # # видалення старих елементів / Removing old elements
-            # if plot_third_second:
-            #     plot_third_second.remove()  # Видалення старого графіка / Removing the old graph
-            #     plot_third_second = None
-
-            # if inflection_points_third_scatter:
-            #     for point in inflection_points_third_scatter:
-            #         point.remove()  # Видалення старих точок перегину / Removing old inflection points
-            #     inflection_points_third_scatter.clear()
-
-            # if ox_points_third_second:
-            #     for point in ox_points_third_second:
-            #         point.remove()  # Видалення старих точок перетину з віссю x / Removing old intersection points with x-axis
-            #     ox_points_third_second.clear()
-
-            # if h_lines_third_second:
-            #     for line in h_lines_third_second:
-            #         line.remove()  # Видалення старих горизонтальних ліній / Removing old horizontal lines
-            #     h_lines_third_second.clear()
-
-            # Побудова графіку другої похідної / Plotting the second derivative graph
-            plot_third_second = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
-
-            # пошук точок перегину / Finding inflection points
-            inflection_points = find_inflection_points(second_dev_of_function)
-            for point in inflection_points:
-                y_val = function.subs(x, point)  # Обчислення значення функції в точці перегину / Calculating the function value at the inflection point
-                scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)  # Додавання точок перегину на графік / Adding inflection points to the graph
-                inflection_points_third_scatter.append(scatter)
-                inflection_points_th_l = ax.annotate(
-                    f'({float(point):.2f}, {float(y_val):.2f})',
-                    (float(point), float(y_val)),
-                    textcoords="offset points",
-                    xytext=(0, 10),
-                    ha='center',
-                    color='blue'
-                )  # Додавання тексту для точок перегину / Adding text for inflection points
-                inflection_points_th.append(inflection_points_th_l)
-
-            # пошук точок пересічення з Ox і побудова пунктирних ліній / Finding intersection points with Ox and plotting dashed lines
-            points_0x_0y = points_ox_oy(second_dev_of_function, 'blue', label=False, lines=True, include_oy=False)
-            ox_points_third_second = points_0x_0y['0x']  # Збереження точок перетину з Ox / Storing intersection points with Ox
-            h_lines_third_second = points_0x_0y['lines']  # Збереження пунктирних ліній / Storing dashed lines
-
-            ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
-            legend = ax.legend()
-
-            third_s_dev_label.configure(
-                text=f"y'' = {second_dev_of_function}"  # Оновлення тексту для другої похідної / Updating the text for the second derivative
-            )
-
-            # оновлення лейблу з точками перегину / Updating the label with inflection points
-            if inflection_points:
-                formatted_points = "; ".join([f"x{i+1} = {float(pt):.2f}" for i, pt in enumerate(inflection_points)])
-                inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")  # Оновлення тексту мітки з точками перегину / Updating the text for the inflection points label
+            if isinstance(func, sympy.Number):  # Якщо вираз є числом / If the expression is a number
+                plot_3 = plot_constant_function(float(func), 'blue')  # Побудова графіка для константи / Plotting the graph for the constant function
             else:
-                inflection_points_label.configure(text="9) Точки перегину: не існує")  # Виведення повідомлення про відсутність точок перегину / Displaying message about the absence of inflection points
+                # Визначення діапазону значень x / Defining the range of x values
+                x_vals = numpy.linspace(-10, 10, 400)
+                y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
-            points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
-            for text in legend.get_texts():
-                text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
-            canvas.draw()  # Оновлення графіку / Redrawing the canvas
+                # Побудова графіку другої похідної / Plotting the second derivative graph
+                plot_third_second = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
 
-            dictionary_of_variables['ox_points_third_second'] = ox_points_third_second  # Збереження точок перетину з віссю x / Storing intersection points with the x-axis
-            dictionary_of_variables['h_lines_third_second'] = h_lines_third_second  # Збереження пунктирних ліній / Storing dashed lines
-            dictionary_of_variables['plot_third_second'] = plot_third_second  # Збереження графіку другої похідної / Storing the second derivative graph
-            dictionary_of_variables['inflection_points_third_scatter'] = inflection_points_third_scatter  # Збереження точок перегину / Storing inflection points
-            dictionary_of_variables['inflection_points_th'] = inflection_points_th  # Збереження підписів точок перегину / Storing inflection point labels
-            dictionary_of_variables['inflection_points_label'] = inflection_points_label  # Збереження лейблу з точками перегину / Storing the label with inflection points
+                # пошук точок перегину / Finding inflection points
+                inflection_points = find_inflection_points(second_dev_of_function)
+                for point in inflection_points:
+                    y_val = function.subs(x, point)  # Обчислення значення функції в точці перегину / Calculating the function value at the inflection point
+                    scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)  # Додавання точок перегину на графік / Adding inflection points to the graph
+                    inflection_points_third_scatter.append(scatter)
+                    inflection_points_th_l = ax.annotate(
+                        f'({float(point):.2f}, {float(y_val):.2f})',
+                        (float(point), float(y_val)),
+                        textcoords="offset points",
+                        xytext=(0, 10),
+                        ha='center',
+                        color='blue'
+                    )  # Додавання тексту для точок перегину / Adding text for inflection points
+                    inflection_points_th.append(inflection_points_th_l)
+
+                # пошук точок пересічення з Ox і побудова пунктирних ліній / Finding intersection points with Ox and plotting dashed lines
+                points_0x_0y = points_ox_oy(second_dev_of_function, 'blue', label=False, lines=True, include_oy=False)
+                ox_points_third_second = points_0x_0y['0x']  # Збереження точок перетину з Ox / Storing intersection points with Ox
+                h_lines_third_second = points_0x_0y['lines']  # Збереження пунктирних ліній / Storing dashed lines
+
+                ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
+                legend = ax.legend()
+
+                third_s_dev_label.configure(
+                    text=f"y'' = {second_dev_of_function}"  # Оновлення тексту для другої похідної / Updating the text for the second derivative
+                )
+
+                # оновлення лейблу з точками перегину / Updating the label with inflection points
+                if inflection_points:
+                    formatted_points = "; ".join([f"x{i+1} = {float(pt):.2f}" for i, pt in enumerate(inflection_points)])
+                    inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")  # Оновлення тексту мітки з точками перегину / Updating the text for the inflection points label
+                else:
+                    inflection_points_label.configure(text="9) Точки перегину: не існує")  # Виведення повідомлення про відсутність точок перегину / Displaying message about the absence of inflection points
+
+                points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
+                for text in legend.get_texts():
+                    text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
+                canvas.draw()  # Оновлення графіку / Redrawing the canvas
+
+                dictionary_of_variables['ox_points_third_second'] = ox_points_third_second  # Збереження точок перетину з віссю x / Storing intersection points with the x-axis
+                dictionary_of_variables['h_lines_third_second'] = h_lines_third_second  # Збереження пунктирних ліній / Storing dashed lines
+                dictionary_of_variables['plot_third_second'] = plot_third_second  # Збереження графіку другої похідної / Storing the second derivative graph
+                dictionary_of_variables['inflection_points_third_scatter'] = inflection_points_third_scatter  # Збереження точок перегину / Storing inflection points
+                dictionary_of_variables['inflection_points_th'] = inflection_points_th  # Збереження підписів точок перегину / Storing inflection point labels
+                dictionary_of_variables['inflection_points_label'] = inflection_points_label  # Збереження лейблу з точками перегину / Storing the label with inflection points
 
     elif check == 0 and plot_third_second:  # Якщо чекбокс вимкнений і графік другої похідної існує / If the checkbox is unchecked and the second derivative plot exists
         # видалення графіка другої похідної / Removing the second derivative plot

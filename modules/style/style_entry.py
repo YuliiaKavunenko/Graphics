@@ -216,3 +216,14 @@ a2_sixth.configure(
     border_width = 3, # ширина рамки інпуту / input border width
     border_color = input_border_color # колір рамки інпуту / input border color
 )
+
+a1_seventh.configure(
+    bg_color = frame_background, # колір фону інпуту / input background color
+    placeholder_text= 'a', # текст підказки для інпуту / input placeholder text
+    placeholder_text_color = input_textholder_color, # колір тексту підказки для інпуту / input placeholder text color
+    fg_color = input_color, # колір інпуту / input color
+    text_color = text_color, # колір тексту інпуту / input text color
+    font = ("Roboto Slab", 15), # шрифт тексту інпуту / input text font
+    border_width = 3, # ширина рамки інпуту / input border width
+    border_color = input_border_color # колір рамки інпуту / input border color
+)

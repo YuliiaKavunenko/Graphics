@@ -42,7 +42,7 @@ button_get = ctk.CTkButton(
     height=40
 )
 # робота функції відображення підсказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-button_get.bind("<Enter>", lambda event: show_tooltip(event, "Побудова вибраного або введеного вами графіку функції /\nBuild the selected or entered by you function graph"))
+button_get.bind("<Enter>", lambda event: show_tooltip(event, "Побудова вибраного або введеного вами графіку функції"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 button_get.bind("<Leave>", hide_tooltip)
 # створення кнопки на головному вікні для побудови і дослідження першого графіку / creating a button on the main window for building and researching the first graph
@@ -52,7 +52,7 @@ get_grachic_1 = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підсказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-get_grachic_1.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = ax**3 + bx**2 + cx + d /\nBuild and research the graph of the function y = ax**3 + bx**2 + cx + d"))
+get_grachic_1.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = ax**3 + bx**2 + cx + d"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 get_grachic_1.bind("<Leave>", hide_tooltip)
 # створення кнопки на головному вікні для очищення ДСК / creating a button on the main window for clearing the system
@@ -62,7 +62,7 @@ clean_graphic = ctk.CTkButton(
     height = 35
 )
 # робота функції відображення підсказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-clean_graphic.bind("<Enter>", lambda event: show_tooltip(event, "Очищення поля побудови графіків функцій і введених користувачем даних  /\nClearing the field for building function graphs and user-entered data"))
+clean_graphic.bind("<Enter>", lambda event: show_tooltip(event, "Очищення поля побудови графіків функцій і введених користувачем даних"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 clean_graphic.bind("<Leave>", hide_tooltip)
 
@@ -73,7 +73,7 @@ get_drob_grachic = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підсказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-get_drob_grachic.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції у = (x**2 - a)/(x - b) /\nBuild and research the graph of the function y = (x**2 - a)/(x - b)"))
+get_drob_grachic.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції у = (x**2 - a)/(x - b)"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 get_drob_grachic.bind("<Leave>", hide_tooltip)
 # створення кнопки для побудови і дослідження графіку функції y = (x**2 - a**2)/x / creating a button for building and researching the graph of the function y = (x**2 - a**2)/x
@@ -83,7 +83,7 @@ third_func_button = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підсказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-third_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = (x**2 - a**2)/x /\nBuild and research the graph of the function y = (x**2 - a**2)/x"))
+third_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = (x**2 - a**2)/x"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 third_func_button.bind("<Leave>", hide_tooltip)
 
@@ -94,7 +94,7 @@ choose_gr = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-choose_gr.bind("<Enter>", lambda event: show_tooltip(event, "Оберіть більш складний графік функції з списку для побудови і його дослідження /\nChoose a more complex function graph from the list for building and researching"))
+choose_gr.bind("<Enter>", lambda event: show_tooltip(event, "Оберіть більш складний графік функції з списку для побудови і його дослідження"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 choose_gr.bind("<Leave>", hide_tooltip)
 # створення кнопки для побудови і дослідження функції y = x/(x**2 + a) / creating a button for building and researching the function y = x/(x**2 + a)
@@ -104,7 +104,7 @@ fourth_func_button = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-fourth_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = x/(x**2 + a) /\nBuild and research the graph of the function y = x/(x**2 + a)"))
+fourth_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = x/(x**2 + a)"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 fourth_func_button.bind("<Leave>", hide_tooltip)
 # створення кнопки для побудови і дослідження графіку функції y = (x**2 + a)/(x**2 - a) / creating a button for building and researching the graph of the function y = (x**2 + a)/(x**2 - a)
@@ -114,7 +114,7 @@ fifth_func_button = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-fifth_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = (x**2 + a)/(x**2 - a) /\nBuild and research the graph of the function y = (x**2 + a)/(x**2 - a)"))
+fifth_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = (x**2 + a)/(x**2 - a)"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 fifth_func_button.bind("<Leave>", hide_tooltip)
 # створення кнопки для побудови і дослідження графіку функції y = a/x**2 + x/a / creating a button for building and researching the graph of the function y = a/x**2 + x/a
@@ -124,6 +124,17 @@ sixth_func_button = ctk.CTkButton(
     height = 40
 )
 # робота функції відображення підказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
-sixth_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = a/x**2 + x/a /\nBuild and research the graph of the function y = a/x**2 + x/a"))
+sixth_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = a/x**2 + x/a"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 sixth_func_button.bind("<Leave>", hide_tooltip) 
+
+# створення кнопки для побудови і дослідження графіку функції y = (x**2 + x + a)/x / creating a button for building and researching the graph of the function y = (x**2 + x + a)/x
+seventh_func_button = ctk.CTkButton(
+    master = frame_first,
+    width = 40,
+    height = 40
+)
+# робота функції відображення підказки при наведенні курсора на кнопку / function to show tooltip when hovering over the button
+seventh_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = (x**2 + x + a)/x"))
+# робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
+seventh_func_button.bind("<Leave>", hide_tooltip) 

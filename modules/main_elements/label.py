@@ -61,7 +61,7 @@ drob_y_zn = ctk.CTkLabel(
     master = frame_first,
     width = 160,
     height = 45,
-    text = 'х -'
+    text = 'x -  '
 )
 # створення лейблу для відображення "у = " функції у = (x**2 - a)/(x - b) / creating a label for displaying "y =" of the function y = (x**2 - a)/(x - b)
 drob_y = ctk.CTkLabel(
@@ -362,4 +362,43 @@ sixth_func_plus = ctk.CTkLabel(
     width = 11,
     height = 16,
     text = '+'
+)
+# Функція y = (x**2 + x + a)/x / Function y = (x**2 + x + a)/x
+# створення лейблу для відображення "у = " сьомого графік функції / creating a label for displaying "y =" of the seventh function graph
+seventh_func_l = ctk.CTkLabel(
+    master = frame_first,
+    width = 23,
+    height = 40,
+    text = 'y ='
+)
+# створення лейблу для відображення чисельника функції y = (x**2 + x + a)/x / creating a label for displaying the numerator of the function y = (x**2 + x + a)/x
+seventh_func_up_label = ctk.CTkLabel(
+    master = frame_first,
+    width = 160,
+    height = 43
+)
+# створення лейблу для відображення знаменника функції y = (x**2 + x + a)/x / creating a label for displaying the denominator of the function y = (x**2 + x + a)/x
+seventh_func_down_label = ctk.CTkLabel(
+    master = frame_first,
+    width = 160,
+    height = 43
+)
+# створення лейблу для відображення дробового знаку функції y = (x**2 + x + a)/x / creating a label for displaying the fraction sign of the function y = (x**2 + x + a)/x
+seventh_func_drob_label = ctk.CTkLabel(
+    master = frame_first,
+    width = 209,
+    height = 2,
+    text = '————————————'
+)
+# створення лейблу для відображення похідної y' функції y = (x**2 + x + a)/x / creating a label for displaying the derivative y' of the function y = (x**2 + x + a)/x
+seventh_f_dev_label = ctk.CTkLabel(
+    master = frame_first,
+    width = 275,
+    height = 40
+)
+# створення лейблу для відображення похідної y'' функції y = (x**2 + x + a)/x / creating a label for displaying the derivative y'' of the function y = (x**2 + x + a)/x
+seventh_s_dev_label = ctk.CTkLabel(
+    master = frame_first,
+    width = 275,
+    height = 40
 )

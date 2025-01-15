@@ -3,8 +3,10 @@ from ..main_elements import *
 from ..data_calculation import scope_of_function, format_intervals, check_even_odd_func, points_ox_oy, find_sign_intervals, find_intervals
 # функція для побудови графіка / function to plot the graph
 def plot_graph(ax, canvas):
+    from .clean import clean_graphic
     from .plot_constant_function import plot_constant_function
     from .punctured_dots import punctured_dots
+    clean_graphic()
     # очищаємо поточний графік / clearing the current graph
     # ax.clear()
     # Переводимо фокус на кнопку, щоб прибрати курсор з CTkEntry / shifting focus to the button to remove the caret from CTkEntry
@@ -54,37 +56,38 @@ def plot_graph(ax, canvas):
             domain_text = f"1) D(y) = {format_intervals(domain)}"  # форматування інтервалів області визначення / format the domain intervals
             scope_label.configure(text=domain_text)
 
-    # визначення інтервалів зростання та спадання / determining intervals of increase and decrease
+            # визначення інтервалів зростання та спадання / determining intervals of increase and decrease
             intervals_data = find_intervals(dev_expr, expr)  # знаходимо інтервали зростання та спадання / find intervals of increase and decrease
             if len(intervals_data['інтервали']) != 0:  # якщо існують інтервали зростання або спадання / if there are intervals of increase or decrease
-                interval_text = "\n".join([f"({left:.2f}; {right:.2f}) {state}" for left, right, state in intervals_data['інтервали']])
+                interval_text = "\n".join([f"({str(left)[0:4]}; {str(right)[0:4]}) {state}" for left, right, state in intervals_data['інтервали']])
             else:
                 interval_text = "Інтервалів зростання/спадання не існує"  # не існують інтервали зростання або спадання / no intervals of increase or decrease exist
 
             interval_label.configure(text=f'3) {interval_text}')  # оновлюємо лейбл для інтервалів / update the interval label
 
             # Формуємо текст для локальних максимумів і мінімумів / forming text for local maxima and minima
-            if len(intervals_data['локальний максимум']) != 0:  # якщо існують локальні максимуми / if there are local maxima
+            if intervals_data['локальний максимум'] != 'не існує':  # якщо існують локальні максимуми / if there are local maxima
                 local_max_text = "4) Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
             else:
                 local_max_text = "4) Локальний максимум: не існує"  # не існує локальних максимумів / no local maxima exist
 
-            if len(intervals_data['локальний мінімум']) != 0:  # якщо існують локальні мінімуми / if there are local minima
+            if intervals_data['локальний мінімум'] != "не існує":  # якщо існують локальні мінімуми / if there are local minima
                 local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
             else:
                 local_min_text = "Локальний мінімум: не існує"  # не існує локальних мінімумів / no local minima exist
 
-            # максимальне значення функції / maximum value of the function
-            if intervals_data['макс. значення ф-ції']:
-                funct_max_text = f"5) Макс. значення функції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+                       # макс значення функції / max function value
+            if isinstance(intervals_data['макс. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
+                funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
             else:
-                funct_max_text = "5) Макс. значення функції: не існує"  # не існує максимального значення / no maximum value exists
+                funct_max_text = f"Макс. значення ф-ції: {intervals_data['макс. значення ф-ції']}"  # Виводимо текст без форматування / Display text without formatting
 
-            # мінімальне значення функції / minimum value of the function
-            if intervals_data['мін. значення ф-ції']:
-                func_min_text = f"Мін. значення функції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+            # Мінімальне значення функції / min function value
+            if isinstance(intervals_data['мін. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
+                func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
             else:
-                func_min_text = "Мін. значення функції: не існує"  # не існує мінімального значення / no minimum value exists
+                func_min_text = f"Мін. значення ф-ції: {intervals_data['мін. значення ф-ції']}"  # Виводимо текст без форматування / Display text without formatting
+
 
             local_max_min_text = f'{local_max_text}\n{local_min_text}'  # об'єднуємо текст для локальних максимумів та мінімумів / combine local max and min text
             local_max_min_label.configure(text=local_max_min_text)  # оновлюємо лейбл для локальних максимумів та мінімумів / update the label for local max and min

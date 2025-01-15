@@ -1,13 +1,22 @@
 import sympy
 # Функція для знаходження точок перегину графіку функцій / Function to find inflection points of function graphs
 def find_inflection_points(second_derivative):
-    x = sympy.symbols('x')  # Створюємо символ x / Create the symbol x
+    import sympy
 
-    # Знаходимо нулі другої похідної (тобто потенційні точки перегину) / Find the zeros of the second derivative (potential inflection points)
-    inflection_points = sympy.solve(second_derivative, x)  # Розв'язуємо рівняння для другої похідної / Solve the equation for the second derivative
+# Функція для знаходження точок перегину графіку функцій
+def find_inflection_points(second_derivative):
+    x = sympy.symbols('x')  # Створюємо символ x
 
-    # Округлюємо кожну точку до заданої точності / Round each point to the specified precision
-    inflection_points_rounded = [round(point, 1) for point in inflection_points]  # Округлення точок перегину / Rounding inflection points
+    # Знаходимо нулі другої похідної (потенційні точки перегину)
+    inflection_points = sympy.solve(second_derivative, x)
 
-    # Повертаємо список точок перегину / Return the list of inflection points
-    return inflection_points_rounded
+    # Створюємо список для зберігання реальних точок перегину
+    inflection_points_real = []
+
+    # Проходимо по знайдених точках і перевіряємо, чи є вони дійсними
+    for point in inflection_points:
+        if sympy.im(point) == 0:  # Якщо точка дійсна
+            inflection_points_real.append(round(point.evalf(), 1))  # Округлюємо і додаємо до списку
+
+    # Повертаємо список точок перегину
+    return inflection_points_real

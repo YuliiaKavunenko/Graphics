@@ -81,3 +81,16 @@ second_dev_sixth = ctk.CTkCheckBox(
     checkbox_width = 35,
     checkbox_height = 35
 )
+# сьомий графік y = (x**2 + x + a)/x / seventh graph y = (x**2 + x + a)/x
+# створення чекбоксу для побудови або прибирання у' / creating a checkbox for building or removing y'
+first_dev_seventh = ctk.CTkCheckBox(
+    master = frame_for_options,
+    checkbox_width = 35,
+    checkbox_height = 35
+)
+# створення чекбоксу для побудови або прибирання у'' / creating a checkbox for building or removing y''
+second_dev_seventh = ctk.CTkCheckBox(
+    master = frame_for_options,
+    checkbox_width = 35,
+    checkbox_height = 35
+)

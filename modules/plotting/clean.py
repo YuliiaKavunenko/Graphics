@@ -4,8 +4,11 @@ import customtkinter as ctk
 # функція для очищення зайвих елементів на ДСК і старих коєфіцієнтів / function to clear unnecessary elements on the coordinate grid and old coefficients
 def clean_button():
     from .build_DSK import build_DSK
-    first_dev.place_forget()  # приховуємо першу похідну / hiding the first derivative
-    second_dev.place_forget()  # приховуємо другу похідну / hiding the second derivative
+
+    red_gr.place_forget()
+    green_gr.place_forget()
+    blue_gr.place_forget()
+
     ax.clear()  # очищаємо вісь графіка / clearing the graph axis
     a_1.delete(0,"end")  # очищаємо поле для коефіцієнта a / clearing the field for coefficient a
     b_1.delete(0,"end")  # очищаємо поле для коефіцієнта b / clearing the field for coefficient b
@@ -38,14 +41,14 @@ def clean_button():
 
     scope_label.configure(text = '1) Область визначення функції')  # оновлюємо текст лейблу області визначення функції / updating the label text for the function domain
 
-    drob_first_dev_lable.configure(text = "y' = ")  # очищаємо текст лейблу першої похідної дробової функції / clearing the label text for the first derivative of the fractional function
-    drob_second_dev_lable.configure(text = "y'' = ")  # очищаємо текст лейблу другої похідної дробової функції / clearing the label text for the second derivative of the fractional function
+    drob_first_dev_lable.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної дробової функції / clearing the label text for the first derivative of the fractional function
+    drob_second_dev_lable.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної дробової функції / clearing the label text for the second derivative of the fractional function
 
-    third_f_dev_label.configure(text = "y' = ")  # очищаємо текст лейблу першої похідної третьої функції / clearing the label text for the first derivative of the third function
-    third_s_dev_label.configure(text = "y'' = ")  # очищаємо текст лейблу другої похідної третьої функції / clearing the label text for the second derivative of the third function
+    third_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної третьої функції / clearing the label text for the first derivative of the third function
+    third_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної третьої функції / clearing the label text for the second derivative of the third function
 
-    fourth_f_dev_label.configure(text = "y' = ")  # очищаємо текст лейблу першої похідної четвертої функції / clearing the label text for the first derivative of the fourth function
-    fourth_s_dev_label.configure(text = "y'' = ")  # очищаємо текст лейблу другої похідної четвертої функції / clearing the label text for the second derivative of the fourth function
+    fourth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної четвертої функції / clearing the label text for the first derivative of the fourth function
+    fourth_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної четвертої функції / clearing the label text for the second derivative of the fourth function
 
     points_ox_oy_label.configure(text="6) Точки перетину з осями ох і оу")  # оновлюємо текст лейблу для точок перетину з осями / updating the label text for intersection points with axes
 
@@ -62,15 +65,33 @@ def clean_button():
     main_graphic_label.place_forget()  # приховуємо лейбл головного графіка / hiding the main graph label
     a1_function5.delete(0,"end")
     a2_function5.delete(0,"end")
-    fifth_f_dev_label.configure(text = "y' = ")  # очищаємо текст лейблу першої похідної п'ятої функції / clearing the label text for the first derivative of the fifth function
-    fifth_s_dev_label.configure(text = "y'' = ")  # очищаємо текст лейблу другої похідної п'ятої функції / clearing the label text for the second derivative of the fifth function
+    fifth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної п'ятої функції / clearing the label text for the first derivative of the fifth function
+    fifth_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної п'ятої функції / clearing the label text for the second derivative of the fifth function
 
-    first_dev_fifth.place_forget()  # приховуємо першу похідну п'ятої функції / hiding the first derivative of the fifth function
-    second_dev_fifth.place_forget()  # приховуємо другу похідну п'ятої функції / hiding the second derivative of the fifth function
-    sixth_s_dev_label.configure(text = "y'' = ")  # очищаємо текст лейблу другої похідної шостої функції / clearing the label text for the second derivative of the sixth function
-    sixth_f_dev_label.configure(text = "y' = ")  # очищаємо текст лейблу першої похідної шостої функції / clearing the label text for the first derivative of the sixth function
+    sixth_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної шостої функції / clearing the label text for the second derivative of the sixth function
+    sixth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної шостої функції / clearing the label text for the first derivative of the sixth function
 
     a1_sixth.delete(0,"end")
     a2_sixth.delete(0,"end")
-    # викликаємо функцію для побудови ДСК / calling the function to build the coordinate grid
+
+    first_dev.place_forget()
+    second_dev.place_forget()
+    first_dev_fdrob.place_forget()
+    second_dev_fdrob.place_forget()
+    first_dev_sdrob.place_forget()
+    second_dev_sdrob.place_forget()
+    first_dev_fourth.place_forget()
+    second_dev_fourth.place_forget()
+    first_dev_fifth.place_forget()
+    second_dev_fifth.place_forget()
+    first_dev_sixth.place_forget()
+    second_dev_sixth.place_forget()
+
+    a1_seventh.delete(0,"end")
+
+    seventh_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної сьомої функції / clearing the label text for the first derivative of the seventh function
+    seventh_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної сьомої функції / clearing the label text for the second derivative of the seventh function
+
+    first_dev_seventh.place_forget()
+    second_dev_seventh.place_forget()
     build_DSK()

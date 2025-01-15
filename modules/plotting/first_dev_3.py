@@ -23,142 +23,107 @@ def third_first_dev():
 
             function = (x**2 - a**2) / x  # Визначення виразу функції / Defining the function expression
             dev_of_function = sympy.diff(function, x)  # Обчислення першої похідної функції / Calculating the first derivative of the function
-
-            # Видалення старих точок, ліній, графіка, максимумів і мінімумів / Removing old points, lines, graph, maxima, and minima
-            # if plot_third_first:
-            #     plot_third_first.remove()  # Видалення старого графіка / Removing the old graph
-            #     plot_third_first = None
-
-            # if ox_points_third_first:
-            #     for point in ox_points_third_first:
-            #         point.remove()  # Видалення старих точок перетину з віссю x / Removing old intersection points with x-axis
-            #     ox_points_third_first.clear()
-
-            # if h_lines_third_first:
-            #     for line in h_lines_third_first:
-            #         line.remove()  # Видалення старих горизонтальних ліній / Removing old horizontal lines
-            #     h_lines_third_first.clear()
-
-            # if local_max_third_first:
-            #     local_max_third_first.remove()  # Видалення старих точок локального максимуму / Removing old local maximum points
-            #     local_max_text_third_first.remove()  # Видалення тексту старих точок локального максимуму / Removing old local maximum points text
-            #     local_max_third_first = None
-            #     local_max_text_third_first = None
-
-            # if local_min_third_first:
-            #     local_min_third_first.remove()  # Видалення старих точок локального мінімуму / Removing old local minimum points
-            #     local_min_text_third_first.remove()  # Видалення тексту старих точок локального мінімуму / Removing old local minimum points text
-            #     local_min_third_first = None
-            #     local_min_text_third_first = None
-
-            # Обчислення інтервалів зростання і спадання / Calculating growth and decay intervals
-            intervals_data = find_intervals(dev_of_function, function)
-            if len(intervals_data['інтервали']) != 0:  # Перевірка наявності інтервалів зростання/спадання / Checking for growth/decay intervals
-                interval_text = "\n".join([f"({str(left)[0:4]}; {str(right)[0:4]}) {state}" for left, right, state in intervals_data['інтервали']])
+            if isinstance(dev_of_function, sympy.Number):  # Якщо вираз є числом / If the expression is a number
+                plot_constant_function(float(dev_of_function), 'green')  # Побудова графіка для константи / Plotting the graph for the constant
             else:
-                interval_text = "Інтервалів зростання/спадання не існує"  # Виведення повідомлення про відсутність інтервалів зростання/спадання / Displaying message about the absence of growth/decay intervals
+                # Обчислення інтервалів зростання і спадання / Calculating growth and decay intervals
+                intervals_data = find_intervals(dev_of_function, function)
+                if len(intervals_data['інтервали']) != 0:  # Перевірка наявності інтервалів зростання/спадання / Checking for growth/decay intervals
+                    interval_text = "\n".join([f"({str(left)[0:4]}; {str(right)[0:4]}) {state}" for left, right, state in intervals_data['інтервали']])
+                else:
+                    interval_text = "Інтервалів зростання/спадання не існує"  # Виведення повідомлення про відсутність інтервалів зростання/спадання / Displaying message about the absence of growth/decay intervals
 
-            interval_label.configure(text=f'3) {interval_text}')  # Налаштування тексту мітки для інтервалів зростання/спадання / Setting text for growth/decay intervals label
-            
-            # print(intervals_data['локальний максимум'])
-            # print(len(intervals_data['локальний максимум']))
-            # Формування тексту для локальних максимумів і мінімумів / Forming text for local maxima and minima
-            if intervals_data['локальний максимум'] != 'не існує':  # Перевірка наявності локальних максимумів / Checking for local maxima
-                local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
-            else:
-                local_max_text = "Локальний максимум: не існує"  # Виведення повідомлення про відсутність локальних максимумів / Displaying message about the absence of local maxima
+                interval_label.configure(text=f'3) {interval_text}')  # Налаштування тексту мітки для інтервалів зростання/спадання / Setting text for growth/decay intervals label
+                
+                # print(intervals_data['локальний максимум'])
+                # print(len(intervals_data['локальний максимум']))
+                # Формування тексту для локальних максимумів і мінімумів / Forming text for local maxima and minima
+                if intervals_data['локальний максимум'] != 'не існує':  # Перевірка наявності локальних максимумів / Checking for local maxima
+                    local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
+                    local_max = intervals_data['локальний максимум'][0]
+                    l_max_x, l_max_y = local_max
+                    local_max_third_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40)  # Додавання точок локального максимуму / Adding local maximum points
+                    local_max_text_third_first = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
+                                                        (l_max_x, l_max_y),
+                                                        textcoords="offset points",
+                                                        xytext=(15, 15),
+                                                        ha='center')  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
+                    
+                else:
+                    local_max_text = "Локальний максимум: не існує"  # Виведення повідомлення про відсутність локальних максимумів / Displaying message about the absence of local maxima
 
-            if intervals_data['локальний мінімум'] != 'не існує':  # Перевірка наявності локальних мінімумів / Checking for local minima
-                local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
-            else:
-                local_min_text = "Локальний мінімум: не існує"  # Виведення повідомлення про відсутність локальних мінімумів / Displaying message about the absence of local minima
+                if intervals_data['локальний мінімум'] != 'не існує':  # Перевірка наявності локальних мінімумів / Checking for local minima
+                    local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
+                    local_min = intervals_data['локальний мінімум'][0]
+                    l_min_x, l_min_y = local_min
+                    local_min_third_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40)  # Додавання точок локального мінімуму / Adding local minimum points
+                    local_min_text_third_first = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
+                                                        (l_min_x, l_min_y),
+                                                        textcoords="offset points",
+                                                        xytext=(15, 15),
+                                                        ha='center')  # Додавання тексту для точок локального мінімуму / Adding text for local minimum points
+                else:
+                    local_min_text = "Локальний мінімум: не існує"  # Виведення повідомлення про відсутність локальних мінімумів / Displaying message about the absence of local minima
 
-            # макс значення функції / max function value
-            if isinstance(intervals_data['макс. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
-                funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
-            else:
-                funct_max_text = f"Макс. значення ф-ції: {intervals_data['макс. значення ф-ції']}"  # Виводимо текст без форматування / Display text without formatting
+                # макс значення функції / max function value
+                if isinstance(intervals_data['макс. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
+                    funct_max_text = f"Макс. значення ф-ції: x = {intervals_data['макс. значення ф-ції'][0]:.2f}, y = {intervals_data['макс. значення ф-ції'][1]:.2f}"
+                else:
+                    funct_max_text = f"Макс. значення ф-ції: {intervals_data['макс. значення ф-ції']}"  # Виводимо текст без форматування / Display text without formatting
 
-            # Мінімальне значення функції / min function value
-            if isinstance(intervals_data['мін. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
-                func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
-            else:
-                func_min_text = f"Мін. значення ф-ції: {intervals_data['мін. значення ф-ції']}"  # Виводимо текст без форматування / Display text without formatting
+                # Мінімальне значення функції / min function value
+                if isinstance(intervals_data['мін. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
+                    func_min_text = f"Мін. значення ф-ції: x = {intervals_data['мін. значення ф-ції'][0]:.2f}, y = {intervals_data['мін. значення ф-ції'][1]:.2f}"
+                else:
+                    func_min_text = f"Мін. значення ф-ції: {intervals_data['мін. значення ф-ції']}"  # Виводимо текст без форматування / Display text without formatting
 
-            local_max_min_text = f'4) {local_max_text}\n{local_min_text}'  # Формування тексту для локальних максимумів і мінімумів / Forming text for local maxima and minima
-            local_max_min_label.configure(text=local_max_min_text)  # Налаштування тексту мітки для локальних максимумів і мінімумів / Setting text for local maxima and minima label
+                local_max_min_text = f'4) {local_max_text}\n{local_min_text}'  # Формування тексту для локальних максимумів і мінімумів / Forming text for local maxima and minima
+                local_max_min_label.configure(text=local_max_min_text)  # Налаштування тексту мітки для локальних максимумів і мінімумів / Setting text for local maxima and minima label
 
-            zn_function_text = f'5) {funct_max_text}\n{func_min_text}'  # Формування тексту для макс. та мін. значень функції / Forming text for max and min function values
-            zn_function_label.configure(text=zn_function_text)  # Налаштування тексту мітки для макс. та мін. значень функції / Setting text for max and min function values label
+                zn_function_text = f'5) {funct_max_text}\n{func_min_text}'  # Формування тексту для макс. та мін. значень функції / Forming text for max and min function values
+                zn_function_label.configure(text=zn_function_text)  # Налаштування тексту мітки для макс. та мін. значень функції / Setting text for max and min function values label
 
-            # Оновлення тексту похідної / Updating the derivative text
-            drob_first_dev_lable.configure(
-                text=f"y' = {dev_of_function}"
-            )
+                # Оновлення тексту похідної / Updating the derivative text
+                drob_first_dev_lable.configure(
+                    text=f"y' = {dev_of_function}"
+                )
 
-            print(dev_of_function)  # Виведення похідної у консоль / Printing the derivative in the console
+                print(dev_of_function)  # Виведення похідної у консоль / Printing the derivative in the console
 
-            expr = dev_of_function  # Встановлення виразу для похідної / Setting the expression for the derivative
-            func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу похідної у функцію для обчислень / Converting the derivative expression to a function for calculations
+                expr = dev_of_function  # Встановлення виразу для похідної / Setting the expression for the derivative
+                func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу похідної у функцію для обчислень / Converting the derivative expression to a function for calculations
 
-            x_vals = numpy.linspace(-10, 10, 400)  # Визначення діапазону значень x / Defining the range of x values
-            y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
+                x_vals = numpy.linspace(-10, 10, 400)  # Визначення діапазону значень x / Defining the range of x values
+                y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
-            plot_third_first = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')  # Побудова графіку першої похідної / Plotting the first derivative graph
-            # plots.append(plot)
+                plot_third_first = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')  # Побудова графіку першої похідної / Plotting the first derivative graph
+                # plots.append(plot)
 
-            # Пошук точок перетину з Ox / Finding intersection points with Ox
-            # пошук точок перетину похідної з Ox / Finding intersection points of the derivative with Ox
-            points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)
-            ox_points_third_first = points_0x_0y['0x']  # Збереження точок перетину з Ox / Storing intersection points with Ox
-            h_lines_third_first = points_0x_0y['lines']  # Збереження пунктирних ліній / Storing dashed lines
+                # Пошук точок перетину з Ox / Finding intersection points with Ox
+                # пошук точок перетину похідної з Ox / Finding intersection points of the derivative with Ox
+                points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)
+                ox_points_third_first = points_0x_0y['0x']  # Збереження точок перетину з Ox / Storing intersection points with Ox
+                h_lines_third_first = points_0x_0y['lines']  # Збереження пунктирних ліній / Storing dashed lines
 
-            # # пошук локальних максимумів і мінімумів / Finding local maxima and minima
-            # intervals_data = find_intervals(dev_of_function, function)
-            # if intervals_data['локальний максимум'] != 'не існує':  # Перевірка наявності локальних максимумів / Checking for local maxima
-            #     local_max = intervals_data['локальний максимум'][0]
-            #     print(local_max)
-            #     l_max_x, l_max_y = local_max
-            #     local_max_third_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s =40)  # Додавання точок локального максимуму / Adding local maximum points
-            #     local_max_text_third_first = ax.annotate(
-            #         f'({l_max_x:.2f}, {l_max_y:.2f})',
-            #         (l_max_x, l_max_y),
-            #         textcoords="offset points",
-            #         xytext=(15, 15),
-            #         ha='center'
-            #     )  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
+                ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
+                legend = ax.legend()
 
-            # if len(intervals_data['локальний мінімум']) != 0:  # Перевірка наявності локальних мінімумів / Checking for local minima
-            #     local_min = intervals_data['локальний мінімум'][0]
-            #     l_min_x, l_min_y = local_min
-            #     local_min_third_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s= 40)  # Додавання точок локального мінімуму / Adding local minimum points
-            #     local_min_text_third_first = ax.annotate(
-            #         f'({l_min_x:.2f}, {l_min_y:.2f})',
-            #         (l_min_x, l_min_y),
-            #         textcoords="offset points",
-            #         xytext=(15, 15),
-            #         ha='center'
-            #     )  # Додавання тексту для точок локального мінімуму / Adding text for local minimum points
+                third_f_dev_label.configure(
+                    text=f"y' = {dev_of_function}"  # Оновлення тексту для першої похідної / Updating the text for the first derivative
+                )
 
-            ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
-            legend = ax.legend()
-
-            third_f_dev_label.configure(
-                text=f"y' = {dev_of_function}"  # Оновлення тексту для першої похідної / Updating the text for the first derivative
-            )
-
-            for text in legend.get_texts():
-                text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
-            canvas.draw()  # Оновлення графіку / Redrawing the canvas
-            dictionary_of_variables['plot_third_first'] = plot_third_first  # Збереження графіку першої похідної / Saving the first derivative plot
-            dictionary_of_variables['ox_points_third_first'] = ox_points_third_first  # Збереження точок перетину з Ox / Saving intersection points with Ox
-            dictionary_of_variables['h_lines_third_first'] = h_lines_third_first  # Збереження пунктирних ліній / Saving dashed lines
-            dictionary_of_variables['local_max_third_first'] = local_max_third_first  # Збереження точок локального максимуму / Saving local maximum points
-            dictionary_of_variables['local_min_third_first'] = local_min_third_first  # Збереження точок локального мінімуму / Saving local minimum points
-            dictionary_of_variables['local_max_text_third_first'] = local_max_text_third_first  # Збереження тексту точок локального максимуму / Saving text of local maximum points
-            dictionary_of_variables['local_min_text_third_first'] = local_min_text_third_first  # Збереження тексту точок локального мінімуму / Saving text of local minimum points
-            # except Exception as e:
-            #     print(f"Помилка першої дробової похідної: {e}")  # Виведення повідомлення про помилку першої похідної / Displaying message about the first derivative error
+                for text in legend.get_texts():
+                    text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
+                canvas.draw()  # Оновлення графіку / Redrawing the canvas
+                dictionary_of_variables['plot_third_first'] = plot_third_first  # Збереження графіку першої похідної / Saving the first derivative plot
+                dictionary_of_variables['ox_points_third_first'] = ox_points_third_first  # Збереження точок перетину з Ox / Saving intersection points with Ox
+                dictionary_of_variables['h_lines_third_first'] = h_lines_third_first  # Збереження пунктирних ліній / Saving dashed lines
+                dictionary_of_variables['local_max_third_first'] = local_max_third_first  # Збереження точок локального максимуму / Saving local maximum points
+                dictionary_of_variables['local_min_third_first'] = local_min_third_first  # Збереження точок локального мінімуму / Saving local minimum points
+                dictionary_of_variables['local_max_text_third_first'] = local_max_text_third_first  # Збереження тексту точок локального максимуму / Saving text of local maximum points
+                dictionary_of_variables['local_min_text_third_first'] = local_min_text_third_first  # Збереження тексту точок локального мінімуму / Saving text of local minimum points
+                # except Exception as e:
+                #     print(f"Помилка першої дробової похідної: {e}")  # Виведення повідомлення про помилку першої похідної / Displaying message about the first derivative error
 
     elif check == 0 and plot_third_first:  # Якщо чекбокс вимкнений і графік першої похідної існує / If the checkbox is unchecked and the first derivative plot exists
         # видалення графіка першої похідної / Removing the first derivative plot

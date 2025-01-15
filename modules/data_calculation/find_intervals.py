@@ -44,20 +44,23 @@ def find_intervals(first_dev, function):
                 intervals_with_state.append((left, right, "інтервал не визначений"))
         except:
             intervals_with_state.append((left, right, "інтервал не визначений"))
+    print('критичні точки', crit_points)
 
+    
     # Знаходимо локальні максимуми та мінімуми
     for point in crit_points:
         second_dev = sympy.diff(first_dev, x)
         curvature = second_dev.subs(x, point)
         
-        # якщо друга похідна < 0, це локальний максимум
+        # якщо перша похідна < 0, це локальний максимум
         if curvature.is_real and not curvature.has(sympy.zoo, sympy.nan, sympy.oo, sympy.I):
             if curvature < 0:
                 local_max.append((point, function.subs(x, point)))
-            # якщо друга похідна > 0, це локальний мінімум
+            # якщо перща похідна > 0, це локальний мінімум
             elif curvature > 0:
                 local_min.append((point, function.subs(x, point)))
-  
+
+    
     if not local_max:
         local_max = "не існує"
     if not local_min:
@@ -73,7 +76,8 @@ def find_intervals(first_dev, function):
             global_min = min(boundary_values, key=lambda t: t[1])
     except:
         pass
-    
+    print('локальний максимум', local_max)
+    print('локальний мінімум', local_min)
     return {
         'інтервали': intervals_with_state,
         'локальний максимум': local_max,
