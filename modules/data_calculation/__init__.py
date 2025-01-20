@@ -1,5 +1,6 @@
 from .check_even_or_odd import check_even_odd_func
 from .find_convexity_intervals import find_convexity_intervals
+from .find_simple_convexity_intervals import find_simple_convexity_intervals
 from .find_inflection_points import find_inflection_points
 from .find_intervals import find_intervals
 from .find_sign_intervals import find_sign_intervals

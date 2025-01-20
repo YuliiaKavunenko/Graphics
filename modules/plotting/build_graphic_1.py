@@ -55,7 +55,7 @@ def build_graphic_1():
             x_vals = numpy.linspace(-10, 10, 400)  # створюємо значення x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
             y_vals = func1(x_vals)  # обчислюємо значення y для функції / calculating the y values for the function
 
-            plot, = ax.plot(x_vals, y_vals, label=f'y = {a}x^3 + {b}x^2 + {c}x + {d}', color='red')  # будуємо графік функції / plotting the function
+            plot = ax.plot(x_vals, y_vals, label=f'y = {a}x^3 + {b}x^2 + {c}x + {d}', color='red')  # будуємо графік функції / plotting the function
             dictionary_of_variables['plots'].append(plot)  # додаємо графік до списку / adding the plot to the list
 
             # додаємо легенду / adding the legend

@@ -110,7 +110,7 @@ def introduction():
         master = intrd_window, 
         width = 101, 
         height = 52, 
-        text = "м. Дніпро\n2024"
+        text = "м. Дніпро\n2025"
         )
     # задаємо стилі для Label / set styles for the Label
     city_data_l.configure(

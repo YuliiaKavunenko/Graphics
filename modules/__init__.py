@@ -6,9 +6,9 @@ from .variables_constants import *
 # from .main_elements import *
 # імпортуємо функцію introduction з файлу introduction_window для запуску титульного вікна / import the introduction function from introduction_window to run the title window
 from .introduction_window import introduction
-from .document_window import *
 # імпортуємо з main_window функцію run_main для можливості запуску головного додатку / import the run_main function from main_window to be able to run the main application
 from .main_window import run_main
+from .document_window import *
 # імпортуємо з elements_functions усі функції для кнопок або чекбоксів для подальшого використання / import all functions for buttons or checkboxes from elements_functions for further use
 # from .plotting import *
 # from .data_calculation import *

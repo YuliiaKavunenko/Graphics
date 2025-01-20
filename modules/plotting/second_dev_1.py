@@ -1,7 +1,7 @@
 
 import sympy, numpy
 from ..main_elements import *
-from ..data_calculation import points_ox_oy, find_inflection_points, find_convexity_intervals
+from ..data_calculation import points_ox_oy, find_inflection_points, find_simple_convexity_intervals
 from ..variables_constants import *
 
 # Функція для побудови і виконання дослідження похідної у'' першого графіку функції / Function for constructing and researching the second derivative of the first graph function
@@ -74,10 +74,10 @@ def check_second_dev():
                 h_lines_second = points_0x_0y['lines']  # Графічні об'єкти пунктирних ліній / Graphical objects of dashed lines
 
                 # Знаходимо проміжки опуклості / Find the intervals of convexity
-                convexity_intervals = find_convexity_intervals(expr)
+                convexity_intervals = find_simple_convexity_intervals(expr)
 
                 # Створюємо текст для лейблу / Create text for the label
-                convexity_text = "Проміжки опуклості графіка:\n"  # "Intervals of graph convexity:\n"
+                convexity_text = "10) Проміжки опуклості графіка:\n"  # "Intervals of graph convexity:\n"
                 for interval, convexity in convexity_intervals:
                     left, right = interval
                     left = "-∞" if left == float('-inf') else f"{left:.2f}"
@@ -85,7 +85,7 @@ def check_second_dev():
                     convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"  # "{convexity} at x ∈ ({left}; {right})\n"
 
                 # Виводимо текст у лейбл / Output the text to the label
-                convexity_intervals_label.configure(text=convexity_text)
+                convexity_intervals_label.configure(text=convexity_text, anchor="w", justify = "left")
                 ax.legend()  # Виводимо легенду на графіку / Output the legend on the graph
                 legend = ax.legend()
 

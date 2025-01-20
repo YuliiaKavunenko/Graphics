@@ -40,7 +40,6 @@ def fifth_second_dev():
                         y_val = function.subs(x, point)
                         scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)
                         inflection_points_scatter_5.append(scatter)
-
                         inflection_label_5 = ax.annotate(f'({float(point):.2f}, {float(y_val):.2f})',
                                     (float(point), float(y_val)),
                                     textcoords="offset points",
@@ -68,6 +67,19 @@ def fifth_second_dev():
                 points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
                 ox_points_second_5 = points_0x_0y['0x']  # Точки 0х / Points on the x-axis
                 h_lines_second_5 = points_0x_0y['lines']  # Пунктирні лінії / Dashed lines
+                # Знаходимо проміжки опуклості / Find the intervals of convexity
+                convexity_intervals = find_convexity_intervals(expr)
+
+                # Створюємо текст для лейблу / Create text for the label
+                convexity_text = "10) Проміжки опуклості графіка:\n"  # "Intervals of graph convexity:\n"
+                for interval, convexity in convexity_intervals:
+                    left, right = interval
+                    left = "-∞" if left == float('-inf') else f"{left:.2f}"
+                    right = "+∞" if right == float('inf') else f"{right:.2f}"
+                    convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"  # "{convexity} at x ∈ ({left}; {right})\n"
+
+                # Виводимо текст у лейбл / Output the text to the label
+                convexity_intervals_label.configure(text=convexity_text, anchor="w", justify = "left")
 
                 ax.legend()  # Виведення легенди на графіку / Displaying the legend on the graph
                 legend = ax.legend()

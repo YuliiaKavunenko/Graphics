@@ -66,6 +66,20 @@ def drob_second_dev():
                 ox_points_second = points_0x_0y['0x']  # Точки 0х / Points on the x-axis
                 h_lines_second = points_0x_0y['lines']  # Пунктирні лінії / Dashed lines
 
+                # Знаходимо проміжки опуклості / Find the intervals of convexity
+                convexity_intervals = find_convexity_intervals(expr)
+
+                # Створюємо текст для лейблу / Create text for the label
+                convexity_text = "10) Проміжки опуклості графіка:\n"  # "Intervals of graph convexity:\n"
+                for interval, convexity in convexity_intervals:
+                    left, right = interval
+                    left = "-∞" if left == float('-inf') else f"{left:.2f}"
+                    right = "+∞" if right == float('inf') else f"{right:.2f}"
+                    convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"  # "{convexity} at x ∈ ({left}; {right})\n"
+
+                # Виводимо текст у лейбл / Output the text to the label
+                convexity_intervals_label.configure(text = convexity_text, anchor="w", justify = "left")
+
                 ax.legend()  # Виведення легенди на графіку / Displaying the legend on the graph
                 legend = ax.legend()
                 

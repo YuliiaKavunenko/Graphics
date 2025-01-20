@@ -74,6 +74,19 @@ def third_second_dev():
                     inflection_points_label.configure(text="9) Точки перегину: не існує")  # Виведення повідомлення про відсутність точок перегину / Displaying message about the absence of inflection points
 
                 points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
+                # Знаходимо проміжки опуклості / Find the intervals of convexity
+                convexity_intervals = find_convexity_intervals(expr)
+
+                # Створюємо текст для лейблу / Create text for the label
+                convexity_text = "10) Проміжки опуклості графіка:\n"  # "Intervals of graph convexity:\n"
+                for interval, convexity in convexity_intervals:
+                    left, right = interval
+                    left = "-∞" if left == float('-inf') else f"{left:.2f}"
+                    right = "+∞" if right == float('inf') else f"{right:.2f}"
+                    convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"  # "{convexity} at x ∈ ({left}; {right})\n"
+
+                # Виводимо текст у лейбл / Output the text to the label
+                convexity_intervals_label.configure(text=convexity_text, anchor="w", justify = "left")
                 for text in legend.get_texts():
                     text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 canvas.draw()  # Оновлення графіку / Redrawing the canvas

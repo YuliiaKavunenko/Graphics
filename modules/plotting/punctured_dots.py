@@ -1,5 +1,8 @@
 import sympy
 from ..main_elements import *
+import numpy as np
+import matplotlib.pyplot as plt
+from sympy import symbols, limit, oo, sympify
 
 # Функція для знаходження і побудови асимптот та виколотих точок / Function for finding and plotting asymptotes and punctured points
 def punctured_dots(function):
@@ -39,3 +42,48 @@ def punctured_dots(function):
                         xytext=(10, 10),
                         ha='center')  # Додавання підпису до виколотої точки / Adding a label to the punctured point
     canvas.draw()  # Оновлення графіка / Updating the canvas
+
+
+def plot_function_with_asymptotes(func_str, x_range=(-10, 10), num_points=1000):
+    """
+    Построение графика функции с горизонтальными асимптотами, если они существуют.
+    
+    :param func_str: Строка с математической функцией, например "x / (x + 1)".
+    :param x_range: Диапазон значений по оси X (tuple).
+    :param num_points: Количество точек для построения графика.
+    """
+    # Объявляем переменную x для sympy
+    x = symbols('x')
+    
+    # Преобразуем строку в sympy-выражение
+    func = sympify(func_str)
+    
+    # Проверяем горизонтальные асимптоты
+    left_limit = limit(func, x, -oo)
+    right_limit = limit(func, x, oo)
+    
+    # Генерируем данные для построения графика функции
+    x_vals = np.linspace(x_range[0], x_range[1], num_points)
+    y_vals = [float(func.subs(x, val)) if func.subs(x, val).is_real else np.nan for val in x_vals]
+    
+    # Построение графика функции
+    plt.figure(figsize=(8, 6))
+    plt.plot(x_vals, y_vals, label=f'f(x) = {func_str}', color='blue')
+    
+    # Добавляем горизонтальные асимптоты, если они существуют
+    if left_limit.is_finite:
+        plt.axhline(y=float(left_limit), color='brown', linestyle='--', label=f'Asymptote y = {left_limit}')
+    if right_limit.is_finite and right_limit != left_limit:
+        plt.axhline(y=float(right_limit), color='brown', linestyle='--', label=f'Asymptote y = {right_limit}')
+    
+    # Настройки графика
+    plt.axhline(0, color='black', linewidth=0.8, linestyle='--')
+    plt.axvline(0, color='black', linewidth=0.8, linestyle='--')
+    plt.title('Function with Horizontal Asymptotes')
+    plt.xlabel('x')
+    plt.ylabel('f(x)')
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+# plot_function_with_asymptotes("x / (x + 1)")

@@ -12,7 +12,6 @@ print('MAIN')
 def run_main():
     # імортуємо функції для побудови ДСК, відображення і зникнення меню базових функцій, зміни фокусу / import functions for building DSK, showing and hiding the basic functions menu, and changing focus
     # from ..elements_functions import build_DSK, appear_menu, disappear_menu, focus_on_elements
-
     # Встановлюємо тему і тему за замовчуванням для вікна / Set theme and default theme for the window
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
@@ -75,24 +74,24 @@ def run_main():
     # 
     interval_label.bind('<Button-1>', focus_on_elements)
 
-    # Label для виводу локального максимуму і локального мінімуму / Label to display the local maximum and local minimum
-    local_max_min_label.place(x = 10, y = 170)
+    # # Label для виводу локального максимуму і локального мінімуму / Label to display the local maximum and local minimum
+    local_max_min_label.place(x = 10, y = 195)
     local_max_min_label.bind('<Button-1>', focus_on_elements)
     # Label для виводу мінімального і максимального знач. функції / Label to display the minimum and maximum values of the function
-    zn_function_label.place(x = 10, y = 260)
+    zn_function_label.place(x = 10, y = 280)
     zn_function_label.bind('<Button-1>', focus_on_elements)
     # Label для виводу точок перетину графіку з осями ох і оу / Label to display the points of intersection of the graph with the x and y axes
-    points_ox_oy_label.place(x = 10, y = 300)
+    points_ox_oy_label.place(x = 10, y = 330)
     # Label для виводу нулів функцій / Label to display the zeros of the functions
-    points_zero_label.place(x = 10, y = 385)
+    points_zero_label.place(x = 400, y = 35)
     # Label для виводу проміжків знакосталості / Label to display intervals of constancy
-    intervals_identity_l.place(x = 400, y = 35)
+    intervals_identity_l.place(x = 400, y = 80)
     # Label для виводу точок перегину / Label to display inflection points
-    inflection_points_label.place(x = 400, y = 120)
+    inflection_points_label.place(x = 400, y = 190)
     # Label для виводу проміжків опуклості функції / Label to display intervals of convexity of the function
-    convexity_intervals_label.place(x = 400, y = 185)
+    convexity_intervals_label.place(x = 400, y = 245)
     # Label для виводу похилої асимптоти / Label to display the slant asymptote
-    slope_asymptote.place(x = 400, y = 270)
+    slope_asymptote.place(x = 400, y = 360)
 
     # Label для виводу кольору побудови базових функцій / Label to display the color of basic function construction
     purple_gr.place(x = 5, y = 10)

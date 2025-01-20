@@ -70,6 +70,19 @@ def fourth_second_dev():
                     inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")  # Оновлення тексту лейблу / Updating the label text
                 else:
                     inflection_points_label.configure(text="9) Точки перегину: не існує")  # Якщо точок перегину немає, оновлюємо лейбл відповідно / If no inflection points exist, update label accordingly
+                # Знаходимо проміжки опуклості / Find the intervals of convexity
+                convexity_intervals = find_convexity_intervals(expr)
+
+                # Створюємо текст для лейблу / Create text for the label
+                convexity_text = "10) Проміжки опуклості графіка:\n"  # "Intervals of graph convexity:\n"
+                for interval, convexity in convexity_intervals:
+                    left, right = interval
+                    left = "-∞" if left == float('-inf') else f"{left:.2f}"
+                    right = "+∞" if right == float('inf') else f"{right:.2f}"
+                    convexity_text += f"{convexity} при x ∈ ({left}; {right})\n"  # "{convexity} at x ∈ ({left}; {right})\n"
+
+                # Виводимо текст у лейбл / Output the text to the label
+                convexity_intervals_label.configure(text=convexity_text, anchor="w", justify = "left")
 
                 ax.legend()  # Додавання легенди до графіка / Adding legend to the graph
                 legend = ax.legend()
