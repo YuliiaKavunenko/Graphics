@@ -27,6 +27,7 @@ checkbox_hover_color = "#EBCDAE"
 PATH = os.path.abspath(os.path.join(__file__, '..'))
 image_name = 'error.png'
 def show_error_window(error_message):
+    from .plotting import clean_button
     error_window = ctk.CTkToplevel()
     error_window.title("Помилка")
     error_window.resizable(False, False)
@@ -76,3 +77,4 @@ def show_error_window(error_message):
 
     )
     close_button.place(x = 241, y = 97)
+    clean_button()

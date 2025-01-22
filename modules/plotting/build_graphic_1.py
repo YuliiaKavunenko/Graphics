@@ -1,5 +1,6 @@
 import sympy, numpy
 from ..main_elements import *
+from ..error_window import show_error_window
 from ..data_calculation import (
     scope_of_function, 
     format_intervals, 
@@ -26,32 +27,37 @@ def build_graphic_1():
     b = b_1.get()
     c = c_1.get()
     d = d_1.get()
-    
+
     # похідні / derivatives
 
     if a and b and c and d:  # перевіряємо, що всі поля не пусті / checking that all fields are not empty
         # try:
-        # ставимо чекбокси / placing checkboxes
-        first_dev.place(x = 25, y = 65)
-        first_dev.deselect()
-        second_dev.place(x = 25, y = 110)
-        second_dev.deselect()
-        main_graphic_label.place(x = 25, y = 20)
-        build_colors_labels()  # розміщуємо кольорові лейбли / placing colored labels
-
-        # видаляємо значення в полях похідних, щоб уникнути помилок повторення символів / deleting values in derivative fields to avoid symbol repetition errors
-        a_2.delete(0,"end")
-        b_2.delete(0,"end")
-        c_2.delete(0,"end")
-
-        a_3.delete(0,"end")
-        b_3.delete(0,"end")
+        
         
         x = sympy.symbols('x')  # створюємо символ x / creating the symbol x
-        a = float(a)  # перетворюємо значення a в число з плаваючою комою / converting the value of a to a float
-        b = float(b)  # перетворюємо значення b в число з плаваючою комою / converting the value of b to a float
-        c = float(c)  # перетворюємо значення c в число з плаваючою комою / converting the value of c to a float
-        d = float(d)  # перетворюємо значення d в число з плаваючою комою / converting the value of d to a float
+        try:
+            a = float(a)  # перетворюємо значення a в число з плаваючою комою / converting the value of a to a float
+            b = float(b)  # перетворюємо значення b в число з плаваючою комою / converting the value of b to a float
+            c = float(c)  # перетворюємо значення c в число з плаваючою комою / converting the value of c to a float
+            d = float(d)  # перетворюємо значення d в число з плаваючою комою / converting the value of d to a float
+            # ставимо чекбокси / placing checkboxes
+        
+            first_dev.place(x = 25, y = 65)
+            first_dev.deselect()
+            second_dev.place(x = 25, y = 110)
+            second_dev.deselect()
+            main_graphic_label.place(x = 25, y = 20)
+            build_colors_labels()  # розміщуємо кольорові лейбли / placing colored labels
+
+            # видаляємо значення в полях похідних, щоб уникнути помилок повторення символів / deleting values in derivative fields to avoid symbol repetition errors
+            a_2.delete(0,"end")
+            b_2.delete(0,"end")
+            c_2.delete(0,"end")
+
+            a_3.delete(0,"end")
+            b_3.delete(0,"end")
+        except ValueError:
+            show_error_window("Помилка! Всі коефіцієнти повинні бути числами!")
 
         expr = a*x**3 + b*x**2 + c*x + d  # створюємо вираз для функції / creating the expression for the function
         if isinstance(expr, sympy.Number):  # перевіряємо, чи є вираз числом / checking if the expression is a number
@@ -135,3 +141,5 @@ def build_graphic_1():
 
             print(range)
             print(dictionary_of_variables['plots'])  # виводимо список графіків / outputting
+    else:
+        show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')

@@ -1,5 +1,6 @@
 import sympy, numpy
 from ..main_elements import *
+from ..error_window import show_error_window
 from ..data_calculation import ( 
     scope_of_function, 
     format_intervals, 
@@ -23,20 +24,22 @@ def build_seventh_func():
     # Отримання значення параметра a з інтерфейсу / Getting the values of parameters a and b from the interface
     a = a1_seventh.get()
     
-    # Розміщення чекбоксів / Placing checkboxes
-    first_dev_seventh.place(x = 25, y = 65)
-    first_dev_seventh.deselect()
-    second_dev_seventh.place(x = 25, y = 110)
-    second_dev_seventh.deselect()
-
-    main_graphic_label.place(x=25, y=20)
-    
-    # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
-    build_colors_labels()
-    
     if a:  # Перевірка, чи існують значення a і b / Checking if a and b values exist
         x = sympy.symbols('x')  # Оголошення змінної x як символічної / Declaring x as a symbolic variable
-        a = float(a)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
+        try:
+            a = float(a)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
+            # Розміщення чекбоксів / Placing checkboxes
+            first_dev_seventh.place(x = 25, y = 65)
+            first_dev_seventh.deselect()
+            second_dev_seventh.place(x = 25, y = 110)
+            second_dev_seventh.deselect()
+
+            main_graphic_label.place(x=25, y=20)
+            
+            # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
+            build_colors_labels()
+        except ValueError:
+            show_error_window("Помилка! Коєфіцієнт повинен бути числом!")
         expr = (x**2 + x + a)/x  # Визначення виразу функції / Defining the function expression
         
         if isinstance(expr, sympy.Number):  # Якщо вираз є числом / If the expression is a number
@@ -114,3 +117,5 @@ def build_seventh_func():
             print(dictionary_of_variables['plots'])  # Виведення списку графіків / Printing the list of plots
             # except Exception as e:
             #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
+    else:
+        show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')

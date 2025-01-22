@@ -43,11 +43,8 @@ def appear_menu(event):
     # input_graphic.lift(frame_menu)
     # список наших базових функцій / a list of our core features
     el_functions = [
-                    'x', '1/x', 'sqrt(x)', 'abs(x)', 'x**2', 'x**3', 
-                    'x**-2', 'x**-3', 'x**(1/2)', 'x**(2/3)',
-                    'x**(-1/2)', 'x**(-2/3)', 'sin(x)', 'cos(x)', 
-                    'tan(x)', 'cot(x)', 'arccos(x)', 'arcsin(x)',
-                    'arctan(x)'
+                    'x', '1/x', 'x**2', 'x**3', 
+                    'x**-2', 'x**-3'
                     ]
     # створення кнопок для вибору функцій / creation of buttons for selecting functions
     for func in el_functions:

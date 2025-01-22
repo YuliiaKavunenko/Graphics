@@ -3,12 +3,11 @@ from ..main_elements import *
 from ..data_calculation import scope_of_function, format_intervals, check_even_odd_func, points_ox_oy, find_sign_intervals, find_intervals
 # функція для побудови графіка / function to plot the graph
 def plot_graph(ax, canvas):
-    from .clean import clean_graphic
     from .plot_constant_function import plot_constant_function
     from .punctured_dots import punctured_dots
-    clean_graphic()
-    # очищаємо поточний графік / clearing the current graph
-    # ax.clear()
+    from .build_DSK import build_DSK
+    ax.clear()
+    build_DSK()
     # Переводимо фокус на кнопку, щоб прибрати курсор з CTkEntry / shifting focus to the button to remove the caret from CTkEntry
     button_get.focus()
     # отримуємо текст з поля вводу / getting text from the input field
