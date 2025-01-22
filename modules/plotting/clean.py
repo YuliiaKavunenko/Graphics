@@ -9,6 +9,20 @@ def clean_button():
     green_gr.place_forget()
     blue_gr.place_forget()
 
+    first_dev.deselect()
+    second_dev.deselect()
+    first_dev_fdrob.deselect()
+    second_dev_fdrob.deselect()
+    first_dev_sdrob.deselect()
+    second_dev_sdrob.deselect()
+    first_dev_fourth.deselect()
+    second_dev_fourth.deselect()
+    first_dev_fifth.deselect()
+    second_dev_fifth.deselect()
+    first_dev_sixth.deselect()
+    second_dev_sixth.deselect()
+    first_dev_seventh.deselect()
+    second_dev_seventh.deselect()
     ax.clear()  # очищаємо вісь графіка / clearing the graph axis
     a_1.delete(0,"end")  # очищаємо поле для коефіцієнта a / clearing the field for coefficient a
     b_1.delete(0,"end")  # очищаємо поле для коефіцієнта b / clearing the field for coefficient b
@@ -86,6 +100,7 @@ def clean_button():
     second_dev_fifth.place_forget()
     first_dev_sixth.place_forget()
     second_dev_sixth.place_forget()
+
 
     a1_seventh.delete(0,"end")
 

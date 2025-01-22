@@ -7,3 +7,4 @@ from .find_sign_intervals import find_sign_intervals
 from .find_slant_asymptote import find_and_plot_slant_asymptote
 from .format_intervals import format_intervals, scope_of_function
 from .points_ox_oy import points_ox_oy
+from .find_horizontal_asymptote import plot_horizontal_asymptotes

@@ -116,6 +116,7 @@ def fourth_first_dev():
 
                 # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 for text in legend.get_texts():
+                    
                     text.set_color('red')
                 canvas.draw()  # Перемальовуємо графік / Redrawing the canvas
                 dictionary_of_variables['plot_fourth_first'] = plot_fourth_first

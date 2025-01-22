@@ -1,8 +1,14 @@
 import sympy, numpy
 from ..main_elements import *
-from ..data_calculation import scope_of_function, format_intervals, check_even_odd_func, points_ox_oy, find_sign_intervals
+from ..data_calculation import (
+    scope_of_function, 
+    format_intervals, 
+    check_even_odd_func, 
+    points_ox_oy, 
+    find_sign_intervals, 
+    plot_horizontal_asymptotes
+)
 from ..variables_constants import dictionary_of_variables
-
 # list_functions = []
 
 # функція для побудови і дослідження графіку функції y = ax**3 + bx**2 + cx + d / function to plot and analyze the graph of the function y = ax**3 + bx**2 + cx + d
@@ -20,14 +26,16 @@ def build_graphic_1():
     b = b_1.get()
     c = c_1.get()
     d = d_1.get()
-
+    
     # похідні / derivatives
 
     if a and b and c and d:  # перевіряємо, що всі поля не пусті / checking that all fields are not empty
         # try:
         # ставимо чекбокси / placing checkboxes
         first_dev.place(x = 25, y = 65)
+        first_dev.deselect()
         second_dev.place(x = 25, y = 110)
+        second_dev.deselect()
         main_graphic_label.place(x = 25, y = 20)
         build_colors_labels()  # розміщуємо кольорові лейбли / placing colored labels
 
@@ -122,6 +130,8 @@ def build_graphic_1():
                 intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # не вдалося обчислити інтервали знакосталості / unable to calculate sign intervals
 
             punctured_dots(expr)  # перевіряємо наявність точок розриву у функції / check for punctured points in the function
+
+            plot_horizontal_asymptotes(expr = expr)
 
             print(range)
             print(dictionary_of_variables['plots'])  # виводимо список графіків / outputting

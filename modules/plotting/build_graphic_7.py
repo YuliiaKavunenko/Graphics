@@ -6,7 +6,8 @@ from ..data_calculation import (
     check_even_odd_func, 
     points_ox_oy, 
     find_sign_intervals, 
-    find_and_plot_slant_asymptote
+    find_and_plot_slant_asymptote,
+    plot_horizontal_asymptotes
 )
 from ..variables_constants import *
 
@@ -24,7 +25,10 @@ def build_seventh_func():
     
     # Розміщення чекбоксів / Placing checkboxes
     first_dev_seventh.place(x = 25, y = 65)
+    first_dev_seventh.deselect()
     second_dev_seventh.place(x = 25, y = 110)
+    second_dev_seventh.deselect()
+
     main_graphic_label.place(x=25, y=20)
     
     # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
@@ -104,6 +108,8 @@ def build_seventh_func():
             find_and_plot_slant_asymptote(expr, x, label_widget=slope_asymptote)
 
             punctured_dots(expr)  # Визначення й побудова розривних точок / Defining and plotting punctured points
+
+            plot_horizontal_asymptotes(expr = expr)
 
             print(dictionary_of_variables['plots'])  # Виведення списку графіків / Printing the list of plots
             # except Exception as e:

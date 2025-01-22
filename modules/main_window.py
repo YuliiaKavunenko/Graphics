@@ -8,16 +8,18 @@ from .main_elements import *
 from .plotting import *
 
 print('MAIN')
+
+def on_close():
+    main.withdraw()
+
 # функція для запуску нашого головного вікна у роботу / function to start our main window
 def run_main():
-    # імортуємо функції для побудови ДСК, відображення і зникнення меню базових функцій, зміни фокусу / import functions for building DSK, showing and hiding the basic functions menu, and changing focus
-    # from ..elements_functions import build_DSK, appear_menu, disappear_menu, focus_on_elements
     # Встановлюємо тему і тему за замовчуванням для вікна / Set theme and default theme for the window
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
 
     # Встановлюємо назву для вікна / Set window title
-    main.title("Випускна робота")
+    main.title("Випускна робота. Додаток")
     # Задаємо ширину для вікна / Set window width
     window_width = 1400
     # Задаємо висоту для вікна / Set window height
@@ -35,6 +37,9 @@ def run_main():
     main.geometry(f"{window_width}x{window_height}+{x}+{y}")
     # Встановлюємо неможливість змінити розміри вікна / Disable resizing of the window
     main.resizable(False, False)
+
+    main.lift()
+    main.focus_set()
 
     # розташування усіх елементів на вікні / location of all elements on the window
 
@@ -91,7 +96,7 @@ def run_main():
     # Label для виводу проміжків опуклості функції / Label to display intervals of convexity of the function
     convexity_intervals_label.place(x = 400, y = 245)
     # Label для виводу похилої асимптоти / Label to display the slant asymptote
-    slope_asymptote.place(x = 400, y = 360)
+    slope_asymptote.place(x = 400, y = 370)
 
     # Label для виводу кольору побудови базових функцій / Label to display the color of basic function construction
     purple_gr.place(x = 5, y = 10)
@@ -102,4 +107,5 @@ def run_main():
     canvas.get_tk_widget().place(x=10, y=10, width=830, height=955)  # Редагування холста / Edit canvas
     canvas.get_tk_widget().configure(bg='#FAF0E6') # Встановлюємо фон для ДСК / Set background for DSK
     # запускаємо додаток у роботу / start the application
-    main.mainloop()
+    main.protocol("WM_DELETE_WINDOW", on_close)
+    main.deiconify()

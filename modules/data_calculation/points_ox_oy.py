@@ -1,4 +1,4 @@
-import numpy, sympy
+import sympy
 from ..main_elements import canvas, ax
 # Функція для знаходження точок перетину з вісю 0х і 0у, нулів функції / Function for finding intersections with the Ox and Oy axes, zeros of the function
 def points_ox_oy(graphic, color, label=False, lines=False, include_oy=True):

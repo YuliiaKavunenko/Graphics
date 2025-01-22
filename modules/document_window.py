@@ -128,14 +128,17 @@ def display_document(master, file_path):
 
 # визначаємо функцію run_document для створення вікна документу / defines the function run_document to create the document window
 def run_document():
+    from .main_elements import intrd_window
     # створюємо новий екземпляр вікна ctk.CTk / creates a new instance of ctk.CTk window
-    document_window = ctk.CTkToplevel()
+    document_window = ctk.CTkToplevel(intrd_window)
     # встановлюємо заголовок вікна "Документація" / sets the window title to "Документація"
-    document_window.title("Документація")
+    document_window.title("Випускна робота. Документація")
     # забороняємо зміну розмірів вікна / disables window resizing
     document_window.resizable(False, False)
     # налаштовуємо колір фону вікна / configures the window background color
     document_window.configure(fg_color = background)
+    document_window.grab_set()
+    intrd_window.lower()
     # задаємо ширину та висоту вікна / sets the window width and height
     window_width = 950
     window_height = 780
@@ -156,18 +159,25 @@ def run_document():
     label_starttext.place(x=305, y=25)
 
     # створюємо кнопку ctk.CTkButton для читання додатку до проєкту / creates a ctk.CTkButton for reading the project appendix
-    button_app = ctk.CTkButton(master = document_window, width = 390, height = 45, text = "Читати додаток до проєкту",
+    button_app = ctk.CTkButton(master = document_window, width = 252, height = 45, text = "Додаток",
                                fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
                                command = lambda: display_document(document_window, os.path.join(PATH, "Курсова_робота.pdf")))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
-    button_app.place(x = 81, y = 90)
+    button_app.place(x = 616, y = 90)
 
     # створюємо кнопку ctk.CTkButton для читання документації до проєкту / creates a ctk.CTkButton for reading the project documentation
-    button_readme = ctk.CTkButton(master = document_window, width = 390, height = 45, text="Читати документацію до проєкту",
+    button_readme = ctk.CTkButton(master = document_window, width = 252, height = 45, text="Документація",
                                   fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
                                   command = lambda: display_document(document_window, rf"{PATH}\..\README.md"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
-    button_readme.place(x = 479, y = 90)
+    button_readme.place(x = 349, y = 90)
+
+    # створюємо кнопку ctk.CTkButton для читання документації до проєкту / creates a ctk.CTkButton for reading the project documentation
+    button_manual = ctk.CTkButton(master = document_window, width = 252, height = 45, text="Посібник користувача",
+                                  fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
+                                  command = lambda: display_document(document_window, rf"{PATH}\..\README.md"))
+    # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
+    button_manual.place(x = 82, y = 90)
 
     # викликаємо display_document через 100 мілісекунд, щоб відобразити документ під час запуску / calls display_document after 100 milliseconds to display the document at startup
     # document_window.after(100, lambda: display_document(document_window, rf"{PATH}\Курсова_робота.pdf"))

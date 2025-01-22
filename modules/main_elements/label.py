@@ -110,7 +110,7 @@ points_ox_oy_label = ctk.CTkLabel(
 # створення лейблу для відображення нулів функції / creating a label for displaying the zeros of the function
 points_zero_label = ctk.CTkLabel(
     master = frame_exploration,
-    width = 350,
+    width = 300,
     height = 35
 )
 # створення лейблу для відображення парна чи непарна функція / creating a label for displaying whether the function is even or odd

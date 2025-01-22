@@ -93,6 +93,7 @@ def fourth_second_dev():
 
                 # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 for text in legend.get_texts():
+                    
                     text.set_color('red')
                 canvas.draw()  # Перемальовування графіка / Redrawing the canvas
                 dictionary_of_variables['ox_points_fourth_second'] = ox_points_fourth_second  # Збереження точок перетину з віссю Ox / Storing intersection points with the Ox axis

@@ -84,6 +84,7 @@ def drob_second_dev():
                 legend = ax.legend()
                 
                 for text in legend.get_texts():
+                    
                     text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 canvas.draw()  # Оновлення графіку / Redrawing the canvas
 

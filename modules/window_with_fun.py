@@ -275,6 +275,35 @@ def functions_window():
 
 # функція для видалення непотрібних елементів з вікна при зміні вибору функції / function to remove unnecessary elements from the window when changing the function selection
 def clean_old_gr():
+    seventh_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної сьомої функції / clearing the label text for the first derivative of the seventh function
+    seventh_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної сьомої функції / clearing the label text for the second derivative of the seventh function
+    fifth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної п'ятої функції / clearing the label text for the first derivative of the fifth function
+    fifth_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної п'ятої функції / clearing the label text for the second derivative of the fifth function
+
+    sixth_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної шостої функції / clearing the label text for the second derivative of the sixth function
+    sixth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної шостої функції / clearing the label text for the first derivative of the sixth function
+    drob_first_dev_lable.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної дробової функції / clearing the label text for the first derivative of the fractional function
+    drob_second_dev_lable.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної дробової функції / clearing the label text for the second derivative of the fractional function
+
+    third_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної третьої функції / clearing the label text for the first derivative of the third function
+    third_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної третьої функції / clearing the label text for the second derivative of the third function
+
+    fourth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної четвертої функції / clearing the label text for the first derivative of the fourth function
+    fourth_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної четвертої функції / clearing the label text for the second derivative of the fourth function
+    first_dev.deselect()
+    second_dev.deselect()
+    first_dev_fdrob.deselect()
+    second_dev_fdrob.deselect()
+    first_dev_sdrob.deselect()
+    second_dev_sdrob.deselect()
+    first_dev_fourth.deselect()
+    second_dev_fourth.deselect()
+    first_dev_fifth.deselect()
+    second_dev_fifth.deselect()
+    first_dev_sixth.deselect()
+    second_dev_sixth.deselect()
+    first_dev_seventh.deselect()
+    second_dev_seventh.deselect()
     first_dev.place_forget()
     second_dev.place_forget()
     first_dev_fdrob.place_forget()
@@ -368,6 +397,9 @@ def clean_old_gr():
     sixth_s_dev_label.place_forget()
     sixth_first_func_down_label.place_forget()
     sixth_first_func_up_label.place_forget()
+
+    first_dev_sixth.place_forget()
+    second_dev_sixth.place_forget()
 
 
     a1_sixth.place_forget()

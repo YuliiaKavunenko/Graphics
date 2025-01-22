@@ -66,7 +66,8 @@ interval_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір фону лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 380 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для лейблу з відображенням області визначення функції / setting the style for the label displaying the domain of the function
 scope_label.configure(
@@ -75,7 +76,8 @@ scope_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір фону лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 380 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # для другої функції у = (x**2 - a)/(x - b) / for the second function y = (x**2 - a)/(x - b)
 # задаємо стиль для лейблу відображення чисельника другої функції / setting the style for the label displaying the numerator of the second function
@@ -112,7 +114,8 @@ local_max_min_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір переднього плану лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 380 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для відображення лейблу мін. і макс. значення функції / setting the style for the label displaying the min. and max. value of the function
 zn_function_label.configure(
@@ -121,7 +124,8 @@ zn_function_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір переднього плану лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 380 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для лейблу відображення похідної y'' / setting the style for the label displaying the derivative y''
 drob_second_dev_lable.configure(
@@ -138,7 +142,8 @@ points_ox_oy_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     font = ("Roboto Slab", 16), # шрифт тексту лейблу / label text font
     text = "6) Точки перетину з осями ох і оу", # текст на лейблі / label text
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 380 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для лейблу відображення нулів функції / setting the style for the label displaying the zeros of the function
 points_zero_label.configure(
@@ -146,7 +151,8 @@ points_zero_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     font = ("Roboto Slab", 16), # шрифт тексту лейблу / label text font
     text = "7) Нулі функції", # текст на лейблі / label text
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 300 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для лейблу відображення парності функції / setting the style for the label displaying the evenness of the function
 even_or_odd_func_l.configure(
@@ -327,7 +333,8 @@ convexity_intervals_label.configure(
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір переднього плану лейблу / label foreground color
-    anchor = 'w' # прив'язка тексту лейблу / label text anchor
+    anchor = 'w', # прив'язка тексту лейблу / label text anchor
+    wraplength = 300 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # задаємо стиль для лейблу відображення похилої асимптоти функції / setting the style for the label displaying the oblique asymptote of the function
 slope_asymptote.configure(

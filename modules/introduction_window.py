@@ -39,7 +39,7 @@ def introduction():
     # створюємо титульний додаток / create the title application
     # intrd_window = ctk.CTk()
     # задаємо ім'я для титульного додатку / set the name for the title application
-    intrd_window.title("Титульна сторінка")
+    intrd_window.title("Випускна робота. Титульна сторінка")
     # задаємо неможливість змінювати розмір вікна / make the window size non-resizable
     intrd_window.resizable(False, False)
 

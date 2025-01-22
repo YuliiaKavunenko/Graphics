@@ -7,7 +7,8 @@ from ..data_calculation import (
     check_even_odd_func, 
     points_ox_oy, 
     find_sign_intervals, 
-    find_and_plot_slant_asymptote
+    find_and_plot_slant_asymptote,
+    plot_horizontal_asymptotes
 )
 # функція для побудови і дослідження графіку функції y = x/(x**2 + a) / Function for constructing and analyzing the graph of the function y = x/(x**2 + a)
 def build_fourth_func():
@@ -22,7 +23,10 @@ def build_fourth_func():
     
     # Розміщення чекбоксів / Placing checkboxes
     first_dev_fourth.place(x=25, y=65)
+    first_dev_fourth.deselect()
     second_dev_fourth.place(x=25, y=110)
+    second_dev_fourth.deselect()
+
     main_graphic_label.place(x=25, y=20)
     build_colors_labels()  # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
     
@@ -47,6 +51,7 @@ def build_fourth_func():
             ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
             legend = ax.legend()
             for text in legend.get_texts():
+                
                 text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
             canvas.draw()  # Оновлення графіка / Redrawing the canvas
 
@@ -103,6 +108,8 @@ def build_fourth_func():
             # Пошук і побудова косої асимптоти / Finding and plotting the slant asymptote
             slant_asymptote_label = slope_asymptote  # Рівняння асимптоти / Equation of the asymptote
             find_and_plot_slant_asymptote(expr, x, label_widget=slope_asymptote)
+
+            plot_horizontal_asymptotes(expr = expr)
 
             print(dictionary_of_variables['plots'])  # Виведення списку графіків / Printing the list of plots
             # except Exception as e:

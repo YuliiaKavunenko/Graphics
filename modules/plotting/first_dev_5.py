@@ -118,6 +118,7 @@ def fifth_first_dev():
 
                 # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 for text in legend.get_texts():
+                    
                     text.set_color('red')
                 canvas.draw()  # Перемальовуємо графік / Redrawing the canvas
                 dictionary_of_variables['plot_fifth_first'] = plot_fifth_first
@@ -154,17 +155,28 @@ def fifth_first_dev():
                 line.remove()  # Видалення кожної лінії / Removing each line
             h_lines_fifth_first.clear()  # Очищення списку ліній / Clearing the list of lines
 
-        if local_max_fifth_first:
+        print('local_max_fifth_first', local_max_fifth_first)
+        print('local_max_text_fifth_first', local_max_text_fifth_first)
+        try:
+        # if local_max_fifth_first:
             local_max_fifth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
             local_max_text_fifth_first.remove()  # Видалення текстової анотації локального максимуму / Removing the text annotation of local maximum
             local_max_fifth_first = None
             local_max_text_fifth_first = None
+        except:
+            print('none local max')
 
-        if local_min_fifth_first:
+        print('local_min_fifth_first', local_min_fifth_first)
+        print('local_min_text_fifth_first', local_min_text_fifth_first)
+
+        # if local_min_fifth_first:
+        try:
             local_min_fifth_first.remove()  # Видалення локального мінімуму з графіка / Removing local minimum from the graph
             local_min_text_fifth_first.remove()  # Видалення текстової анотації локального мінімуму / Removing the text annotation of local minimum
             local_min_fifth_first = None
             local_min_text_fifth_first = None
+        except:
+            print('none local min')
 
         ax.legend().remove()  # Видалення легенди / Removing the legend
         ax.legend()  # Оновлення легенди / Updating the legend

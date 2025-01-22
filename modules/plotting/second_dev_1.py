@@ -90,6 +90,7 @@ def check_second_dev():
                 legend = ax.legend()
 
                 for text in legend.get_texts():
+                    
                     text.set_color('red')  # Змінюємо колір тексту легенди на червоний / Change legend text color to red
                 canvas.draw()  # Оновлюємо графік / Redraw the canvas
                 # зберігаємо графік у словник / save the plot to the dictionary

@@ -113,6 +113,7 @@ def third_first_dev():
                 )
 
                 for text in legend.get_texts():
+                    
                     text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 canvas.draw()  # Оновлення графіку / Redrawing the canvas
                 dictionary_of_variables['plot_third_first'] = plot_third_first  # Збереження графіку першої похідної / Saving the first derivative plot

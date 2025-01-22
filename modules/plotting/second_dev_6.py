@@ -86,6 +86,7 @@ def sixth_second_dev():
                 legend = ax.legend()
                 
                 for text in legend.get_texts():
+                    
                     text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 canvas.draw()  # Оновлення графіку / Redrawing the canvas
 
@@ -115,6 +116,10 @@ def sixth_second_dev():
             for point in inflection_points_scatter_6:
                 point.remove()  # Видалення точок перегину / Removing inflection points
             inflection_points_scatter_6.clear()
+
+        for label in inflection_points_label_6:
+            label.remove()  # Видалення кожного підпису / Removing each label
+        inflection_points_label_6.clear()
 
         if ox_points_second_6:
             for point in ox_points_second_6:

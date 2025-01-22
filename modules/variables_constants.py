@@ -87,8 +87,8 @@ dictionary_of_variables = {
     'ox_points_second_5' : [],  # Збереження точок перетину з віссю x / Storing intersection points with the x-axis
     'h_lines_second_5' : [],  # Збереження пунктирних ліній / Storing dashed lines
     'plot_fifth_second': [],  # Збереження графіку другої похідної / Storing the second derivative graph
-    'inflection_points_scatter_5': None,  # Збереження точок перегину / Storing inflection points
-    'inflection_points_label_5': None,  # Збереження лейблу з точками перегину / Storing the label with inflection points 
+    'inflection_points_scatter_5': [],  # Збереження точок перегину / Storing inflection points
+    'inflection_points_label_5': [],  # Збереження лейблу з точками перегину / Storing the label with inflection points 
 
     #для шостого графіку / for the sixth graph
     'plot_sixth_first': [],
@@ -102,8 +102,8 @@ dictionary_of_variables = {
     'ox_points_second_6': [],  # Збереження точок перетину з віссю x / Storing intersection points with the x-axis
     'h_lines_second_6': [], # Збереження пунктирних ліній / Storing dashed lines
     'plot_sixth_second': [],  # Збереження графіку другої похідної / Storing the second derivative graph
-    'inflection_points_scatter_6': None,  # Збереження точок перегину / Storing inflection points
-    'inflection_points_label_6' : None,# Збереження лейблу з точками перегину / Storing the label with inflection points
+    'inflection_points_scatter_6': [],  # Збереження точок перегину / Storing inflection points
+    'inflection_points_label_6' : [],# Збереження лейблу з точками перегину / Storing the label with inflection points
 
     'plot_seventh_first'  : [], 
     'ox_points_seventh_first' : [], 
@@ -116,6 +116,6 @@ dictionary_of_variables = {
     'ox_points_second_7' : [],  
     'h_lines_second_7' : [],    
     'plot_seventh_second' : [], 
-    'inflection_points_scatter_7' : None, 
-    'inflection_points_label_7' : None,   
+    'inflection_points_scatter_7' : [], 
+    'inflection_points_label_7' : [],   
 }

@@ -25,6 +25,8 @@ def show_tooltip(event, text):
     # Розміщення мітки в вікні / Placing the label in the window
     label.pack()
 
+    
+
 # функція для приховування підказки / function to hide tooltip
 def hide_tooltip(event):
     global tooltip_window

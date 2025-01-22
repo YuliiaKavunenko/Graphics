@@ -88,6 +88,7 @@ def third_second_dev():
                 # Виводимо текст у лейбл / Output the text to the label
                 convexity_intervals_label.configure(text=convexity_text, anchor="w", justify = "left")
                 for text in legend.get_texts():
+                    
                     text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 canvas.draw()  # Оновлення графіку / Redrawing the canvas
 

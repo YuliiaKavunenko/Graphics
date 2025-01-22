@@ -48,7 +48,6 @@ def check_first_dev():
                 func = sympy.lambdify(x, expr, 'numpy')  # перетворюємо похідну у форму, придатну для числових обчислень / converting the derivative to a form suitable for numerical calculations
                 x_vals = numpy.linspace(-10, 10, 400)  # створюємо значення x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
                 y_vals = func(x_vals)  # обчислюємо значення y для похідної / calculating the y values for the derivative
-                # print("1\\\\111",plot_2)
                 plot_2 = ax.plot(x_vals, y_vals, label = f'y = 3*{a}x^2 + 2*{b}x + {c}', color='green')  # будуємо графік першої похідної / plotting the first derivative
                 plot2.append(plot_2)
                 # plots.append(plot_2)  # додаємо графік до списку / adding the plot to the list
@@ -63,30 +62,6 @@ def check_first_dev():
 
             # Обчислення точок локального максимуму та мінімуму / Calculating local maximum and minimum points
             intervals_data = find_intervals(expr, function)  # знаходимо інтервали та екстремуми / finding intervals and extrema
-
-            # Видалення старих точок, якщо вони є / Removing old points if they exist
-
-            # if local_max_scatter:
-            #     local_max_scatter.remove()  # видаляємо точки локального максимуму / removing local maximum points
-            #     local_max_scatter_text.remove()  # видаляємо текст для точок локального максимуму / removing text for local maximum points
-            #     local_max_scatter = None
-            #     local_max_scatter_text = None
-            # if local_min_scatter:
-            #     local_min_scatter.remove()  # видаляємо точки локального мінімуму / removing local minimum points
-            #     local_min_scatter_text.remove()  # видаляємо текст для точок локального мінімуму / removing text for local minimum points
-            #     local_min_scatter = None
-            #     local_min_scatter_text = None
-
-            # # видалення старих точок перетину і пунктирних ліній / removing old intersection points and dashed lines
-
-            # if ox_points_first:
-            #     for point in ox_points_first:
-            #         point.remove()  # видаляємо точки перетину з Ox / removing intersection points with Ox
-            #     ox_points_first.clear()
-            # if h_lines_first:
-            #     for line in h_lines_first:
-            #         line.remove()  # видаляємо пунктирні лінії / removing dashed lines
-            #     h_lines_first.clear()
 
             # Обчислення точок перетину з віссю Ox та побудова пунктирних ліній / Calculating intersection points with the Ox axis and plotting dashed lines
             points_0x_0y = points_ox_oy(expr, 'green', label=False, lines=True, include_oy=False)
@@ -169,8 +144,7 @@ def check_first_dev():
             canvas.draw()  # Оновлення графіку / Redrawing the canvas
     elif check == 0:
         # Видалення графіка та точок / Removing the graph and points
-        # plot_2.remove()  # Видалення другого графіку / Removing the second graph
-        # del plot_2
+
         print('список plots',plot2)
         # plots.remove(plot_2)  # Видалення другого графіку з переліку графіків / Removing the second graph from the list of plots
         print('удалілі плот', plots)
@@ -205,6 +179,7 @@ def check_first_dev():
         ax.legend()  # Оновлення легенди / Updating legend
         legend = ax.legend()
         for text in legend.get_texts():
+            
             text.set_color('red')  # Зміна кольору тексту в легенді на червоний / Changing legend text color to red
         canvas.draw()  # Оновлення графіку / Redrawing the canvas
     print(f'plots main = {plots}')
