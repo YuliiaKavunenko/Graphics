@@ -27,7 +27,6 @@ def fourth_second_dev():
             dev_of_function = sympy.diff(function, x)  # Визначення першої похідної функції / Finding the first derivative of the function
 
             second_dev_of_function = sympy.diff(dev_of_function, x)  # Визначення другої похідної функції / Finding the second derivative of the function
-            print(second_dev_of_function)  # Виведення другої похідної на екран для перевірки / Printing the second derivative for checking
 
             drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")  # Оновлення тексту лейблу з другою похідною / Updating the label text with the second derivative
 

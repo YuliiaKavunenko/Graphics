@@ -13,7 +13,6 @@ def sixth_second_dev():
     inflection_points_label_6 = dictionary_of_variables['inflection_points_label_6']  # Отримання лейблу з точками перегину / Getting the label with inflection points
 
     if check == 1:  # Якщо чекбокс активований / If the checkbox is checked
-        print('чекбокс 2 пятой функции oN')
         a1 = a1_sixth.get()
         a2 = a2_sixth.get()
 
@@ -100,8 +99,6 @@ def sixth_second_dev():
                 #     print(f"Помилка другої дробової похідної: {e}")  # Виведення повідомлення про помилку другої дробової похідної / Displaying message about the second fractional derivative error
 
     elif check == 0:  # Якщо чекбокс вимкнений і графік існує у списку / If the checkbox is unchecked and the plot exists in the list
-        # видалення графіка / Removing the plot
-        print('чекбокс 2 пятой функции off')
         # Видалення графіка / Removing the graph
         if plot_sixth_second:
             for line in plot_sixth_second:
@@ -137,4 +134,3 @@ def sixth_second_dev():
         for text in legend.get_texts():
             text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
         canvas.draw()  # Оновлення графіку / Redrawing the canvas
-    print(f'check = {check}')

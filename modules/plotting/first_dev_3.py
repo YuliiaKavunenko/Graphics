@@ -34,9 +34,7 @@ def third_first_dev():
                     interval_text = "Інтервалів зростання/спадання не існує"  # Виведення повідомлення про відсутність інтервалів зростання/спадання / Displaying message about the absence of growth/decay intervals
 
                 interval_label.configure(text=f'3) {interval_text}')  # Налаштування тексту мітки для інтервалів зростання/спадання / Setting text for growth/decay intervals label
-                
-                # print(intervals_data['локальний максимум'])
-                # print(len(intervals_data['локальний максимум']))
+
                 # Формування тексту для локальних максимумів і мінімумів / Forming text for local maxima and minima
                 if intervals_data['локальний максимум'] != 'не існує':  # Перевірка наявності локальних максимумів / Checking for local maxima
                     local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
@@ -87,8 +85,6 @@ def third_first_dev():
                 drob_first_dev_lable.configure(
                     text=f"y' = {dev_of_function}"
                 )
-
-                print(dev_of_function)  # Виведення похідної у консоль / Printing the derivative in the console
 
                 expr = dev_of_function  # Встановлення виразу для похідної / Setting the expression for the derivative
                 func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу похідної у функцію для обчислень / Converting the derivative expression to a function for calculations

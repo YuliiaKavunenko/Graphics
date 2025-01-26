@@ -37,7 +37,7 @@ def check_second_dev():
                 inflection_points = find_inflection_points(expr)
 
                 # Формуємо форматований рядок для лейблу / Formatted string for the label
-                formatted_points = "; ".join([f"x{i+1} = {point}" for i, point in enumerate(inflection_points)])
+                formatted_points = "; ".join([f"x{i+1} = {point:.1f}" for i, point in enumerate(inflection_points)])
 
                 # Виводимо точки перегину на графіку / Plot the inflection points on the graph
                 for point in inflection_points:
@@ -60,13 +60,10 @@ def check_second_dev():
 
                 x_vals = numpy.linspace(-10, 10, 400)  # Задаємо діапазон значень x / Set the range of x values
                 y_vals = func(x_vals)  # Обчислюємо значення y / Calculate y values
-                print('plots 3 pershe', plot_3)
-                plot_3 = ax.plot(x_vals, y_vals, label=f'y = 6*{a}x + 2 * {b}', color='blue')  # Побудова графіку другої похідної / Plotting the second derivative graph
-                print('plots 3 druge', plot_3)
 
-                print('plots1', plots)
+                plot_3 = ax.plot(x_vals, y_vals, label=f'y = 6*{a}x + 2 * {b}', color='blue')  # Побудова графіку другої похідної / Plotting the second derivative graph
+
                 plots.append(plot_3)
-                print(plots)
 
                 # Побудова точок перетину 0x і пунктирних ліній / Plotting intersection points with 0x and dashed lines
                 points_0x_0y = points_ox_oy(expr, 'blue', label=False, lines=True, include_oy=False)
@@ -126,14 +123,12 @@ def check_second_dev():
 
         # Видалення точок перегину / Removing inflection points
         if inflection_points_scatter:
-            print('удаляєм точки перегину', inflection_points_scatter)
             for scatter in inflection_points_scatter:
                 scatter.remove()
             inflection_points_scatter.clear()
 
         # Видалення тексту точки перегину / Removing inflection points text
         if inflection_points_l:
-            print('удаляєм підпис точок перегину', inflection_points_l)
             for label in inflection_points_l:
                 label.remove()
             inflection_points_l.clear()

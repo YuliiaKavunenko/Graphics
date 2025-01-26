@@ -2,7 +2,7 @@ import sympy, numpy
 from ..main_elements import canvas, ax
 
 # Функція для знаходження і побудови похилої асимптоти / Function to find and plot the slant asymptote
-def find_and_plot_slant_asymptote(expr, x_symbol, label_widget=None):
+def find_and_plot_slant_asymptote(expr, x_symbol, label_widget = None):
     
     try:
         # Визначаємо k як границю f(x)/x при x -> ±∞ / Determine k as the limit of f(x)/x as x -> ±∞

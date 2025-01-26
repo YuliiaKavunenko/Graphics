@@ -34,7 +34,4 @@ def scope_of_function(expr):
             for subdomain in domain.args:  # перебираємо кожен підінтервал в об'єднанні / iterating through each subinterval in the union
                 if subdomain.is_Interval:  # перевірка, що підінтервал є інтервалом / checking that subinterval is an interval
                     intervals.append(subdomain)  # додавання підінтервала до списку intervals / adding the subinterval to the intervals list
-
-    print(intervals)
-                    
     return intervals  # повертаємо список інтервалів області визначення / returning the list of domain intervals

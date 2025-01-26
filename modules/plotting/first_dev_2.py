@@ -47,7 +47,6 @@ def drob_first_dev():
                                                         textcoords="offset points",
                                                         xytext=(15, 15),
                                                         ha='center')  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
-                print(intervals_data['локальний мінімум'])
                 if intervals_data['локальний мінімум'] != "не існує":  # Перевірка наявності локальних мінімумів / Checking for local minima
                     local_min = intervals_data['локальний мінімум'][0]
                     l_min_x, l_min_y = local_min
@@ -100,8 +99,6 @@ def drob_first_dev():
                 drob_first_dev_lable.configure(
                     text=f"y' = {dev_of_function}",
                 )
-
-                print(dev_of_function)  # Виведення похідної у консоль / Printing the derivative in the console
 
                 expr = dev_of_function  # Встановлення виразу для похідної / Setting the expression for the derivative
 

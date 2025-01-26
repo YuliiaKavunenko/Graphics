@@ -71,8 +71,15 @@ def find_intervals(first_dev, function):
     except:
         pass
 
+    # Замінюємо -∞ та ∞ на символи
+    formatted_intervals = []
+    for left, right, state in intervals_with_state:
+        left_str = "-∞" if left == -sympy.oo else str(left)
+        right_str = "∞" if right == sympy.oo else str(right)
+        formatted_intervals.append((left_str, right_str, state))
+
     return {
-        'інтервали': intervals_with_state,
+        'інтервали': formatted_intervals,
         'локальний максимум': local_max or "не існує",
         'локальний мінімум': local_min or "не існує",
         'макс. значення ф-ції': global_max,

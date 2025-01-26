@@ -51,9 +51,7 @@ def check_first_dev():
                 plot_2 = ax.plot(x_vals, y_vals, label = f'y = 3*{a}x^2 + 2*{b}x + {c}', color='green')  # будуємо графік першої похідної / plotting the first derivative
                 plot2.append(plot_2)
                 # plots.append(plot_2)  # додаємо графік до списку / adding the plot to the list
-                print(f'plots = {plots}')
                 # додаємо легенду / adding the legend
-                print('ax data', ax)
                 ax.legend()
                 legend = ax.legend()
                 for text in legend.get_texts():
@@ -92,17 +90,14 @@ def check_first_dev():
                                                         ha='center')  # додаємо текст для точок локального мінімуму / adding text for local minimum points
 
             if len(intervals_data['інтервали']) != 0:  # Перевірка наявності інтервалів зростання/спадання / Checking for growth/decay intervals
-                print(intervals_data['інтервали'])
-                interval_text = "\n".join([f"({str(left)[0:4]}; {str(right)[0:4]}) {state}" for left, right, state in intervals_data['інтервали']])
+                interval_text = "\n".join([f"({str(left)[0:5]}; {str(right)[0:5]}) {state}" for left, right, state in intervals_data['інтервали']])
             else:
                 interval_text = "Інтервалів зростання/спадання не існує"  # Виведення повідомлення про відсутність інтервалів зростання/спадання / Displaying message about absence of growth/decay intervals
 
             interval_label.configure(text=f'3) {interval_text}')  # Налаштування тексту мітки для інтервалів зростання/спадання / Setting text for growth/decay intervals label
 
             # Формуємо текст для локальних максимумів і мінімумів / Forming text for local maxima and minima
-            print(len(intervals_data['локальний максимум']))
             if intervals_data['локальний максимум'] != 'не існує' :  # Перевірка наявності локальних максимумів / Checking for local maxima
-                print('locaal max text =',intervals_data['локальний максимум']) 
                 local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
             else:
                 local_max_text = "Локальний максимум: не існує"  # Виведення повідомлення про відсутність локальних максимумів / Displaying message about absence of local maxima
@@ -144,10 +139,6 @@ def check_first_dev():
             canvas.draw()  # Оновлення графіку / Redrawing the canvas
     elif check == 0:
         # Видалення графіка та точок / Removing the graph and points
-
-        print('список plots',plot2)
-        # plots.remove(plot_2)  # Видалення другого графіку з переліку графіків / Removing the second graph from the list of plots
-        print('удалілі плот', plots)
         if plot_2:
             for line in plot_2:
                 line.remove()
@@ -182,6 +173,3 @@ def check_first_dev():
             
             text.set_color('red')  # Зміна кольору тексту в легенді на червоний / Changing legend text color to red
         canvas.draw()  # Оновлення графіку / Redrawing the canvas
-    print(f'plots main = {plots}')
-    print(f'plot_2 = {plot_2}')
-    print(f'check = {check}')

@@ -153,8 +153,6 @@ def sixth_first_dev():
             for line in h_lines_sixth_first:
                 line.remove()  # Видалення кожної лінії / Removing each line
             h_lines_sixth_first.clear()  # Очищення списку ліній / Clearing the list of lines
-        print('local_max_sixth_first', local_max_sixth_first)
-        print('local_max_text_sixth_first',local_max_text_sixth_first)
         # if local_max_sixth_first:
         try:
             local_max_sixth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
@@ -163,9 +161,6 @@ def sixth_first_dev():
             local_max_text_sixth_first = None
         except:
             print('none local max')
-
-        print('local_min_sixth_first', local_min_sixth_first)
-        print('local_min_text_sixth_first',local_min_text_sixth_first)
         # if local_min_sixth_first:
         try:
             local_min_sixth_first.remove()  # Видалення локального мінімуму з графіка / Removing local minimum from the graph

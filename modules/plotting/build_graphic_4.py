@@ -17,9 +17,10 @@ def build_fourth_func():
     from .build_colors_labels import build_colors_labels
     from .plot_constant_function import plot_constant_function
     from .punctured_dots import punctured_dots
+    from .clean import clean_for_functions 
     ax.clear()  # Очищення графічної області / Clearing the plotting area
     build_DSK()  # Виклик функції побудови ДСК / Calling the function to build DSK
-    print('build!')  # Виведення повідомлення про початок побудови / Printing the message about starting the build
+    clean_for_functions()
     a = a4_drob.get()  # Отримання значення параметра a з інтерфейсу / Getting the value of parameter a from the interface
     
     if a:  # Перевірка, чи існує значення a / Checking if a value exists
@@ -60,10 +61,6 @@ def build_fourth_func():
                 text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
             canvas.draw()  # Оновлення графіка / Redrawing the canvas
 
-            # виклик функцій для побудови похідних / Calling functions to build derivatives
-            # fourth_first_dev()
-            # fourth_second_dev()
-
             domain = scope_of_function(expr)  # Обчислення області визначення функції / Calculating the domain of the function
             domain_text = f"1) D(y) = {format_intervals(domain)}"  # Форматування тексту області визначення / Formatting the domain text
             scope_label.configure(text=domain_text)  # Налаштування тексту мітки для області визначення / Setting the text for the domain label
@@ -74,25 +71,40 @@ def build_fourth_func():
 
             points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # Форматування точок перетину з Ox / Formatting the intersection points with Ox
 
-            # Отримання координат точки перетину з Oy / Getting the coordinates of the intersection point with Oy
-            oy_point = points_0x_0y['0y']
-            oy_text = "не існує"  # Виведення повідомлення про відсутність точки перетину з Oy / Displaying message about the absence of an intersection point with Oy
-            if oy_point:
-                offsets = oy_point.get_offsets()  # Отримання координат точки / Getting the point coordinates
-                if len(offsets) > 0:
-                    oy_coords = offsets[0]  # Отримання координат першої точки / Getting the coordinates of the first point
-                    oy_text = f"(0, {oy_coords[1]:.2f})"  # Форматування координат точки перетину з Oy / Formatting the coordinates of the intersection point with Oy
+            # перетин з осями ох та оу / intersection with the Ox and Oy axes
+            points_0x_0y = points_ox_oy(expr,'red', True)
 
-            points_0x_0y_text = (
-                f"6) Точки перетину з Ox:\n{points_0x_text}\n"  # Виведення тексту для точок перетину з Ox / Displaying the text for the intersection points with Ox
-                f"Точка перетину з Oy:\n{oy_text}"  # Виведення тексту для точки перетину з Oy / Displaying the text for the intersection point with Oy
-            )
-            points_ox_oy_label.configure(text=points_0x_0y_text)  # Налаштування тексту мітки для точок перетину з осями / Setting the text for the intersection points label
-
-            # Отримання списку нулів функції та їх форматування / Getting the list of function zeros and formatting them
+            # отримуємо список точок нулів функції / getting the list of zero points of the function
             points_zero = points_0x_0y['points_zero']
-            points_zero_text = "7) Нулі функції: " + ", ".join([f"x{i+1} = {point}" for i, point in enumerate(points_zero)])
-            points_zero_label.configure(text=points_zero_text)  # Налаштування тексту мітки для нулів функції / Setting the text for the function zeros label
+            if points_zero:
+                # формуємо текст для лейблу / forming text for the label
+                points_zero_text = "7) Нулі функції: " + ", ".join([f"x{i+1} = {point}" for i, point in enumerate(points_zero)])
+            else:
+                points_zero_text = "7) Нулі функції: не існує"
+
+            # встановлюємо текст лейблу / setting the label text
+            points_zero_label.configure(text=points_zero_text)
+
+            # отримуємо координати точки перетину з Oy / getting the coordinates of the intersection point with Oy
+            oy_point = points_0x_0y['0y']
+            oy_text = "не існує"  # якщо точка не існує / if the point does not exist
+            if oy_point:
+                offsets = oy_point.get_offsets()  # отримуємо координати точки / getting the point coordinates
+                if len(offsets) > 0:
+                    oy_coords = offsets[0]  # отримуємо першу точку / getting the first point
+                    oy_text = f"(0, {oy_coords[1]:.2f})"
+
+            ox_points = points_0x_0y['0x']  # отримуємо точки перетину з Ox / getting intersection points with Ox
+            if ox_points:
+                points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])  # форматуємо текст для точок перетину з Ox / format text for Ox intersection points
+            else:
+                points_0x_text = "не існує"
+            points_0x_0y_text = (
+                f"6) Точки перетину з Ox:\n{points_0x_text}\n"
+                f"Точка перетину з Oy:\n{oy_text}"
+            )
+
+            points_ox_oy_label.configure(text = points_0x_0y_text)  # оновлюємо лейбл для точок перетину з осями / update the label for intersection points with axes
 
             # Перевірка парності або непарності функції / Checking the function for evenness or oddness
             even_or_odd = check_even_odd_func(expr)
@@ -108,7 +120,8 @@ def build_fourth_func():
                 print(f"Помилка обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
                 intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # Виведення повідомлення про неможливість обчислення / Displaying message about inability to calculate
 
-            punctured_dots(expr)  # Визначення й побудова розривних точок / Defining and plotting punctured points
+            punctured_asymptots_text = punctured_dots(expr)  # перевіряємо наявність точок розриву у функції / check for punctured points in the function
+            
 
             # Пошук і побудова косої асимптоти / Finding and plotting the slant asymptote
             slant_asymptote_label = slope_asymptote  # Рівняння асимптоти / Equation of the asymptote
@@ -116,7 +129,6 @@ def build_fourth_func():
 
             plot_horizontal_asymptotes(expr = expr)
 
-            print(dictionary_of_variables['plots'])  # Виведення списку графіків / Printing the list of plots
             # except Exception as e:
             #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
 

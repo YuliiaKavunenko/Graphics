@@ -13,7 +13,6 @@ def fifth_second_dev():
     inflection_points_label_5 = dictionary_of_variables['inflection_points_label_5']  # Отримання лейблу з точками перегину / Getting the label with inflection points
 
     if check == 1:  # Якщо чекбокс активований / If the checkbox is checked
-        print('чекбокс 2 пятой функции oN')
         a1 = a1_function5.get()
         a2 = a2_function5.get()
 
@@ -100,15 +99,12 @@ def fifth_second_dev():
 
     elif check == 0:  # Якщо чекбокс вимкнений і графік існує у списку / If the checkbox is unchecked and the plot exists in the list
         # видалення графіка / Removing the plot
-        print('чекбокс 2 пятой функции off')
         # Видалення графіка / Removing the graph
         if plot_fifth_second:
             for line in plot_fifth_second:
                 line.remove()
             plot_fifth_second.clear()
             canvas.draw()
-        # plot_3_2.remove()
-        # plots_2d.remove(plot_3_2)
 
         # видалення точок 0х, пунктирних ліній і точок перегину / Removing 0x points, dashed lines, and inflection points
         if inflection_points_scatter_5:
@@ -136,4 +132,3 @@ def fifth_second_dev():
         for text in legend.get_texts():
             text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
         canvas.draw()  # Оновлення графіку / Redrawing the canvas
-    print(f'check = {check}')

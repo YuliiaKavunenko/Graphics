@@ -24,8 +24,6 @@ button_hover_color = "#9D6249"
 checkbox_hover_color = "#EBCDAE"
 # Функція для кнопок меню базових функцій, при натисканні обирається базовий графік функції у input / Function for menu buttons of basic functions, selecting a basic graph of the function in input on click
 def frame_buttons_func(funct): 
-    print(funct)  # Виведення обраної функції у консоль / Output of the selected function to the console
-
     input_graphic.insert(0,f"{funct}")  # Вставка функції у поле введення / Inserting the function into the input field
     frame_menu.place_forget()  # Приховування меню після вибору функції / Hiding the menu after selecting the function
 # функція для зникнення меню базових функцій / function to hide the menu of basic functions

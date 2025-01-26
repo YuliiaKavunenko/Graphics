@@ -515,3 +515,9 @@ seventh_s_dev_label.configure(
     anchor = 'w', # прив'язка тексту лейблу / label text anchor
     wraplength = 327 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
+# задаємо стиль для лейблу відображення того, що функція є сталою / setting the style for the label displaying information that we have constant function
+constant_function_label.configure(
+    text_color = text_color, # колір тексту лейблу / label text color
+    font = ("Roboto Slab", 20), # шрифт тексту лейблу / label text font
+    bg_color = frame_background # колір фону лейблу / label background color
+)

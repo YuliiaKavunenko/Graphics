@@ -7,8 +7,6 @@ import customtkinter as ctk
 from .main_elements import *
 from .plotting import *
 
-print('MAIN')
-
 def on_close():
     main.withdraw()
 

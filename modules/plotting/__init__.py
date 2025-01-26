@@ -23,6 +23,6 @@ from .second_dev_4 import fourth_second_dev
 from .second_dev_5 import fifth_second_dev
 from .second_dev_6 import sixth_second_dev
 from .second_dev_7 import seventh_second_dev
-from .clean import clean_button
+from .clean import clean_button, clean_for_functions
 from .focus_on_elements import focus_on_elements
 from .scroll_menu_functions import *

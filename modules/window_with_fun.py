@@ -53,6 +53,7 @@ image_gr_7 = ctk.CTkImage(Image.open(os.path.join(PATH,"function7.png")), size=(
 
 # запуск вікна / window launch
 def functions_window():
+    global window_with_fun
     # створення поверхневого вікна для вікна main / creating a top-level window for the main window
     window_with_fun = ctk.CTkToplevel(main)
     # задаємо розмір вікна / setting the window size
@@ -60,7 +61,7 @@ def functions_window():
     # робимо, щоб не можна було змінити розмір вікна / making the window size unchangeable
     window_with_fun.resizable(False, False)
     # задаємо назву для вікна / setting the window title
-    window_with_fun.title("Вікно вибору функції для дослідження / Function Selection Window for Research")
+    window_with_fun.title("Вікно вибору функції для дослідження")
     # задаємо колір фону для вікна / setting the background color for the window
     window_with_fun.configure(
         fg_color = background,
@@ -275,6 +276,9 @@ def functions_window():
 
 # функція для видалення непотрібних елементів з вікна при зміні вибору функції / function to remove unnecessary elements from the window when changing the function selection
 def clean_old_gr():
+    from .plotting import clean_button
+
+    clean_button()
     seventh_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної сьомої функції / clearing the label text for the first derivative of the seventh function
     seventh_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної сьомої функції / clearing the label text for the second derivative of the seventh function
     fifth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної п'ятої функції / clearing the label text for the first derivative of the fifth function
@@ -416,6 +420,7 @@ def clean_old_gr():
     second_dev_seventh.place_forget()
     a1_seventh.place_forget()
     seventh_func_button.place_forget()
+    window_with_fun.withdraw()
 
 # розміщення елементів для першого графіку, у = ax³ + bx² + cx + d / placing elements for the first graph, y = ax³ + bx² + cx + d
 def first_fn_on():

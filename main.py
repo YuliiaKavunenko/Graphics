@@ -1,5 +1,5 @@
 '''
-Запуск проєкту /Launch of the project
+Запуск проєкту / Launch of the project
 '''
 # імпортуємо модуль нашого проєкту / import the module of our project
 import modules

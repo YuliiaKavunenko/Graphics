@@ -402,3 +402,12 @@ seventh_s_dev_label = ctk.CTkLabel(
     width = 275,
     height = 40
 )
+# створення лейблу для відображення того, що функція є сталою / creating a label for displaying that we have constant function
+constant_function_label = ctk.CTkLabel(
+    master = frame_for_options,
+    height = 52,
+    width = 360,
+    anchor = "center",
+    text = "Функція є сталою. У побудові похідних немає сенсу",
+    wraplength = 360
+)

@@ -9,19 +9,9 @@ def points_ox_oy(graphic, color, label=False, lines=False, include_oy=True):
 
     # Знаходимо точки перетину з віссю 0x (y = 0) / Find intersections with the Ox axis (y = 0)
     x_intercepts = sympy.solve(graphic, x)  # Розв'язуємо рівняння для знаходження коренів / Solve the equation to find roots
-    print('Hi', x_intercepts)
     # Відфільтровуємо тільки дійсні корені та не округлюємо їх передчасно / Filter only real roots and avoid premature rounding
     x_intercepts = [root.evalf() for root in x_intercepts if root.is_real and not root.has(sympy.I)]
-    print('Hi', x_intercepts)
-    # x_int = []
-    # for root in x_intercepts:
-    #     if root.is_real and root.has(sympy.I):
-    #         x_int.append(root.evalf())
-    # print()
-    # print('Hi', x_int)
-
     # Округляємо тільки після перевірки, що це дійсне число / Round only after confirming it is a real number
-    # x_intercepts = x_int
     x_intercepts = [round(float(root), 1) for root in x_intercepts]  # Округлення коренів / Rounding the roots
 
     points_zero = []  # Нулі функції / Zeros of the function
@@ -39,11 +29,11 @@ def points_ox_oy(graphic, color, label=False, lines=False, include_oy=True):
             if label != False:
                 ax.annotate(f'({x_cor:.2f}, 0)',
                             (x_cor, 0),
-                            textcoords="offset points",
+                            textcoords = "offset points",
                             xytext=(10, 10),
                             ha='center')  # Додавання підпису до точки / Adding a label to the point
             if lines:  # Пунктирні лінії / Dashed lines
-                line = ax.axvline(x=x_cor, color=color, linestyle='--', linewidth=1)  # Додавання пунктирної лінії на графік / Adding a dashed line to the graph
+                line = ax.axvline(x = x_cor, color = color, linestyle = '--', linewidth = 1)  # Додавання пунктирної лінії на графік / Adding a dashed line to the graph
                 dashed_lines.append(line)  # Збереження лінії / Storing the line
 
     oy_point = None  # Початкове значення для точки перетину з Oy / Initial value for Oy intersection point

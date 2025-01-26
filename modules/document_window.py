@@ -37,7 +37,6 @@ button_hover_color = "#9D6249"
 checkbox_hover_color = "#EBCDAE"
 # шлях до поточної директорії / path to the current directory
 PATH = os.path.abspath(os.path.join(__file__, '..'))
-print("PATH", PATH)
 # функція для відображення документа / function to display the document
 # визначаємо функцію display_document з параметрами master і file_path / defines the function display_document with parameters master and file_path
 def display_document(master, file_path):
@@ -54,9 +53,6 @@ def display_document(master, file_path):
     if file_path.endswith('.pdf'):
         # відкриваємо PDF-документ з допомогою fitz / opens the PDF document using fitz
         doc = fitz.open(file_path)
-        # doc = ap.Document(file_path)
-       
-        print(doc)
         # створюємо Canvas для відображення PDF-сторінок / creates a Canvas to display PDF pages
         pdf_viewer = tk.Canvas(viewer_frame, width=955, height=780, bg=input_color)
         # розташовуємо Canvas і дозволяємо йому розширюватися / packs the Canvas and allows it to expand
@@ -76,13 +72,8 @@ def display_document(master, file_path):
         # визначаємо функцію для відображення сторінок і використовуємо змінну з зовнішнього контексту / defines a function to render pages using a variable from the outer context
         def render_page(master = master):
             nonlocal total_height
-            # print(len(doc.pages))
-            # resolution = ap.devices.Resolution(300)
-            # device = ap.devices.PngDevice(resolution)
-            for page_num in range(len(doc)):
-            # for page in range(0, len(doc.pages)):
 
-                # print(device.process(doc.pages[page+ 1], os.path.abspath(os.path.join(__file__, '..', '..', 'images', f'page_{page}.png'))))
+            for page_num in range(len(doc)):
                 page = doc[page_num]
                 # отримуємо піксельну карту сторінки з заданим коефіцієнтом збільшення / retrieves the pixel map of the page with the specified zoom factor
                 pix = page.get_pixmap(matrix=fitz.Matrix(zoom_factor, zoom_factor))
@@ -90,10 +81,6 @@ def display_document(master, file_path):
                 img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
    
                 img_tk = ImageTk.PhotoImage(img)
-                # img_tk = ctk.CTkImage(light_image= Image.open(os.path.abspath(os.path.join(__file__, '..','Курсова_робота.pdf'))), size = (pix.width, pix.height))
-                # lable = ctk.CTkLabel(master = master, width = 390, height = 200, image = img_tk, anchor = "center")
-                # lable.place(x=0, y=300)
-
                 # розраховуємо горизонтальне зміщення для центрування зображення на Canvas / calculates horizontal offset to center the image on the Canvas
                 canvas_width = pdf_viewer.winfo_width()
                 x_offset = max((canvas_width - pix.width) // 2, 0)
@@ -178,10 +165,6 @@ def run_document():
                                   command = lambda: display_document(document_window, rf"{PATH}\..\README.md"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_manual.place(x = 82, y = 90)
-
-    # викликаємо display_document через 100 мілісекунд, щоб відобразити документ під час запуску / calls display_document after 100 milliseconds to display the document at startup
-    # document_window.after(100, lambda: display_document(document_window, rf"{PATH}\Курсова_робота.pdf"))
-    # document_window.after(100, lambda: display_document(document_window, os.path.join(PATH, "Курсова_робота.pdf")))
 
     # запускаємо головний цикл обробки подій вікна / starts the main event loop of the window
     document_window.mainloop()

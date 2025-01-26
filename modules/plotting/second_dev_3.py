@@ -22,7 +22,6 @@ def third_second_dev():
             function = (x**2 - a**2) / x  # Визначення виразу функції / Defining the function expression
             dev_of_function = sympy.diff(function, x)  # Обчислення першої похідної функції / Calculating the first derivative of the function
             second_dev_of_function = sympy.diff(dev_of_function, x)  # Обчислення другої похідної функції / Calculating the second derivative of the function
-            print(second_dev_of_function)  # Виведення другої похідної у консоль / Printing the second derivative in the console
 
             drob_second_dev_lable.configure(text=f"y'' = {second_dev_of_function}")  # Оновлення тексту для другої похідної / Updating the text for the second derivative
 

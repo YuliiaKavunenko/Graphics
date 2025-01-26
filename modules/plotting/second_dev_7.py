@@ -97,8 +97,6 @@ def seventh_second_dev():
                 #     print(f"Помилка другої дробової похідної: {e}")  # Виведення повідомлення про помилку другої дробової похідної / Displaying message about the second fractional derivative error
 
     elif check == 0:  # Якщо чекбокс вимкнений і графік існує у списку / If the checkbox is unchecked and the plot exists in the list
-        # видалення графіка / Removing the plot
-        print('чекбокс 2 пятой функции off')
         # Видалення графіка / Removing the graph
         if plot_seventh_second:
             for line in plot_seventh_second:
@@ -134,4 +132,3 @@ def seventh_second_dev():
         for text in legend.get_texts():
             text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
         canvas.draw()  # Оновлення графіку / Redrawing the canvas
-    print(f'check = {check}')

@@ -90,7 +90,6 @@ def fifth_first_dev():
 
                 # Оновлення тексту похідної функції / Update the derivative function text
                 drob_first_dev_lable.configure(text=f"y' = {dev_of_function}")
-                print(dev_of_function)  # Вивід похідної у консоль / Print the derivative in the console
 
                 # Лямбда-функція для розрахунку похідної / Lambda function to calculate the derivative
                 expr = dev_of_function
@@ -155,8 +154,6 @@ def fifth_first_dev():
                 line.remove()  # Видалення кожної лінії / Removing each line
             h_lines_fifth_first.clear()  # Очищення списку ліній / Clearing the list of lines
 
-        print('local_max_fifth_first', local_max_fifth_first)
-        print('local_max_text_fifth_first', local_max_text_fifth_first)
         try:
         # if local_max_fifth_first:
             local_max_fifth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
@@ -165,9 +162,6 @@ def fifth_first_dev():
             local_max_text_fifth_first = None
         except:
             print('none local max')
-
-        print('local_min_fifth_first', local_min_fifth_first)
-        print('local_min_text_fifth_first', local_min_text_fifth_first)
 
         # if local_min_fifth_first:
         try:
