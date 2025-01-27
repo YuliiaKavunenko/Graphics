@@ -78,7 +78,7 @@ def check_second_dev():
                 inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")
                 func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Convert expression to function for calculations
 
-                x_vals = numpy.linspace(-20, 20, 400)  # Задаємо діапазон значень x / Set the range of x values
+                x_vals = numpy.linspace(-100, 100, 4000)  # Задаємо діапазон значень x / Set the range of x values
                 y_vals = func(x_vals)  # Обчислюємо значення y / Calculate y values
 
                 plot_3 = ax.plot(x_vals, y_vals, label=f'y = 6*{a}x + 2 * {b}', color='blue')  # Побудова графіку другої похідної / Plotting the second derivative graph

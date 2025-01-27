@@ -51,7 +51,7 @@ def build_seventh_func():
                 plots = dictionary_of_variables['plots']  # Отримання списку графіків / Getting the list of plots
                 func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Converting the expression to a function for calculations
 
-                x_vals = numpy.linspace(-10, 10, 400)  # Визначення діапазону значень x / Defining the range of x values
+                x_vals = numpy.linspace(-100, 100, 4000)  # Визначення діапазону значень x / Defining the range of x values
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 plot = ax.plot(x_vals, y_vals, label=f'y = (x**2 + x + {a})/x ', color='red')  # Побудова графіка функції / Plotting the function graph
@@ -131,7 +131,7 @@ def build_seventh_func():
             expr = (x**2 + x + 0)/x
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Converting the expression to a function for calculations
 
-            x_vals = numpy.linspace(-20, 20, 400)  # Визначення діапазону значень x / Defining the range of x values
+            x_vals = numpy.linspace(-100, 100, 4000)  # Визначення діапазону значень x / Defining the range of x values
             y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
             plot = ax.plot(x_vals, y_vals, label=f'y = (x**2 + x + {0})/x ', color='red')
             legend = ax.legend()

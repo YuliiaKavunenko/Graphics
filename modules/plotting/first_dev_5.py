@@ -52,6 +52,7 @@ def fifth_first_dev():
                 hover_annotations = []
 
                 if intervals_data['локальний максимум'] != "не існує":
+                    local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
                     local_max = intervals_data['локальний максимум'][0]
                     l_max_x, l_max_y = local_max
                     local_max_fifth_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)
@@ -67,6 +68,7 @@ def fifth_first_dev():
                     local_max_text = "Локальний максимум: не існує"  # Якщо мінімумів немає / If no minima exist
 
                 if intervals_data['локальний мінімум'] != "не існує":
+                    local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
                     local_min = intervals_data['локальний мінімум'][0]
                     l_min_x, l_min_y = local_min
                     local_min_fifth_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)
@@ -108,7 +110,7 @@ def fifth_first_dev():
 
                 # Оновлення текстових віджетів для максимумів і мінімумів / Update text widgets for maxima and minima
                 local_max_min_text = f'4) {local_max_text}\n{local_min_text}'
-                local_max_min_label.configure(text=local_max_min_text)
+                local_max_min_label.configure(text = local_max_min_text)
 
                 # Оновлення тексту для загального максимуму та мінімуму функції / Update text for overall function maxima and minima
                 zn_function_text = f'5) {funct_max_text}\n{func_min_text}'
@@ -122,7 +124,7 @@ def fifth_first_dev():
                 func = sympy.lambdify(x, expr, 'numpy')  # Конвертація у числову функцію / Convert to a numerical function
 
                 # Побудова графіку похідної / Plot the derivative graph
-                x_vals = numpy.linspace(-20, 20, 400)  # Генерація x-значень / Generate x-values
+                x_vals = numpy.linspace(-100, 100, 4000)  # Генерація x-значень / Generate x-values
                 y_vals = func(x_vals)  # Обчислення y-значень похідної / Calculate y-values for the derivative
 
                 plot_fifth_first = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')

@@ -1,6 +1,16 @@
 import sympy, numpy
 from ..main_elements import *
-from ..data_calculation import scope_of_function, format_intervals, check_even_odd_func, points_ox_oy, find_sign_intervals, find_intervals, find_inflection_points, find_convexity_intervals
+from ..data_calculation import (
+    scope_of_function, 
+    format_intervals, 
+    check_even_odd_func, 
+    points_ox_oy, 
+    find_sign_intervals, 
+    find_intervals, 
+    find_inflection_points, 
+    find_convexity_intervals,
+    plot_horizontal_asymptotes
+    )
 
 def plot_graph(ax, canvas):
     from .plot_constant_function import plot_constant_function
@@ -18,13 +28,13 @@ def plot_graph(ax, canvas):
         try:
             expr = sympy.sympify(function_text)
             if isinstance(expr, sympy.Number):
-                plot_constant_function(float(expr), 'orange')
+                plot_constant_function(float(expr), 'red')
                 domain = scope_of_function(expr)  # визначаємо область визначення функції / determine the domain of the function
                 domain_text = f"1) D(y) = {format_intervals(domain)}"  # форматування інтервалів області визначення / format the domain intervals
                 scope_label.configure(text=domain_text)  # оновлюємо лейбл області визначення / update the domain label
 
                 # перетин з осями ох та оу / intersection with the Ox and Oy axes
-                points_0x_0y = points_ox_oy(expr,'orange', True)
+                points_0x_0y = points_ox_oy(expr,'red', True)
 
                 # отримуємо список точок нулів функції / getting the list of zero points of the function
                 points_zero = points_0x_0y['points_zero']
@@ -59,7 +69,7 @@ def plot_graph(ax, canvas):
 
                 points_ox_oy_label.configure(text = points_0x_0y_text)  # оновлюємо лейбл для точок перетину з осями / update the label for intersection points with axes
 
-                even_or_odd_func_l.configure(text ='2) Функція загального вигляду')  # оновлюємо лейбл для парності функції / update the label for the function's parity
+                even_or_odd_func_l.configure(text ='Функція загального вигляду')  # оновлюємо лейбл для парності функції / update the label for the function's parity
 
                 try:
                     sign_intervals = find_sign_intervals(expr)  # знаходимо інтервали знакосталості функції / find sign intervals of the function
@@ -77,10 +87,10 @@ def plot_graph(ax, canvas):
                 second_dev_expr = sympy.diff(dev_expr, x)
                 func = sympy.lambdify(x, expr, 'numpy')
 
-                x_vals = numpy.linspace(-20, 20, 400)
+                x_vals = numpy.linspace(-100, 100, 4000)
                 y_vals = func(x_vals)
 
-                ax.plot(x_vals, y_vals, label=f'y = {function_text}', color='orange')
+                ax.plot(x_vals, y_vals, label=f'y = {function_text}', color='red')
                 ax.legend()
                 legend = ax.legend()
                 for text in legend.get_texts():
@@ -144,7 +154,7 @@ def plot_graph(ax, canvas):
                 zn_function_text = f'5) {funct_max_text}\n{func_min_text}'
                 zn_function_label.configure(text=zn_function_text)
 
-                points_0x_0y = points_ox_oy(expr, 'orange', True)
+                points_0x_0y = points_ox_oy(expr, 'red', True)
                 points_zero = points_0x_0y['points_zero']
                 if points_zero:
                     points_0x_text = "; ".join([f"({x:.2f}, 0)" for x in points_zero])
@@ -172,7 +182,7 @@ def plot_graph(ax, canvas):
                 points_zero_label.configure(text=points_zero_text)
 
                 even_or_odd = check_even_odd_func(expr)
-                even_or_odd_func_l.configure(text=f'2) {even_or_odd}')
+                even_or_odd_func_l.configure(text=f'{even_or_odd}')
 
                 try:
                     sign_intervals = find_sign_intervals(expr)
@@ -226,6 +236,7 @@ def plot_graph(ax, canvas):
                     canvas.draw_idle()
 
                 canvas.mpl_connect('motion_notify_event', on_hover)
+                plot_horizontal_asymptotes(expr = expr)
 
                 canvas.draw()
         except:

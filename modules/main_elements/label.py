@@ -165,8 +165,8 @@ third_s_dev_label = ctk.CTkLabel(
     height = 40
 )
 # створення лейблів для позначення кольору функції / creating labels for denoting the color of the function
-# базові функції або свого введення - фіолетовий / basic functions or custom input - orange
-orange_gr = ctk.CTkLabel(
+# базові функції або свого введення - фіолетовий / basic functions or custom input - red
+base_gr = ctk.CTkLabel(
     master = frame_first,
     height = 40,
     width = 22,
@@ -408,6 +408,6 @@ constant_function_label = ctk.CTkLabel(
     height = 52,
     width = 360,
     anchor = "center",
-    text = "Функція є сталою. У побудові похідних немає сенсу",
+    text = "Функція є сталою",
     wraplength = 360
 )

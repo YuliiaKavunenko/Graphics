@@ -29,7 +29,7 @@ checkbox_hover_color = "#EBCDAE"
 # задаємо стиль для checkbox похідної y' / setting the style for the derivative y' label
 first_dev.configure(
     bg_color = frame_background, # фоновий колір лейблу / label background color
-    text = "Відображення похідної y'", # текст на лейблі / label text
+    text = "Графік першої похідної y'", # текст на лейблі / label text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки лейблу / label border width
@@ -42,7 +42,7 @@ first_dev.configure(
 # задаємо стиль для checkbox похідної y'' / setting the style for the derivative y'' label
 second_dev.configure(
     bg_color = frame_background, # фоновий колір лейблу / label background color
-    text = "Відображення похідної y''", # текст на лейблі / label text
+    text = "Графік другої похідної y''", # текст на лейблі / label text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки лейблу / label border width
@@ -55,7 +55,7 @@ second_dev.configure(
 # задаємо стиль для чекбоксу похідної у' четвертої функції / setting the style for the checkbox displaying the derivative y' of the fourth function
 first_dev_fourth.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
     font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
     text_color = text_color, # колір тексту чекбоксу / checkbox text color
     fg_color = input_color, # колір фону інпуту / input background color
@@ -68,7 +68,7 @@ first_dev_fourth.configure(
 # задаємо стиль для чекбоксу похідної у'' четвертої функції / setting the style for the checkbox displaying the derivative y'' of the fourth function
 second_dev_fourth.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
     font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
     text_color = text_color, # колір тексту чекбоксу / checkbox text color
     fg_color = input_color, # колір фону інпуту / input background color
@@ -82,7 +82,7 @@ second_dev_fourth.configure(
 # похідна y' функції y = (x**2 - a**2)/x / derivative y' of the function y = (x**2 - a**2)/x
 first_dev_fdrob.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
     text_color = text_color, # колір тексту чекбоксу / checkbox text color
@@ -95,7 +95,7 @@ first_dev_fdrob.configure(
 # похідна y'' функції y = (x**2 - a**2)/x / derivative y'' of the function y = (x**2 - a**2)/x
 first_dev_sdrob.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
@@ -108,7 +108,7 @@ first_dev_sdrob.configure(
 # похідна y' функції y = x/(x**2 + a) / derivative y' of the function y = x/(x**2 + a)
 second_dev_sdrob.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -121,7 +121,7 @@ second_dev_sdrob.configure(
 # похідна y'' функції y = x/(x**2 + a) / derivative y'' of the function y = x/(x**2 + a)
 second_dev_fdrob.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -134,7 +134,7 @@ second_dev_fdrob.configure(
 # похідна y' функції y = (x**2 - a)/(x - b) / derivative y'' of the function y = (x**2 - a)/(x - b)
 first_dev_fifth.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -147,7 +147,7 @@ first_dev_fifth.configure(
 # похідна y'' функції y = (x**2 - a)/(x - b) / derivative y'' of the function y = (x**2 - a)/(x - b)
 second_dev_fifth.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -160,7 +160,7 @@ second_dev_fifth.configure(
 # похідна y' функції y = a/x**2 + x/a / derivative y' of the function y = (x**2 - a)/(x - b)
 first_dev_sixth.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -173,7 +173,7 @@ first_dev_sixth.configure(
 # похідна y'' функції y = a/x**2 + x/a / derivative y'' of the function y = (x**2 - a)/(x - b)
 second_dev_sixth.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -186,7 +186,7 @@ second_dev_sixth.configure(
 # похідна y' функції y = (x**2 + x + a)/x / derivative y' of the function y = (x**2 - a)/(x - b)
 first_dev_seventh.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y'", # текст на чекбоксі / checkbox text
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width
@@ -199,7 +199,32 @@ first_dev_seventh.configure(
 # похідна y'' функції y = (x**2 + x + a)/x / derivative y'' of the function y = (x**2 - a)/(x - b)
 second_dev_seventh.configure(
     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Відображення похідної y''", # текст на чекбоксі / checkbox text
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
+    fg_color = input_color, # колір фону інпуту / input background color
+    hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
+    border_width = 2, # ширина рамки чекбоксу / checkbox border width
+    font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
+    text_color = text_color, # колір тексту чекбоксу / checkbox text color
+    border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
+    checkmark_color = text_color, # колір галочки / checkmark color
+    command = seventh_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
+)
+# чекбокси базових функцій
+base_dev_checkbox1.configure(
+    bg_color = frame_background, # колір фону чекбоксу / checkbox background color
+    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
+    fg_color = input_color, # колір фону інпуту / input background color
+    hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
+    border_width = 2, # ширина рамки чекбоксу / checkbox border width
+    font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
+    text_color = text_color, # колір тексту чекбоксу / checkbox text color
+    border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
+    checkmark_color = text_color, # колір галочки / checkmark color
+    command = seventh_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
+)
+base_dev_checkbox2.configure(
+    bg_color = frame_background, # колір фону чекбоксу / checkbox background color
+    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
     fg_color = input_color, # колір фону інпуту / input background color
     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
     border_width = 2, # ширина рамки чекбоксу / checkbox border width

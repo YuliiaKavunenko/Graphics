@@ -97,7 +97,7 @@ def run_main():
     slope_asymptote.place(x = 400, y = 370)
 
     # Label для виводу кольору побудови базових функцій / Label to display the color of basic function construction
-    orange_gr.place(x = 5, y = 10)
+    base_gr.place(x = 5, y = 10)
 
     # Виконуємо побудову ДСК / Perform DSK construction
     build_DSK()

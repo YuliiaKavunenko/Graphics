@@ -37,7 +37,8 @@ checkbox_hover_color = "#EBCDAE"
 PATH = os.path.abspath(os.path.join(__file__, '..'))
 # функція для відображення документа / function to display the document
 # визначаємо функцію display_document з параметрами master і file_path / defines the function display_document with parameters master and file_path
-def display_document(master, file_path):
+def display_document(master, file_path, label_starttext, label_text):
+    label_starttext.configure(text=label_text)
     # видаляємо всі підлеглі елементи типу ctk.CTkFrame з майстра / destroys all child widgets of type ctk.CTkFrame from the master
     for widget in master.winfo_children():
         if isinstance(widget, ctk.CTkFrame):
@@ -137,7 +138,7 @@ def run_document():
     document_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
     # створюємо мітку ctk.CTkLabel з текстом "Документація до проєкту" / creates a ctk.CTkLabel with the text "Документація до проєкту"
-    label_starttext = ctk.CTkLabel(master = document_window, width = 770, height = 45, text = "Документація до проєкту", anchor = "center")
+    label_starttext = ctk.CTkLabel(master = document_window, width = 770, height = 45, text = "", anchor = "center")
     # налаштовуємо властивості мітки, такі як колір фону, шрифт, колір тексту та розташування / configures the label properties such as background color, font, text color, and alignment
     label_starttext.configure(fg_color = background, font = ("Roboto Slab", 24), text_color = text_color, anchor="center")
     # розташовуємо мітку на вказаних координатах / places the label at the specified coordinates
@@ -146,37 +147,43 @@ def run_document():
     # створюємо кнопку ctk.CTkButton для читання додатку до проєкту / creates a ctk.CTkButton for reading the project appendix
     button_app = ctk.CTkButton(master = document_window, width = 252, height = 60, text = "Додаток",
                                fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
-                               command = lambda: display_document(document_window, os.path.join(PATH, "Kursova_robota.pdf")))
+                               command = lambda: display_document(document_window, os.path.join(PATH, "Kursova_robota.pdf"), label_starttext = label_starttext, label_text = "Додаток до проєкту"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_app.place(x = 20, y = 394)
 
     # створюємо кнопку ctk.CTkButton для читання документації до проєкту / creates a ctk.CTkButton for reading the project documentation
     button_readme = ctk.CTkButton(master = document_window, width = 252, height = 60, text="Документація",
                                   fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
-                                  command = lambda: display_document(document_window, os.path.join(PATH, "Documentation.pdf")))
+                                  command = lambda: display_document(document_window, os.path.join(PATH, "Documentation.pdf"), label_starttext = label_starttext, label_text = "Документація до проєкту"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_readme.place(x = 20, y = 169)
 
     # створюємо кнопку ctk.CTkButton для читання посібника користувача до проєкту / creates a ctk.CTkButton for reading the project documentation
     button_manual = ctk.CTkButton(master = document_window, width = 252, height = 60, text="Посібник користувача",
                                   fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
-                                  command = lambda: display_document(document_window, os.path.join(PATH, "Kursova_robota.pdf")))
+                                  command = lambda: display_document(document_window, os.path.join(PATH, "user_posibnik.pdf"), label_starttext = label_starttext, label_text = "Посібник користувача"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_manual.place(x = 20, y = 94)
 
     # створюємо кнопку ctk.CTkButton для читання теоретичної частини з математики / creates a ctk.CTkButton for reading the project appendix
     button_math = ctk.CTkButton(master = document_window, width = 252, height = 60, text = "Теоретична частина\nз математики",
                                fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
-                               command = lambda: display_document(document_window, os.path.join(PATH, "math_part.pdf")))
+                               command = lambda: display_document(document_window, os.path.join(PATH, "math_part.pdf"), label_starttext = label_starttext, label_text = "Теоретична частина з математики"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_math.place(x = 20, y = 244)
 
     # створюємо кнопку ctk.CTkButton для читання теоретичної частини з інформатики / creates a ctk.CTkButton for reading the project documentation
     button_it = ctk.CTkButton(master = document_window, width = 252, height = 60, text="Теоретична частина\nз інформатики",
                                   fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
-                                  command = lambda: display_document(document_window, os.path.join(PATH, "it_part.pdf")))
+                                  command = lambda: display_document(document_window, os.path.join(PATH, "it_part.pdf"), label_starttext = label_starttext, label_text = "Теоретична частина з інформатики"))
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_it.place(x = 20, y = 319)
+    # створюємо кнопку ctk.CTkButton для повернення до титульної сторінки / 
+    button_it = ctk.CTkButton(master = document_window, width = 252, height = 60, text="Повернутися до\nтитульного вікна",
+                                  fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
+                                  command = lambda: document_window.destroy())
+    # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
+    button_it.place(x = 20, y = 473)
 
 
     # запускаємо головний цикл обробки подій вікна / starts the main event loop of the window

@@ -41,7 +41,7 @@ def fourth_second_dev():
             if isinstance(func, sympy.Number):  # Якщо вираз є числом / If the expression is a number
                 plot_3 = plot_constant_function(float(func), 'blue')  # Побудова графіка для константи / Plotting the graph for the constant function
             else:
-                x_vals = numpy.linspace(-20, 20, 400)  # Генерація значень x від -10 до 10 / Generating x values from -10 to 10
+                x_vals = numpy.linspace(-100, 100, 4000)  # Генерація значень x від -10 до 10 / Generating x values from -10 to 10
                 y_vals = func(x_vals)  # Обчислення значень функції для заданих x / Computing function values for given x
 
                 plot_fourth_second = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')  # Побудова нового графіка другої похідної / Plotting the new second derivative graph

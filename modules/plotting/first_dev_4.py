@@ -122,7 +122,7 @@ def fourth_first_dev():
                 func = sympy.lambdify(x, expr, 'numpy')  # Конвертація у числову функцію / Convert to a numerical function
 
                 # Побудова графіку похідної / Plot the derivative graph
-                x_vals = numpy.linspace(-20, 20, 400)  # Генерація x-значень / Generate x-values
+                x_vals = numpy.linspace(-100, 100, 4000)  # Генерація x-значень / Generate x-values
                 y_vals = func(x_vals)  # Обчислення y-значень похідної / Calculate y-values for the derivative
 
                 plot_fourth_first = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')

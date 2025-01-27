@@ -225,9 +225,9 @@ third_s_dev_label.configure(
     wraplength = 327 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # лейблу для відображення кольорів графіку / setting the style for the labels displaying the graph colors
-# для базових або введенних користувачем функцій - фіолетовий / for basic or user-defined functions - orange
-orange_gr.configure(
-    text_color = 'orange', # колір тексту лейблу / label text color
+# для базових або введенних користувачем функцій - фіолетовий / for basic or user-defined functions - red
+base_gr.configure(
+    text_color = 'red', # колір тексту лейблу / label text color
     font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
     bg_color = frame_background # колір фону лейблу / label background color
 )
@@ -353,7 +353,7 @@ main_graphic_label.configure(
     bg_color = frame_background, # колір фону лейблу / label background color
     fg_color = frame_background, # колір переднього плану лейблу / label foreground color
     anchor = 'w', # прив'язка тексту лейблу / label text anchor
-    text = 'Головний графік' # текст на лейблі / label text
+    text = 'Графік функції y = f(x)' # текст на лейблі / label text
 )
 # стиль для лейблу який зазначає "y = " для п'ятої функції y = (x**2 + a)/(x**2 - a) / setting the style for the label indicating "y = " for the fifth function y = (x**2 + a)/(x**2 - a)
 fifth_func_l.configure(

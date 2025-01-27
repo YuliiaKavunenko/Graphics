@@ -133,7 +133,7 @@ def drob_first_dev():
                 func = sympy.lambdify(x, expr, 'numpy')
 
                 # Визначення діапазону значень x / Defining the range of x values
-                x_vals = numpy.linspace(-20, 20, 400)
+                x_vals = numpy.linspace(-100, 100, 4000)
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку похідної функції / Plotting the derivative function graph
@@ -173,15 +173,11 @@ def drob_first_dev():
         # видалення локальних максимумів та мінімумів / Removing local maxima and minima
         if local_max_scatter_2:
             local_max_scatter_2.remove()  # Видалення точок локального максимуму / Removing local maximum points
-            local_max_scatter_text_2.remove()  # Видалення тексту точок локального максимуму / Removing local maximum points text
             local_max_scatter_2 = None
-            local_max_scatter_text_2 = None
 
         if local_min_scatter_2:
             local_min_scatter_2.remove()  # Видалення точок локального мінімуму / Removing local minimum points
-            local_min_scatter_text_2.remove()  # Видалення тексту точок локального мінімуму / Removing local minimum points text
             local_min_scatter_2 = None
-            local_min_scatter_text_2 = None
 
         # видалення точок 0х та пунктирних ліній / Removing 0x points and dashed lines
         if ox_points_first:

@@ -20,20 +20,20 @@ def build_DSK():
     ax.yaxis.set_ticks_position('both')
 
     # Додаємо мітки до осей / adding labels to the axes
-    ax.set_xlabel('x', color='black')
-    ax.set_ylabel('y', color='black', rotation=0, labelpad=15, ha='right')
+    ax.set_xlabel('x', color = 'black')
+    ax.set_ylabel('y', color = 'black', rotation = 0, labelpad = 15, ha = 'right')
 
     # Встановлюємо колір міток на осях / setting the color of labels on the axes
-    ax.tick_params(axis='x', colors='black', pad=5)  # Убираем смещение
-    ax.tick_params(axis='y', colors='black', pad=5)
+    ax.tick_params(axis='x', colors = 'black', pad=5)  # Убираем смещение
+    ax.tick_params(axis='y', colors = 'black', pad=5)
 
     # Встановлюємо крок сітки / setting the grid step
     ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
     ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
 
     # Убираем привязку меток осей к положению графика
-    ax.xaxis.set_label_coords(0.5, -0.05)  # Фиксируем метку "x" ниже холста
-    ax.yaxis.set_label_coords(-0.05, 0.5)  # Фиксируем метку "y" слева от холста
+    ax.xaxis.set_label_coords(1.05, 0.5)  # Фіксуємо мітку "x" справа від холста, по центру
+    ax.yaxis.set_label_coords(0.5, 1.05)  # Фіксуємо мітку "y" зверху від холста, по центру
 
     # Колір для фона ДСК / color for the coordinate grid background
     ax.set_facecolor('#FAF0E6')

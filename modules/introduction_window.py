@@ -147,7 +147,7 @@ def introduction():
         run_document()
 
     button_app_start.configure(
-        text='Перейти до роботи', # текст на кнопці / text on the button
+        text='Перейти до програми', # текст на кнопці / text on the button
         fg_color=button_color, # колір кнопки / button color
         text_color=text_button_color, # колір тексту кнопки / button text color
         hover_color=button_hover_color, # колір кнопки при наведенні / button hover color

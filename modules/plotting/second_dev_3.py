@@ -37,7 +37,7 @@ def third_second_dev():
                 plot_3 = plot_constant_function(float(func), 'blue')  # Побудова графіка для константи / Plotting the graph for the constant function
             else:
                 # Визначення діапазону значень x / Defining the range of x values
-                x_vals = numpy.linspace(-20, 20, 400)
+                x_vals = numpy.linspace(-100, 100, 4000)
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку другої похідної / Plotting the second derivative graph

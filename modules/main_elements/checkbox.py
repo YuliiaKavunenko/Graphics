@@ -94,3 +94,15 @@ second_dev_seventh = ctk.CTkCheckBox(
     checkbox_width = 35,
     checkbox_height = 35
 )
+# чекбокси для базового графіку функцій
+base_dev_checkbox1 = ctk.CTkCheckBox(
+    master = frame_for_options,
+    checkbox_width = 35,
+    checkbox_height = 35
+)
+# створення чекбоксу для побудови або прибирання у'' / creating a checkbox for building or removing y''
+base_dev_checkbox2 = ctk.CTkCheckBox(
+    master = frame_for_options,
+    checkbox_width = 35,
+    checkbox_height = 35
+)

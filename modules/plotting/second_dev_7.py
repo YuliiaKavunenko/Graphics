@@ -74,7 +74,7 @@ def seventh_second_dev():
                     inflection_points_label.configure(text="9) Точки перегину: не існує")  # Виведення повідомлення про відсутність точок перегину / Displaying message about the absence of inflection points
 
                 # Визначення діапазону значень x / Defining the range of x values
-                x_vals = numpy.linspace(-20, 20, 400)
+                x_vals = numpy.linspace(-100, 100, 4000)
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку другої похідної функції / Plotting the second derivative function graph
