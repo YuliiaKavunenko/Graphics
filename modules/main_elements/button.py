@@ -140,3 +140,15 @@ seventh_func_button = ctk.CTkButton(
 seventh_func_button.bind("<Enter>", lambda event: show_tooltip(event, "Побудова і дослідження графіку функції y = (x**2 + x + a)/x"))
 # робота функції приховування підказки при відведенні курсора від кнопки / function to hide the tooltip when the cursor is removed from the button
 seventh_func_button.bind("<Leave>", hide_tooltip) 
+
+#кнопки для змінення маштабування ДСК
+button_plus = ctk.CTkButton(
+    master= main,
+    width= 40,
+    height=40
+)
+button_minus = ctk.CTkButton(
+    master= main,
+    width= 40,
+    height=40
+)

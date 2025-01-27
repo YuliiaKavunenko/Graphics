@@ -23,6 +23,12 @@ def third_first_dev():
 
             function = (x**2 - a**2) / x  # Визначення виразу функції / Defining the function expression
             dev_of_function = sympy.diff(function, x)  # Обчислення першої похідної функції / Calculating the first derivative of the function
+            rounded_derivative = dev_of_function  
+            for atom in dev_of_function.atoms():
+                # Если атом является числом с плавающей точкой
+                if atom.is_Float:
+                    # Заменяем его на округлённое значение
+                    rounded_derivative = rounded_derivative.xreplace({atom: round(atom, 2)})
             if isinstance(dev_of_function, sympy.Number):  # Якщо вираз є числом / If the expression is a number
                 plot_constant_function(float(dev_of_function), 'green')  # Побудова графіка для константи / Plotting the graph for the constant
             else:
@@ -36,32 +42,51 @@ def third_first_dev():
                 interval_label.configure(text=f'3) {interval_text}')  # Налаштування тексту мітки для інтервалів зростання/спадання / Setting text for growth/decay intervals label
 
                 # Формування тексту для локальних максимумів і мінімумів / Forming text for local maxima and minima
-                if intervals_data['локальний максимум'] != 'не існує':  # Перевірка наявності локальних максимумів / Checking for local maxima
-                    local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
+                hover_points = []
+                hover_annotations = []
+
+                if intervals_data['локальний максимум'] != 'не існує':
                     local_max = intervals_data['локальний максимум'][0]
                     l_max_x, l_max_y = local_max
-                    local_max_third_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40)  # Додавання точок локального максимуму / Adding local maximum points
+                    local_max_third_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)
+                    hover_points.append(local_max_third_first)
                     local_max_text_third_first = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
-                                                        (l_max_x, l_max_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
-                    
+                                                            (l_max_x, l_max_y),
+                                                            textcoords="offset points",
+                                                            xytext=(0, -15),
+                                                            ha='center',
+                                                            visible=False)
+                    hover_annotations.append(local_max_text_third_first)
                 else:
-                    local_max_text = "Локальний максимум: не існує"  # Виведення повідомлення про відсутність локальних максимумів / Displaying message about the absence of local maxima
+                    local_max_text = "Локальний максимум: не існує"  # Виведення повідомлення про відсутність локальних мінімумів / Displaying message about the absence of local minima
 
-                if intervals_data['локальний мінімум'] != 'не існує':  # Перевірка наявності локальних мінімумів / Checking for local minima
-                    local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
+                if intervals_data['локальний мінімум'] != 'не існує':
                     local_min = intervals_data['локальний мінімум'][0]
                     l_min_x, l_min_y = local_min
-                    local_min_third_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40)  # Додавання точок локального мінімуму / Adding local minimum points
+                    local_min_third_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)
+                    hover_points.append(local_min_third_first)
                     local_min_text_third_first = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
-                                                        (l_min_x, l_min_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # Додавання тексту для точок локального мінімуму / Adding text for local minimum points
+                                                            (l_min_x, l_min_y),
+                                                            textcoords="offset points",
+                                                            xytext=(0, -15),
+                                                            ha='center',
+                                                            visible=False)
+                    hover_annotations.append(local_min_text_third_first)
                 else:
                     local_min_text = "Локальний мінімум: не існує"  # Виведення повідомлення про відсутність локальних мінімумів / Displaying message about the absence of local minima
+
+
+                def on_hover(event):
+                    if event.inaxes == ax:
+                        for i, point in enumerate(hover_points):
+                            cont, _ = point.contains(event)
+                            if cont:
+                                hover_annotations[i].set_visible(True)
+                            else:
+                                hover_annotations[i].set_visible(False)
+                        canvas.draw_idle()
+
+                canvas.mpl_connect('motion_notify_event', on_hover)
 
                 # макс значення функції / max function value
                 if isinstance(intervals_data['макс. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
@@ -83,16 +108,16 @@ def third_first_dev():
 
                 # Оновлення тексту похідної / Updating the derivative text
                 drob_first_dev_lable.configure(
-                    text=f"y' = {dev_of_function}"
+                    text=f"y' = {rounded_derivative}"
                 )
 
                 expr = dev_of_function  # Встановлення виразу для похідної / Setting the expression for the derivative
                 func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу похідної у функцію для обчислень / Converting the derivative expression to a function for calculations
 
-                x_vals = numpy.linspace(-10, 10, 400)  # Визначення діапазону значень x / Defining the range of x values
+                x_vals = numpy.linspace(-20, 20, 400)  # Визначення діапазону значень x / Defining the range of x values
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
-                plot_third_first = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')  # Побудова графіку першої похідної / Plotting the first derivative graph
+                plot_third_first = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')  # Побудова графіку першої похідної / Plotting the first derivative graph
                 # plots.append(plot)
 
                 # Пошук точок перетину з Ox / Finding intersection points with Ox
@@ -105,11 +130,10 @@ def third_first_dev():
                 legend = ax.legend()
 
                 third_f_dev_label.configure(
-                    text=f"y' = {dev_of_function}"  # Оновлення тексту для першої похідної / Updating the text for the first derivative
+                    text=f"y' = {rounded_derivative}"  # Оновлення тексту для першої похідної / Updating the text for the first derivative
                 )
 
                 for text in legend.get_texts():
-                    
                     text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
                 canvas.draw()  # Оновлення графіку / Redrawing the canvas
                 dictionary_of_variables['plot_third_first'] = plot_third_first  # Збереження графіку першої похідної / Saving the first derivative plot

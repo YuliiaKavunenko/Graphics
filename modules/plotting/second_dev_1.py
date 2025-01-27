@@ -45,20 +45,40 @@ def check_second_dev():
 
                     y_inflection = func1(point)
                     # Малюємо точки перегину на графіку / Draw inflection points on the graph
-                    scatter = ax.scatter(point, y_inflection, color='blue', zorder=5)
-                    inflection_points_scatter.append(scatter)  # Зберігаємо об'єкт точки / Store the point object
-                    label_point_inflection = ax.annotate(f'({point:.1f}, {y_inflection:.1f})',  # Додаємо підпис з округленням / Add label with rounding
-                                (point, y_inflection),
-                                textcoords="offset points", 
-                                xytext=(0, 10),
-                                ha='center', color='blue')
-                    inflection_points_l.append(label_point_inflection)
+                    hover_points = []
+                    hover_annotations = []
+
+                    for point in inflection_points:
+                        y_inflection = func1(point)
+                        scatter = ax.scatter(point, y_inflection, color='blue', zorder=5, picker=5)
+                        inflection_points_scatter.append(scatter)
+                        hover_points.append(scatter)
+                        
+                        label_point_inflection = ax.annotate(f'({point:.1f}, {y_inflection:.1f})',
+                                    (point, y_inflection),
+                                    textcoords="offset points", 
+                                    xytext=(0, -15),
+                                    ha='center', color='blue',
+                                    visible=False)  # Initially invisible
+                        inflection_points_l.append(label_point_inflection)
+                        hover_annotations.append(label_point_inflection)
+                    def on_hover(event):
+                        if event.inaxes == ax:
+                            for i, point in enumerate(hover_points):
+                                cont, _ = point.contains(event)
+                                if cont:
+                                    hover_annotations[i].set_visible(True)
+                                else:
+                                    hover_annotations[i].set_visible(False)
+                            canvas.draw_idle()
+
+                    canvas.mpl_connect('motion_notify_event', on_hover)
 
                 # Оновлюємо лейбл з точками перегину / Update the label with inflection points
                 inflection_points_label.configure(text=f"9) Точки перегину: {formatted_points}")
                 func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Convert expression to function for calculations
 
-                x_vals = numpy.linspace(-10, 10, 400)  # Задаємо діапазон значень x / Set the range of x values
+                x_vals = numpy.linspace(-20, 20, 400)  # Задаємо діапазон значень x / Set the range of x values
                 y_vals = func(x_vals)  # Обчислюємо значення y / Calculate y values
 
                 plot_3 = ax.plot(x_vals, y_vals, label=f'y = 6*{a}x + 2 * {b}', color='blue')  # Побудова графіку другої похідної / Plotting the second derivative graph

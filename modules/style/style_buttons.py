@@ -138,3 +138,23 @@ seventh_func_button.configure(
     font=("Arrial", 15), # шрифт тексту кнопки / button text font
     command = build_seventh_func # команда для виконання при натисканні кнопки / command to execute on button press
 )
+
+button_plus.configure(
+    bg_color=frame_background, # фонова кольорова кнопка / button background color
+    text='+', # текст на кнопці / text on the button
+    fg_color=button_color, # колір кнопки / button color
+    text_color=text_button_color, # колір тексту кнопки / button text color
+    hover_color=button_hover_color, # колір кнопки при наведенні / button hover color
+    font=("Roboto Slab", 15), # шрифт тексту кнопки / button text font
+)
+button_minus.configure(
+    bg_color=frame_background, # фонова кольорова кнопка / button background color
+    text='-', # текст на кнопці / text on the button
+    fg_color=button_color, # колір кнопки / button color
+    text_color=text_button_color, # колір тексту кнопки / button text color
+    hover_color=button_hover_color, # колір кнопки при наведенні / button hover color
+    font=("Roboto Slab", 15), # шрифт тексту кнопки / button text font
+)
+
+button_plus.configure(command=lambda: zoom(key='+'))
+button_minus.configure(command=lambda: zoom(key='-'))

@@ -438,9 +438,9 @@ def first_fn_on():
     # розміщуємо на main input для коєфіцієнта b / placing on main input for coefficient b
     b_1.place(x = 104, y = 173)
     # розміщуємо на main input для коєфіцієнта c / placing on main input for coefficient c
-    c_1.place(x = 171, y = 173)
+    c_1.place(x = 174, y = 173)
     # розміщуємо на main input для коєфіцієнта d / placing on main input for coefficient d
-    d_1.place(x = 231, y = 173)
+    d_1.place(x = 234, y = 173)
 
     # розміщуємо на main input для коєфіцієнта a / placing on main input for coefficient a
     a_2.place(x = 55, y = 223)
@@ -591,8 +591,8 @@ def sixth_fn_on():
     sixth_first_func_up_label.place(x = 122, y = 149)
 
 
-    a1_sixth.place(x = 51, y = 150)
-    a2_sixth.place(x = 132, y = 191)
+    a1_sixth.place(x = 46, y = 150)
+    a2_sixth.place(x = 129, y = 194)
     # закриваємо вікно з функціями / closing the window with functions
     # window_with_fun.destroy()
    

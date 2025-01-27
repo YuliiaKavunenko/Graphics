@@ -25,7 +25,14 @@ def fourth_first_dev():
 
             # Визначення функції та її похідної / Define the function and its derivative
             function = x/(x**2 + a)  # Основна функція / The main function
+            
             dev_of_function = sympy.diff(function, x)  # Обчислення похідної функції / Calculate the derivative of the function
+            rounded_derivative = dev_of_function  
+            for atom in dev_of_function.atoms():
+                # Если атом является числом с плавающей точкой
+                if atom.is_Float:
+                    # Заменяем его на округлённое значение
+                    rounded_derivative = rounded_derivative.xreplace({atom: round(atom, 2)})
             if isinstance(dev_of_function, sympy.Number):  # Якщо вираз є числом / If the expression is a number
                 plot_constant_function(float(dev_of_function), 'green')  # Побудова графіка для константи / Plotting the graph for the constant
             else:
@@ -40,31 +47,52 @@ def fourth_first_dev():
                 interval_label.configure(text=f'3) {interval_text}')
 
                 # Формування тексту для локальних максимумів і мінімумів / Form text for local maxima and minima
-                if intervals_data['локальний максимум'] != "не існує":  # Перевірка наявності локальних максимумів / Check for local maxima
+                hover_points = []
+                hover_annotations = []
+
+                if intervals_data['локальний максимум'] != "не існує":
                     local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
                     local_max = intervals_data['локальний максимум'][0]
                     l_max_x, l_max_y = local_max
-                    local_max_fourth_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40)  # Додавання точок локального максимуму / Adding local maximum points
+                    local_max_fourth_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)
+                    hover_points.append(local_max_fourth_first)
                     local_max_text_fourth_first = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
-                                                        (l_max_x, l_max_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
+                                                            (l_max_x, l_max_y),
+                                                            textcoords="offset points",
+                                                            xytext=(0, -15),
+                                                            ha='center',
+                                                            visible=False)
+                    hover_annotations.append(local_max_text_fourth_first)
                 else:
-                    local_max_text = "Локальний максимум: не існує"  # Якщо максимумів немає / If no maxima exist
+                    local_max_text = "Локальний максимум: не існує"  # Якщо мінімумів немає / If no minima exist
 
-                if intervals_data['локальний мінімум'] != "не існує":  # Перевірка наявності локальних мінімумів / Check for local minima
+                if intervals_data['локальний мінімум'] != "не існує":
                     local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
                     local_min = intervals_data['локальний мінімум'][0]
                     l_min_x, l_min_y = local_min
-                    local_min_fourth_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40)  # Додавання точок локального мінімуму / Adding local minimum points
+                    local_min_fourth_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)
+                    hover_points.append(local_min_fourth_first)
                     local_min_text_fourth_first = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
-                                                        (l_min_x, l_min_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # Додавання тексту для точок локального мінімуму / Adding text for local minimum points
+                                                            (l_min_x, l_min_y),
+                                                            textcoords="offset points",
+                                                            xytext=(0, -15),
+                                                            ha='center',
+                                                            visible=False)
+                    hover_annotations.append(local_min_text_fourth_first)
                 else:
                     local_min_text = "Локальний мінімум: не існує"  # Якщо мінімумів немає / If no minima exist
+                def on_hover(event):
+                    if event.inaxes == ax:
+                        for i, point in enumerate(hover_points):
+                            cont, _ = point.contains(event)
+                            if cont:
+                                hover_annotations[i].set_visible(True)
+                            else:
+                                hover_annotations[i].set_visible(False)
+                        canvas.draw_idle()
+
+                canvas.mpl_connect('motion_notify_event', on_hover)
+            
 
                 # макс значення функції / max function value
                 if isinstance(intervals_data['макс. значення ф-ції'], tuple):  # Перевірка, чи значення є кортежем / Checking if value is a tuple
@@ -87,18 +115,17 @@ def fourth_first_dev():
                 zn_function_label.configure(text=zn_function_text)
 
                 # Оновлення тексту похідної функції / Update the derivative function text
-                drob_first_dev_lable.configure(text=f"y' = {dev_of_function}")
-                print(dev_of_function)  # Вивід похідної у консоль / Print the derivative in the console
+                drob_first_dev_lable.configure(text=f"y' = {rounded_derivative}")
 
                 # Лямбда-функція для розрахунку похідної / Lambda function to calculate the derivative
                 expr = dev_of_function
                 func = sympy.lambdify(x, expr, 'numpy')  # Конвертація у числову функцію / Convert to a numerical function
 
                 # Побудова графіку похідної / Plot the derivative graph
-                x_vals = numpy.linspace(-10, 10, 400)  # Генерація x-значень / Generate x-values
+                x_vals = numpy.linspace(-20, 20, 400)  # Генерація x-значень / Generate x-values
                 y_vals = func(x_vals)  # Обчислення y-значень похідної / Calculate y-values for the derivative
 
-                plot_fourth_first = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')
+                plot_fourth_first = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')
 
                 # Пошук точок перетину з віссю Ox / Find intersection points with the x-axis
                 points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)
@@ -111,7 +138,7 @@ def fourth_first_dev():
                 legend = ax.legend()
 
                 fourth_f_dev_label.configure(
-                    text = f"y' = {dev_of_function}"  # Оновлюємо текст ярлика з похідною функцією / Updating the label text with the derivative function
+                    text = f"y' = {rounded_derivative}"  # Оновлюємо текст ярлика з похідною функцією / Updating the label text with the derivative function
                 )
 
                 # Зміна кольору тексту легенди на червоний / Changing the legend text color to red

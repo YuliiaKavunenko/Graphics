@@ -55,7 +55,7 @@ def build_drob_graphic():
             expr = 1*x
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Converting the expression to a function for calculations
 
-            x_vals = numpy.linspace(-10, 10, 400)  # Визначення діапазону значень x / Defining the range of x values
+            x_vals = numpy.linspace(-20, 20, 400)  # Визначення діапазону значень x / Defining the range of x values
             y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
             plot = ax.plot(x_vals, y_vals, label = 'y = (x**2 - 0) / (x - 0)', color='red')
             legend = ax.legend()

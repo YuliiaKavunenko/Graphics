@@ -24,8 +24,12 @@ def sixth_second_dev():
             function = (a1/x**2) + (x/a2) # Визначення виразу функції / Defining the function expression
             dev_of_function = sympy.diff(function, x)  # Обчислення першої похідної функції / Calculating the first derivative of the function
             second_dev_of_function = sympy.diff(dev_of_function, x)  # Обчислення другої похідної функції / Calculating the second derivative of the function
+            rounded_derivative = second_dev_of_function  
+            for number in second_dev_of_function.atoms():
+                if number.is_Float:
+                    rounded_derivative = rounded_derivative.xreplace({number: round(number, 2)})
 
-            sixth_s_dev_label.configure(text=f"y'' = {second_dev_of_function}")  # Оновлення тексту для другої похідної / Updating the text for the second derivative
+            sixth_s_dev_label.configure(text=f"y'' = {rounded_derivative}")  # Оновлення тексту для другої похідної / Updating the text for the second derivative
 
             expr = second_dev_of_function  # Встановлення виразу для другої похідної / Setting the expression for the second derivative
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу другої похідної у функцію для обчислень / Converting the second derivative expression to a function for calculations
@@ -34,18 +38,34 @@ def sixth_second_dev():
             else:
                 # пошук і побудова точок перегину / Finding and plotting inflection points
                 inflection_points = find_inflection_points(second_dev_of_function)  # Пошук точок перегину / Finding inflection points
-                for point in inflection_points:
-                    if sympy.im(point) == 0:  # Тільки дійсні точки
-                        y_val = function.subs(x, point)
-                        scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=6)
-                        inflection_points_scatter_6.append(scatter)
+                hover_points = []
+                hover_annotations = []
 
-                        inflection_label_6 = ax.annotate(f'({float(point):.2f}, {float(y_val):.2f})',
+                for point in inflection_points:
+                    if sympy.im(point) == 0:
+                        y_val = function.subs(x, point)
+                        scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=6, picker=5)
+                        inflection_points_scatter_6.append(scatter)
+                        hover_points.append(scatter)
+
+                        annotation = ax.annotate(f'({float(point):.2f}, {float(y_val):.2f})',
                                     (float(point), float(y_val)),
                                     textcoords="offset points",
-                                    xytext=(0, 10),
-                                    ha='center', color='blue')
-                        inflection_points_label_6.append(inflection_label_6)
+                                    xytext=(0, -15),
+                                    ha='center', color='blue',
+                                    visible=False)
+                        hover_annotations.append(annotation)
+                        inflection_points_label_6.append(annotation)
+                def on_hover(event):
+                    if event.inaxes == ax:
+                        for i, point in enumerate(hover_points):
+                            cont, _ = point.contains(event)
+                            if cont:
+                                hover_annotations[i].set_visible(True)
+                            else:
+                                hover_annotations[i].set_visible(False)
+                        canvas.draw_idle()
+                canvas.mpl_connect('motion_notify_event', on_hover)
 
                 # оновлення лейблу з точками перегину / Updating the label with inflection points
                 if inflection_points:
@@ -56,11 +76,11 @@ def sixth_second_dev():
                     inflection_points_label.configure(text="9) Точки перегину: не існує")  # Виведення повідомлення про відсутність точок перегину / Displaying message about the absence of inflection points
 
                 # Визначення діапазону значень x / Defining the range of x values
-                x_vals = numpy.linspace(-10, 10, 400)
+                x_vals = numpy.linspace(-20, 20, 400)
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку другої похідної функції / Plotting the second derivative function graph
-                plot_sixth_second = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')
+                plot_sixth_second = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')
                 # plots_2d.append(plot_3_2)  # Додавання графіку до списку графіків / Adding the plot to the list of plots
 
                 # побудова точок 0х і пунктирних ліній / Plotting 0x points and dashed lines

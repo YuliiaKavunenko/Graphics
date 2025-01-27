@@ -1,6 +1,7 @@
 import sympy, numpy
 from ..main_elements import *
 from ..error_window import show_error_window
+
 from ..data_calculation import (
     scope_of_function, 
     format_intervals, 
@@ -123,7 +124,7 @@ def build_graphic_1():
             func1 = sympy.lambdify(x, expr, 'numpy') # перетворюємо функцію у форму, придатну для числових обчислень / convert the function to a form suitable for numerical calculations
             # list_functions.append(func1)
             dictionary_of_variables['func1'] = func1
-            x_vals = numpy.linspace(-10, 10, 400)  # створюємо значення x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
+            x_vals = numpy.linspace(-20, 20, 400)  # створюємо значення x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
             y_vals = func1(x_vals)  # обчислюємо значення y для функції / calculating the y values for the function
 
             plot = ax.plot(x_vals, y_vals, label=f'y = {a}x^3 + {b}x^2 + {c}x + {d}', color='red')  # будуємо графік функції / plotting the function

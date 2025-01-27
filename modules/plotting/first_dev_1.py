@@ -46,7 +46,7 @@ def check_first_dev():
                 plot_2 = plot_constant_function(float(expr), 'green')  # будуємо графік для константної похідної / plotting the constant derivative
             else:
                 func = sympy.lambdify(x, expr, 'numpy')  # перетворюємо похідну у форму, придатну для числових обчислень / converting the derivative to a form suitable for numerical calculations
-                x_vals = numpy.linspace(-10, 10, 400)  # створюємо значення x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
+                x_vals = numpy.linspace(-20, 20, 400)  # створюємо значення x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
                 y_vals = func(x_vals)  # обчислюємо значення y для похідної / calculating the y values for the derivative
                 plot_2 = ax.plot(x_vals, y_vals, label = f'y = 3*{a}x^2 + 2*{b}x + {c}', color='green')  # будуємо графік першої похідної / plotting the first derivative
                 plot2.append(plot_2)
@@ -66,29 +66,53 @@ def check_first_dev():
             ox_points_first = points_0x_0y['0x']  # зберігаємо точки перетину з Ox / storing intersection points with Ox
             h_lines_first = points_0x_0y['lines']  # зберігаємо пунктирні лінії / storing dashed lines
 
-            # Додавання нових точок / Adding new points
-            if len(intervals_data['локальний максимум']) != 0:  # якщо є локальні максимуми / if there are local maxima
+            hover_points = []
+            hover_annotations = []
+
+            # Формування тексту для локальних максимумів і мінімумів / Form text for local maxima and minima
+            if intervals_data['локальний максимум'] != "не існує":  # Перевірка наявності локальних максимумів / Check for local maxima
+                local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
                 local_max = intervals_data['локальний максимум'][0]
-                if len(local_max) == 2:
-                    l_max_x, l_max_y = local_max
-                    local_max_scatter = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40)  # додаємо точки локального максимуму / adding local maximum points
-                    local_max_scatter_text = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
-                                                        (l_max_x, l_max_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # додаємо текст для точок локального максимуму / adding text for local maximum points
+                l_max_x, l_max_y = local_max
+                local_max_seventh_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)  # Додавання точок локального максимуму / Adding local maximum points
+                hover_points.append(local_max_seventh_first)
+                local_max_text_seventh_first = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
+                                                    (l_max_x, l_max_y),
+                                                    textcoords="offset points",
+                                                    xytext=(0, -15),
+                                                    ha='center',
+                                                    visible=False)  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
+                hover_annotations.append(local_max_text_seventh_first)
+            else:
+                local_max_text = "Локальний максимум: не існує"  # Якщо максимумів немає / If no maxima exist
 
-            if len(intervals_data['локальний мінімум']) != 0:  # якщо є локальні мінімуми / if there are local minima
+            if intervals_data['локальний мінімум'] != "не існує":  # Перевірка наявності локальних мінімумів / Check for local minima
+                local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
                 local_min = intervals_data['локальний мінімум'][0]
-                if len(local_min) == 2:
-                    l_min_x, l_min_y = local_min
-                    local_min_scatter = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40)  # додаємо точки локального мінімуму / adding local minimum points
-                    local_min_scatter_text = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
-                                                        (l_min_x, l_min_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # додаємо текст для точок локального мінімуму / adding text for local minimum points
+                l_min_x, l_min_y = local_min
+                local_min_seventh_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)  # Додавання точок локального мінімуму / Adding local minimum points
+                hover_points.append(local_min_seventh_first)
+                local_min_text_seventh_first = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
+                                                    (l_min_x, l_min_y),
+                                                    textcoords="offset points",
+                                                    xytext=(0, -15),
+                                                    ha='center',
+                                                    visible=False)  # Додавання тексту для точок локального мінімуму / Adding text for local minimum points
+                hover_annotations.append(local_min_text_seventh_first)
+            else:
+                local_min_text = "Локальний мінімум: не існує"  # Якщо мінімумів немає / If no minima exist
 
+            def on_hover(event):
+                if event.inaxes == ax:
+                    for i, point in enumerate(hover_points):
+                        cont, _ = point.contains(event)
+                        if cont:
+                            hover_annotations[i].set_visible(True)
+                        else:
+                            hover_annotations[i].set_visible(False)
+                    canvas.draw_idle()
+
+            canvas.mpl_connect('motion_notify_event', on_hover)
             if len(intervals_data['інтервали']) != 0:  # Перевірка наявності інтервалів зростання/спадання / Checking for growth/decay intervals
                 interval_text = "\n".join([f"({str(left)[0:5]}; {str(right)[0:5]}) {state}" for left, right, state in intervals_data['інтервали']])
             else:

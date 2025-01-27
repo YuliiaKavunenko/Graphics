@@ -27,36 +27,59 @@ def fourth_second_dev():
             dev_of_function = sympy.diff(function, x)  # Визначення першої похідної функції / Finding the first derivative of the function
 
             second_dev_of_function = sympy.diff(dev_of_function, x)  # Визначення другої похідної функції / Finding the second derivative of the function
+            rounded_derivative = second_dev_of_function  
+            for atom in second_dev_of_function.atoms():
+                # Если атом является числом с плавающей точкой
+                if atom.is_Float:
+                    # Заменяем его на округлённое значение
+                    rounded_derivative = rounded_derivative.xreplace({atom: round(atom, 2)})
+            drob_second_dev_lable.configure(text = f"y'' = {rounded_derivative}")  # Оновлення тексту лейблу з другою похідною / Updating the label text with the second derivative
 
-            drob_second_dev_lable.configure(text = f"y'' = {second_dev_of_function}")  # Оновлення тексту лейблу з другою похідною / Updating the label text with the second derivative
-
-            expr = second_dev_of_function  # Присвоєння виразу другої похідної змінній / Assigning the second derivative expression to a variable
+            expr = rounded_derivative  # Присвоєння виразу другої похідної змінній / Assigning the rounded second derivative expression to a variable
             
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислення значень / Converting the expression to a function for computing values
             if isinstance(func, sympy.Number):  # Якщо вираз є числом / If the expression is a number
                 plot_3 = plot_constant_function(float(func), 'blue')  # Побудова графіка для константи / Plotting the graph for the constant function
             else:
-                x_vals = numpy.linspace(-10, 10, 400)  # Генерація значень x від -10 до 10 / Generating x values from -10 to 10
+                x_vals = numpy.linspace(-20, 20, 400)  # Генерація значень x від -10 до 10 / Generating x values from -10 to 10
                 y_vals = func(x_vals)  # Обчислення значень функції для заданих x / Computing function values for given x
 
-                plot_fourth_second = ax.plot(x_vals, y_vals, label=f"y'' = {second_dev_of_function}", color='blue')  # Побудова нового графіка другої похідної / Plotting the new second derivative graph
+                plot_fourth_second = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')  # Побудова нового графіка другої похідної / Plotting the new second derivative graph
                 # plots.append(plot)
                 
                 # Пошук точок перегину / Finding inflection points
                 inflection_points = find_inflection_points(second_dev_of_function)  # Виклик функції для пошуку точок перегину / Calling the function to find inflection points
+                hover_points = []
+                hover_annotations = []
+
                 for point in inflection_points:
-                    y_val = function.subs(x, point)  # Обчислення значення функції у точці перегину / Computing the function value at the inflection point
-                    scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5)  # Відмічення точки перегину на графіку / Marking the inflection point on the graph
-                    inflection_points_fourth_scatter.append(scatter)  # Додавання точки перегину до списку / Adding the inflection point to the list
-                    label_point_inflection_3 = ax.annotate(
+                    y_val = function.subs(x, point)
+                    scatter = ax.scatter(float(point), float(y_val), color='blue', zorder=5, picker=5)
+                    inflection_points_fourth_scatter.append(scatter)
+                    hover_points.append(scatter)
+
+                    annotation = ax.annotate(
                         f'({float(point):.2f}, {float(y_val):.2f})',
                         (float(point), float(y_val)),
                         textcoords="offset points",
-                        xytext=(0, 10),
+                        xytext=(0, -15),
                         ha='center',
-                        color='blue'
-                    )  # Додавання текстової анотації до точки перегину / Adding a text annotation to the inflection point
-                    inflection_points_l_3.append(label_point_inflection_3)  # Додавання анотації до списку / Adding the annotation to the list
+                        color='blue',
+                        visible=False
+                    )
+                    hover_annotations.append(annotation)
+                    inflection_points_l_3.append(annotation)
+                def on_hover(event):
+                    if event.inaxes == ax:
+                        for i, point in enumerate(hover_points):
+                            cont, _ = point.contains(event)
+                            if cont:
+                                hover_annotations[i].set_visible(True)
+                            else:
+                                hover_annotations[i].set_visible(False)
+                        canvas.draw_idle()
+
+                canvas.mpl_connect('motion_notify_event', on_hover)
 
                 # Пошук точок перетину з віссю Ox / Finding points of intersection with the Ox axis
                 points_0x_0y = points_ox_oy(second_dev_of_function, 'blue', label=False, lines=True, include_oy=False)  # Виклик функції для пошуку точок перетину та горизонтальних ліній / Calling the function to find points of intersection and horizontal lines
@@ -87,7 +110,7 @@ def fourth_second_dev():
                 legend = ax.legend()
 
                 fourth_s_dev_label.configure(
-                    text = f"y'' = {second_dev_of_function}"  # Оновлення тексту лейблу з другою похідною / Updating the label text with the second derivative
+                    text = f"y'' = {rounded_derivative}"  # Оновлення тексту лейблу з другою похідною / Updating the label text with the second derivative
                 )
 
                 # Зміна кольору тексту легенди на червоний / Changing the legend text color to red

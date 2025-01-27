@@ -52,7 +52,7 @@ def build_third_func():
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Converting the expression to a function for calculations
 
             # Визначення діапазону значень x / Defining the range of x values
-            x_vals = numpy.linspace(-10, 10, 400)
+            x_vals = numpy.linspace(-20, 20, 400)
             y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
             # Побудова графіку функції / Plotting the function graph

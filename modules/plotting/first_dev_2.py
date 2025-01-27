@@ -26,6 +26,13 @@ def drob_first_dev():
             b_data_3 = float(b_data_3)  # Перетворення b у число з плаваючою крапкою / Converting b to a float
             function = (x**2 - a) / (x - b_data_3)  # Визначення виразу функції / Defining the function expression
             dev_of_function = sympy.diff(function, x)  # Обчислення першої похідної функції / Calculating the first derivative of the function
+            rounded_derivative = dev_of_function  
+            for atom in dev_of_function.atoms():
+                # Если атом является числом с плавающей точкой
+                if atom.is_Float:
+                    # Заменяем его на округлённое значение
+                    rounded_derivative = rounded_derivative.xreplace({atom: round(atom, 2)})
+
             if isinstance(dev_of_function, sympy.Number):  # Якщо вираз є числом / If the expression is a number
                 plot_constant_function(float(dev_of_function), 'green')  # Побудова графіка для константи / Plotting the graph for the constant
             else:
@@ -37,28 +44,48 @@ def drob_first_dev():
                 ox_points_first = points_0x_0y['0x']  # Точки 0х / Points on the x-axis
                 h_lines_first = points_0x_0y['lines']  # Пунктирні лінії / Dashed lines
 
-                # додавання нових точок локальних максимумів і мінімумів / Adding new local maxima and minima points
-                if intervals_data['локальний максимум'] != 'не існує':  # Перевірка наявності локальних максимумів / Checking for local maxima
+                hover_points = []
+                hover_annotations = []
+
+                if intervals_data['локальний максимум'] != 'не існує':
                     local_max = intervals_data['локальний максимум'][0]
                     l_max_x, l_max_y = local_max
-                    local_max_scatter_2 = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40)  # Додавання точок локального максимуму / Adding local maximum points
-                    local_max_scatter_text_2 = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
-                                                        (l_max_x, l_max_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # Додавання тексту для точок локального максимуму / Adding text for local maximum points
-                if intervals_data['локальний мінімум'] != "не існує":  # Перевірка наявності локальних мінімумів / Checking for local minima
+                    local_max_scatter_2 = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)
+                    hover_points.append(local_max_scatter_2)
+                    local_max_annotation = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
+                                                    (l_max_x, l_max_y),
+                                                    textcoords="offset points",
+                                                    xytext=(0, -15),
+                                                    ha='center',
+                                                    visible=False)
+                    hover_annotations.append(local_max_annotation)
+
+                if intervals_data['локальний мінімум'] != "не існує":
                     local_min = intervals_data['локальний мінімум'][0]
                     l_min_x, l_min_y = local_min
-                    local_min_scatter_2 = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40)  # Додавання точок локального мінімуму / Adding local minimum points
-                    local_min_scatter_text_2 = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
-                                                        (l_min_x, l_min_y),
-                                                        textcoords="offset points",
-                                                        xytext=(15, 15),
-                                                        ha='center')  # Додавання тексту для точок локального мінімуму / Adding text for local minimum points
+                    local_min_scatter_2 = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)
+                    hover_points.append(local_min_scatter_2)
+                    local_min_annotation = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
+                                                    (l_min_x, l_min_y),
+                                                    textcoords="offset points",
+                                                    xytext=(0, -15),
+                                                    ha='center',
+                                                    visible=False)
+                    hover_annotations.append(local_min_annotation)
 
+                def on_hover(event):
+                    if event.inaxes == ax:
+                        for i, point in enumerate(hover_points):
+                            cont, _ = point.contains(event)
+                            if cont:
+                                hover_annotations[i].set_visible(True)
+                            else:
+                                hover_annotations[i].set_visible(False)
+                        canvas.draw_idle()
+
+                canvas.mpl_connect('motion_notify_event', on_hover)
                 # оновлення тексту похідної / Updating the derivative text
-                drob_first_dev_lable.configure(text=f"y' = {dev_of_function}")
+                drob_first_dev_lable.configure(text=f"y' = {rounded_derivative}")
 
                 if len(intervals_data['інтервали']) != 0:  # Перевірка наявності інтервалів зростання/спадання / Checking for growth/decay intervals
                     interval_text = "\n".join([f"({str(left)[0:4]}; {str(right)[0:4]}) {state}" for left, right, state in intervals_data['інтервали']])
@@ -97,7 +124,7 @@ def drob_first_dev():
 
                 # Оновлення тексту похідної / Updating the derivative text
                 drob_first_dev_lable.configure(
-                    text=f"y' = {dev_of_function}",
+                    text=f"y' = {rounded_derivative}",
                 )
 
                 expr = dev_of_function  # Встановлення виразу для похідної / Setting the expression for the derivative
@@ -106,11 +133,11 @@ def drob_first_dev():
                 func = sympy.lambdify(x, expr, 'numpy')
 
                 # Визначення діапазону значень x / Defining the range of x values
-                x_vals = numpy.linspace(-10, 10, 400)
+                x_vals = numpy.linspace(-20, 20, 400)
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку похідної функції / Plotting the derivative function graph
-                plot_2_2 = ax.plot(x_vals, y_vals, label=f"y' = {dev_of_function}", color='green')
+                plot_2_2 = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')
                 plots_2d.append(plot_2_2)  # Додавання графіку до списку графіків / Adding the plot to the list of plots
 
                 ax.legend()  # Виведення легенди на графіку / Displaying the legend on the graph

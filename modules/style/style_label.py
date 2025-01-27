@@ -181,7 +181,7 @@ third_func_l.configure(
 )
 # задаємо стиль для відображення чисельника функції / setting the style for the label displaying the numerator of the function
 third_func_up_label.configure(
-    text = 'x² -          ²', # текст на лейблі / label text
+    text = 'x² -           ²', # текст на лейблі / label text
     font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
     text_color = text_color, # колір тексту лейблу / label text color
     bg_color = frame_background, # колір фону лейблу / label background color
@@ -225,9 +225,9 @@ third_s_dev_label.configure(
     wraplength = 327 # задаємо максимальну ширину тексту до переносу / setting the maximum text width before wrapping
 )
 # лейблу для відображення кольорів графіку / setting the style for the labels displaying the graph colors
-# для базових або введенних користувачем функцій - фіолетовий / for basic or user-defined functions - purple
-purple_gr.configure(
-    text_color = 'purple', # колір тексту лейблу / label text color
+# для базових або введенних користувачем функцій - фіолетовий / for basic or user-defined functions - orange
+orange_gr.configure(
+    text_color = 'orange', # колір тексту лейблу / label text color
     font = ("Roboto Slab", 15), # шрифт тексту лейблу / label text font
     bg_color = frame_background # колір фону лейблу / label background color
 )

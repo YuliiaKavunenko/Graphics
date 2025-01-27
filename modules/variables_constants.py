@@ -117,5 +117,9 @@ dictionary_of_variables = {
     'h_lines_second_7' : [],    
     'plot_seventh_second' : [], 
     'inflection_points_scatter_7' : [], 
-    'inflection_points_label_7' : [],   
+    'inflection_points_label_7' : [],  
+
+    'panning': False,
+    'start_x': 0,
+    'start_y': 0,
 }

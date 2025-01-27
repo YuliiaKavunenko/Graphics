@@ -15,14 +15,14 @@ y_1 = ctk.CTkLabel(
     master = frame_first,
     width = 285,
     height = 40,
-    text = 'y =          х³ +          x² +          x +'
+    text = 'y =           х³ +          x² +          x +  '
 )
 # створення лейблу на головному вікні для y' похідної першого нашого графіку функції / creating a label on the main window for the y' derivative of our first function graph
 y_2 = ctk.CTkLabel(
     master = frame_first,
     width = 325,
     height = 40,
-    text = "y’ = 3*          x² + 2*          x +"
+    text = "y' = 3*          x² + 2*          x +"
 )
 # створення лейблу на головному вікні для y'' похідної першого нашого графіку функції / creating a label on the main window for the y'' derivative of our first function graph
 y_3 = ctk.CTkLabel(
@@ -165,8 +165,8 @@ third_s_dev_label = ctk.CTkLabel(
     height = 40
 )
 # створення лейблів для позначення кольору функції / creating labels for denoting the color of the function
-# базові функції або свого введення - фіолетовий / basic functions or custom input - purple
-purple_gr = ctk.CTkLabel(
+# базові функції або свого введення - фіолетовий / basic functions or custom input - orange
+orange_gr = ctk.CTkLabel(
     master = frame_first,
     height = 40,
     width = 22,

@@ -97,13 +97,16 @@ def run_main():
     slope_asymptote.place(x = 400, y = 370)
 
     # Label для виводу кольору побудови базових функцій / Label to display the color of basic function construction
-    purple_gr.place(x = 5, y = 10)
+    orange_gr.place(x = 5, y = 10)
 
     # Виконуємо побудову ДСК / Perform DSK construction
     build_DSK()
     
     canvas.get_tk_widget().place(x=10, y=10, width=830, height=955)  # Редагування холста / Edit canvas
     canvas.get_tk_widget().configure(bg='#FAF0E6') # Встановлюємо фон для ДСК / Set background for DSK
+
+    button_plus.place(x = 625, y = 15)
+    button_minus.place(x = 580, y = 15)
     # запускаємо додаток у роботу / start the application
     main.protocol("WM_DELETE_WINDOW", on_close)
     main.deiconify()
