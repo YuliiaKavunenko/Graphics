@@ -118,7 +118,6 @@ def drob_second_dev():
                 dictionary_of_variables['h_lines_second'] = h_lines_second  # Збереження пунктирних ліній / Storing dashed lines
                 dictionary_of_variables['plot_3_2'] = plot_3_2  # Збереження графіку другої похідної / Storing the second derivative graph
                 dictionary_of_variables['inflection_points_scatter'] = inflection_points_scatter  # Збереження точок перегину / Storing inflection points
-                dictionary_of_variables['inflection_points_label'] = inflection_points_label  # Збереження лейблу з точками перегину / Storing the label with inflection points
 
                 # except Exception as e:
                 #     print(f"Помилка другої дробової похідної: {e}")  # Виведення повідомлення про помилку другої дробової похідної / Displaying message about the second fractional derivative error

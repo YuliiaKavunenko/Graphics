@@ -13,10 +13,7 @@ def sixth_first_dev():
     ox_points_sixth_first = dictionary_of_variables['ox_points_sixth_first']
     h_lines_sixth_first = dictionary_of_variables['h_lines_sixth_first']
     local_max_sixth_first = dictionary_of_variables['local_max_sixth_first']
-    local_max_text_sixth_first = dictionary_of_variables['local_max_text_sixth_first']
-    local_min_sixth_first = dictionary_of_variables['local_min_sixth_first']
-    local_min_text_sixth_first = dictionary_of_variables['local_min_text_sixth_first']
-    
+    local_min_sixth_first = dictionary_of_variables['local_min_sixth_first']    
     if check == 1:  # Якщо чекбокс ввімкнено / If the checkbox is enabled
 
         # Отримання значення змінної "a" для четвертої похідної / Retrieve the value of variable "a" for the sixth derivative
@@ -154,9 +151,7 @@ def sixth_first_dev():
                 dictionary_of_variables['ox_points_sixth_first'] = ox_points_sixth_first
                 dictionary_of_variables['h_lines_sixth_first'] = h_lines_sixth_first
                 dictionary_of_variables['local_max_sixth_first'] = local_max_sixth_first
-                dictionary_of_variables['local_max_text_sixth_first'] = local_max_text_sixth_first
                 dictionary_of_variables['local_min_sixth_first'] = local_min_sixth_first
-                dictionary_of_variables['local_min_text_sixth_first'] = local_min_text_sixth_first
 
                 # Приклад обробки винятків при знаходженні першої дробової похідної / Example of exception handling in finding the first fractional derivative
                 # except Exception as e:
@@ -183,20 +178,14 @@ def sixth_first_dev():
             for line in h_lines_sixth_first:
                 line.remove()  # Видалення кожної лінії / Removing each line
             h_lines_sixth_first.clear()  # Очищення списку ліній / Clearing the list of lines
-        # if local_max_sixth_first:
         try:
             local_max_sixth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
-            local_max_text_sixth_first.remove()  # Видалення текстової анотації локального максимуму / Removing the text annotation of local maximum
             local_max_sixth_first = None
-            local_max_text_sixth_first = None
         except:
             print('none local max')
-        # if local_min_sixth_first:
         try:
             local_min_sixth_first.remove()  # Видалення локального мінімуму з графіка / Removing local minimum from the graph
-            local_min_text_sixth_first.remove()  # Видалення текстової анотації локального мінімуму / Removing the text annotation of local minimum
             local_min_sixth_first = None
-            local_min_text_sixth_first = None
         except:
             print('none local min')
 

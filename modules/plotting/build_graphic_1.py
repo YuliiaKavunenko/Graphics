@@ -130,12 +130,6 @@ def build_graphic_1():
             plot = ax.plot(x_vals, y_vals, label=f'y = {a}x^3 + {b}x^2 + {c}x + {d}', color='red')  # будуємо графік функції / plotting the function
             dictionary_of_variables['plots'].append(plot)  # додаємо графік до списку / adding the plot to the list
 
-            # додаємо легенду / adding the legend
-            legend = ax.legend()
-            for text in legend.get_texts():
-                text.set_color('red')  # встановлюємо червоний колір тексту легенди / setting the legend text color to red
-            canvas.draw()  # перерисовуємо холст / redrawing the canvas
-
             # замінюємо значення для похідних / replacing values for derivatives
             a_2.insert(0,f"{int(a)}")
             b_2.insert(0,f"{int(b)}")
@@ -200,5 +194,11 @@ def build_graphic_1():
             punctured_asymptots_text = punctured_dots(expr)  # перевіряємо наявність точок розриву у функції / check for punctured points in the function
 
             plot_horizontal_asymptotes(expr = expr)
+
+            # додаємо легенду / adding the legend
+            legend = ax.legend()
+            for text in legend.get_texts():
+                text.set_color('red')  # встановлюємо червоний колір тексту легенди / setting the legend text color to red
+            canvas.draw()  # перерисовуємо холст / redrawing the canvas
     else:
         show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')

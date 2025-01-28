@@ -88,13 +88,6 @@ def build_fifth_func():
                         plot, = ax.plot(x_vals, y_vals, label=f'y = (х²+{a1})/(х²-{a2})', color='red')  # Побудова графіка функції / Plotting the function graph
                         plots.append(plot)  # Додавання графіка до списку / Adding the plot to the list
 
-                        ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
-                        legend = ax.legend()
-                        for text in legend.get_texts():
-                            
-                            text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
-                        canvas.draw()  # Оновлення графіка / Redrawing the canvas
-
                         domain = scope_of_function(expr)  # Обчислення області визначення функції / Calculating the domain of the function
                         domain_text = f"1) D(y) = {format_intervals(domain)}"  # Форматування тексту області визначення / Formatting the domain text
                         scope_label.configure(text=domain_text)  # Налаштування тексту мітки для області визначення / Setting the text for the domain label
@@ -157,6 +150,13 @@ def build_fifth_func():
                         punctured_asymptots_text = punctured_dots(expr)  # перевіряємо наявність точок розриву у функції / check for punctured points in the function
 
                         plot_horizontal_asymptotes(expr = expr)
+                        ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
+                        legend = ax.legend()
+                        for text in legend.get_texts():
+                            
+                            text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
+                        canvas.draw()  # Оновлення графіка / Redrawing the canvas
+
                         # except Exception as e:
                         #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
                 else:

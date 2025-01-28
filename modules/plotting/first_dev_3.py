@@ -12,8 +12,6 @@ def third_first_dev():
     h_lines_third_first = dictionary_of_variables['h_lines_third_first']  # Отримання пунктирних ліній / Getting dashed lines
     local_max_third_first = dictionary_of_variables['local_max_third_first']  # Отримання точок локального максимуму / Getting local maximum points
     local_min_third_first = dictionary_of_variables['local_min_third_first']  # Отримання точок локального мінімуму / Getting local minimum points
-    local_max_text_third_first = dictionary_of_variables['local_max_text_third_first']  # Отримання тексту точок локального максимуму / Getting text of local maximum points
-    local_min_text_third_first = dictionary_of_variables['local_min_text_third_first']  # Отримання тексту точок локального мінімуму / Getting text of local minimum points
     
     if check == 1:  # Якщо чекбокс активований / If the checkbox is checked
         
@@ -143,8 +141,7 @@ def third_first_dev():
                 dictionary_of_variables['h_lines_third_first'] = h_lines_third_first  # Збереження пунктирних ліній / Saving dashed lines
                 dictionary_of_variables['local_max_third_first'] = local_max_third_first  # Збереження точок локального максимуму / Saving local maximum points
                 dictionary_of_variables['local_min_third_first'] = local_min_third_first  # Збереження точок локального мінімуму / Saving local minimum points
-                dictionary_of_variables['local_max_text_third_first'] = local_max_text_third_first  # Збереження тексту точок локального максимуму / Saving text of local maximum points
-                dictionary_of_variables['local_min_text_third_first'] = local_min_text_third_first  # Збереження тексту точок локального мінімуму / Saving text of local minimum points
+
                 # except Exception as e:
                 #     print(f"Помилка першої дробової похідної: {e}")  # Виведення повідомлення про помилку першої похідної / Displaying message about the first derivative error
 
@@ -167,19 +164,19 @@ def third_first_dev():
             for line in h_lines_third_first:
                 line.remove()  # Видалення горизонтальних ліній / Removing horizontal lines
             h_lines_third_first.clear()
-
-        # видалення локальних максимумів і мінімумів / Removing local maxima and minima
-        if local_max_third_first:
-            local_max_third_first.remove()  # Видалення точок локального максимуму / Removing local maximum points
-            local_max_text_third_first.remove()  # Видалення тексту точок локального максимуму / Removing local maximum points text
-            local_max_third_first = None
-            local_max_text_third_first = None
-
-        if local_min_third_first:
-            local_min_third_first.remove()  # Видалення точок локального мінімуму / Removing local minimum points
-            local_min_text_third_first.remove()  # Видалення тексту точок локального мінімуму / Removing local minimum points text
-            local_min_third_first = None
-            local_min_text_third_first = None
+        try:
+            # видалення локальних максимумів і мінімумів / Removing local maxima and minima
+            if local_max_third_first:
+                local_max_third_first.remove()  # Видалення точок локального максимуму / Removing local maximum points
+                local_max_third_first = None
+        except:
+            pass
+        try:
+            if local_min_third_first:
+                local_min_third_first.remove()  # Видалення точок локального мінімуму / Removing local minimum points
+                local_min_third_first = None
+        except:
+            pass
 
         ax.legend().remove()  # Видалення легенди / Removing the legend
         ax.legend()  # Оновлення легенди / Updating the legend

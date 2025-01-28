@@ -12,9 +12,8 @@ def fourth_first_dev():
     ox_points_fourth_first = dictionary_of_variables['ox_points_fourth_first']
     h_lines_fourth_first = dictionary_of_variables['h_lines_fourth_first']
     local_max_fourth_first = dictionary_of_variables['local_max_fourth_first']
-    local_max_text_fourth_first = dictionary_of_variables['local_max_text_fourth_first']
     local_min_fourth_first = dictionary_of_variables['local_min_fourth_first']
-    local_min_text_fourth_first = dictionary_of_variables['local_min_text_fourth_first']
+
     
     if check == 1:  # Якщо чекбокс ввімкнено / If the checkbox is enabled
 
@@ -181,18 +180,19 @@ def fourth_first_dev():
             for line in h_lines_fourth_first:
                 line.remove()  # Видалення кожної лінії / Removing each line
             h_lines_fourth_first.clear()  # Очищення списку ліній / Clearing the list of lines
+        try:
+            if local_max_fourth_first:
+                local_max_fourth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
+                local_max_fourth_first = None
+        except:
+            pass
 
-        if local_max_fourth_first:
-            local_max_fourth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
-            local_max_text_fourth_first.remove()  # Видалення текстової анотації локального максимуму / Removing the text annotation of local maximum
-            local_max_fourth_first = None
-            local_max_text_fourth_first = None
-
-        if local_min_fourth_first:
-            local_min_fourth_first.remove()  # Видалення локального мінімуму з графіка / Removing local minimum from the graph
-            local_min_text_fourth_first.remove()  # Видалення текстової анотації локального мінімуму / Removing the text annotation of local minimum
-            local_min_fourth_first = None
-            local_min_text_fourth_first = None
+        try:
+            if local_min_fourth_first:
+                local_min_fourth_first.remove()  # Видалення локального мінімуму з графіка / Removing local minimum from the graph
+                local_min_fourth_first = None
+        except:
+            pass
 
         ax.legend().remove()  # Видалення легенди / Removing the legend
         ax.legend()  # Оновлення легенди / Updating the legend

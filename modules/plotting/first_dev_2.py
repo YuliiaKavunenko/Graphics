@@ -13,8 +13,6 @@ def drob_first_dev():
     local_min_scatter_2 = dictionary_of_variables['local_min_scatter_2']
     ox_points_first = dictionary_of_variables['ox_points_first'] # Точки перетину з віссю x / Intersection points with the x-axis
     h_lines_first = dictionary_of_variables['h_lines_first']  # Пунктирні лінії / Dashed lines 
-    local_max_scatter_text_2 = dictionary_of_variables['local_max_scatter_text_2']
-    local_min_scatter_text_2 = dictionary_of_variables['local_min_scatter_text_2']
 
     if check == 1:  # Якщо чекбокс активований / If the checkbox is checked
 
@@ -154,8 +152,6 @@ def drob_first_dev():
                 dictionary_of_variables['plot_2_2'] = plot_2_2
                 dictionary_of_variables['local_max_scatter_2'] = local_max_scatter_2
                 dictionary_of_variables['local_min_scatter_2'] = local_min_scatter_2
-                dictionary_of_variables['local_max_scatter_text_2'] = local_max_scatter_text_2
-                dictionary_of_variables['local_min_scatter_text_2'] = local_min_scatter_text_2
                 dictionary_of_variables['ox_points_first'] = ox_points_first
                 dictionary_of_variables['h_lines_first'] = h_lines_first
 
@@ -174,13 +170,19 @@ def drob_first_dev():
         # plots_2d.remove(plot_2_2)
 
         # видалення локальних максимумів та мінімумів / Removing local maxima and minima
-        if local_max_scatter_2:
-            local_max_scatter_2.remove()  # Видалення точок локального максимуму / Removing local maximum points
-            local_max_scatter_2 = None
-
-        if local_min_scatter_2:
-            local_min_scatter_2.remove()  # Видалення точок локального мінімуму / Removing local minimum points
-            local_min_scatter_2 = None
+        print(local_max_scatter_2)
+        try:
+            if local_max_scatter_2:
+                local_max_scatter_2.remove()  # Видалення точок локального максимуму / Removing local maximum points
+                local_max_scatter_2 = None
+        except:
+            pass
+        try:
+            if local_min_scatter_2:
+                local_min_scatter_2.remove()  # Видалення точок локального мінімуму / Removing local minimum points
+                local_min_scatter_2 = None
+        except:
+            pass
 
         # видалення точок 0х та пунктирних ліній / Removing 0x points and dashed lines
         if ox_points_first:

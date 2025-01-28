@@ -13,9 +13,7 @@ def fifth_first_dev():
     ox_points_fifth_first = dictionary_of_variables['ox_points_fifth_first']
     h_lines_fifth_first = dictionary_of_variables['h_lines_fifth_first']
     local_max_fifth_first = dictionary_of_variables['local_max_fifth_first']
-    local_max_text_fifth_first = dictionary_of_variables['local_max_text_fifth_first']
     local_min_fifth_first = dictionary_of_variables['local_min_fifth_first']
-    local_min_text_fifth_first = dictionary_of_variables['local_min_text_fifth_first']
     
     if check == 1:  # Якщо чекбокс ввімкнено / If the checkbox is enabled
 
@@ -154,9 +152,7 @@ def fifth_first_dev():
                 dictionary_of_variables['ox_points_fifth_first'] = ox_points_fifth_first
                 dictionary_of_variables['h_lines_fifth_first'] = h_lines_fifth_first
                 dictionary_of_variables['local_max_fifth_first'] = local_max_fifth_first
-                dictionary_of_variables['local_max_text_fifth_first'] = local_max_text_fifth_first
                 dictionary_of_variables['local_min_fifth_first'] = local_min_fifth_first
-                dictionary_of_variables['local_min_text_fifth_first'] = local_min_text_fifth_first
 
                 # Приклад обробки винятків при знаходженні першої дробової похідної / Example of exception handling in finding the first fractional derivative
                 # except Exception as e:
@@ -185,20 +181,14 @@ def fifth_first_dev():
             h_lines_fifth_first.clear()  # Очищення списку ліній / Clearing the list of lines
 
         try:
-        # if local_max_fifth_first:
             local_max_fifth_first.remove()  # Видалення локального максимуму з графіка / Removing local maximum from the graph
-            local_max_text_fifth_first.remove()  # Видалення текстової анотації локального максимуму / Removing the text annotation of local maximum
             local_max_fifth_first = None
-            local_max_text_fifth_first = None
         except:
             print('none local max')
 
-        # if local_min_fifth_first:
         try:
             local_min_fifth_first.remove()  # Видалення локального мінімуму з графіка / Removing local minimum from the graph
-            local_min_text_fifth_first.remove()  # Видалення текстової анотації локального мінімуму / Removing the text annotation of local minimum
             local_min_fifth_first = None
-            local_min_text_fifth_first = None
         except:
             print('none local min')
 

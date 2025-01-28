@@ -10,9 +10,7 @@ def fourth_second_dev():
     plot_fourth_second = dictionary_of_variables['plot_fourth_second']  # Отримання графіку зі словника / Getting the plot from the dictionary
     inflection_points_fourth_scatter = dictionary_of_variables['inflection_points_fourth_scatter']  # Отримання точок перегину / Getting the inflection points
     ox_points_fourth_second = dictionary_of_variables['ox_points_fourth_second']  # Отримання точок перетину з віссю Ox / Getting the intersection points with the Ox axis
-    h_lines_fourth_second = dictionary_of_variables['h_lines_fourth_second']  # Отримання горизонтальних ліній / Getting the horizontal lines
-    inflection_points_l_3 = dictionary_of_variables['inflection_points_l_3']  # Отримання тексту для точок перегину / Getting text for inflection points
-    
+    h_lines_fourth_second = dictionary_of_variables['h_lines_fourth_second']  # Отримання горизонтальних ліній / Getting the horizontal lines    
 
     if check == 1:  # Якщо перемикач увімкнено / If toggle is on
         a = a4_drob.get()  # Отримання значення дробового коефіцієнта / Getting the fractional coefficient
@@ -124,7 +122,6 @@ def fourth_second_dev():
                 dictionary_of_variables['h_lines_fourth_second'] = h_lines_fourth_second  # Збереження горизонтальних ліній / Storing horizontal lines
                 dictionary_of_variables['plot_fourth_second'] = plot_fourth_second  # Збереження графіку другої похідної / Storing the second derivative graph
                 dictionary_of_variables['inflection_points_fourth_scatter'] = inflection_points_fourth_scatter  # Збереження точок перегину / Storing inflection points
-                dictionary_of_variables['inflection_points_l_3'] = inflection_points_l_3  # Збереження тексту для точок перегину / Storing text for inflection points
                 dictionary_of_variables['inflection_points_label'] = inflection_points_label  # Збереження лейблу з точками перегину / Storing the label with inflection points
     elif check == 0 and plot_fourth_second:
         # Видалення графіка / Removing the graph
@@ -139,11 +136,6 @@ def fourth_second_dev():
             for point in inflection_points_fourth_scatter:
                 point.remove()  # Видалення кожної точки перегину / Removing each inflection point
             inflection_points_fourth_scatter.clear()
-
-        # Видалення підпису точок / Removing point labels
-        for label in inflection_points_l_3:
-            label.remove()  # Видалення кожного підпису / Removing each label
-        inflection_points_l_3.clear()
 
         if ox_points_fourth_second:
             for point in ox_points_fourth_second:

@@ -12,8 +12,6 @@ def check_first_dev():
     plot2 = []
     local_max_scatter = dictionary_of_variables['local_max_scatter'] 
     local_min_scatter = dictionary_of_variables['local_min_scatter'] 
-    local_max_scatter_text = dictionary_of_variables['local_max_scatter_text'] 
-    local_min_scatter_text = dictionary_of_variables['local_min_scatter_text'] 
     ox_points_first = dictionary_of_variables['ox_points_first'] 
     h_lines_first = dictionary_of_variables['h_lines_first']
 
@@ -74,8 +72,8 @@ def check_first_dev():
                 local_max_text = "Локальний максимум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний максимум']])
                 local_max = intervals_data['локальний максимум'][0]
                 l_max_x, l_max_y = local_max
-                local_max_seventh_first = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)  # Додавання точок локального максимуму / Adding local maximum points
-                hover_points.append(local_max_seventh_first)
+                local_max_scatter = ax.scatter(l_max_x, l_max_y, color='#FF0899', s=40, picker=5)  # Додавання точок локального максимуму / Adding local maximum points
+                hover_points.append(local_max_scatter)
                 local_max_text_seventh_first = ax.annotate(f'({l_max_x:.2f}, {l_max_y:.2f})',
                                                     (l_max_x, l_max_y),
                                                     textcoords="offset points",
@@ -90,8 +88,8 @@ def check_first_dev():
                 local_min_text = "Локальний мінімум:\n" + "\n".join([f"x = {point:.2f}, y = {value:.2f}" for point, value in intervals_data['локальний мінімум']])
                 local_min = intervals_data['локальний мінімум'][0]
                 l_min_x, l_min_y = local_min
-                local_min_seventh_first = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)  # Додавання точок локального мінімуму / Adding local minimum points
-                hover_points.append(local_min_seventh_first)
+                local_min_scatter = ax.scatter(l_min_x, l_min_y, color='#FF0899', s=40, picker=5)  # Додавання точок локального мінімуму / Adding local minimum points
+                hover_points.append(local_min_scatter)
                 local_min_text_seventh_first = ax.annotate(f'({l_min_x:.2f}, {l_min_y:.2f})',
                                                     (l_min_x, l_min_y),
                                                     textcoords="offset points",
@@ -152,8 +150,6 @@ def check_first_dev():
             dictionary_of_variables['plot_2'] = plot_2
             dictionary_of_variables['local_max_scatter'] = local_max_scatter
             dictionary_of_variables['local_min_scatter'] = local_min_scatter
-            dictionary_of_variables['local_max_scatter_text'] = local_max_scatter_text
-            dictionary_of_variables['local_min_scatter_text'] = local_min_scatter_text
             dictionary_of_variables['ox_points_first'] = ox_points_first
             dictionary_of_variables['h_lines_first'] = h_lines_first
             dictionary_of_variables['plots'] = plots
@@ -170,15 +166,11 @@ def check_first_dev():
             canvas.draw()
         if local_max_scatter:
             local_max_scatter.remove()  # Видалення точок локальних максимумів / Removing local maxima points
-            local_max_scatter_text.remove()  # Видалення тексту локальних максимумів / Removing local maxima text
             local_max_scatter = None
-            local_max_scatter_text = None
 
         if local_min_scatter:
             local_min_scatter.remove()  # Видалення точок локальних мінімумів / Removing local minima points
-            local_min_scatter_text.remove()  # Видалення тексту локальних мінімумів / Removing local minima text
             local_min_scatter = None
-            local_min_scatter_text = None
 
         # видалення точок перетину і пунктирних ліній / removing intersection points and dashed lines
         if ox_points_first:

@@ -12,7 +12,6 @@ def fifth_second_dev():
     ox_points_second_5 = dictionary_of_variables['ox_points_second_5']  # Отримання точок перетину з віссю x / Getting the intersection points with the x-axis
     h_lines_second_5 = dictionary_of_variables['h_lines_second_5']  # Отримання пунктирних ліній / Getting the dashed lines
     inflection_points_scatter_5 = dictionary_of_variables['inflection_points_scatter_5']  # Отримання точок перегину / Getting the inflection points
-    inflection_points_label_5 = dictionary_of_variables['inflection_points_label_5']  # Отримання лейблу з точками перегину / Getting the label with inflection points
 
     if check == 1:  # Якщо чекбокс активований / If the checkbox is checked
         a1 = a1_function5.get()
@@ -59,7 +58,6 @@ def fifth_second_dev():
                                     ha='center', color='blue',
                                     visible=False)
                         hover_annotations.append(annotation)
-                        inflection_points_label_5.append(annotation)
                 def on_hover(event):
                     if event.inaxes == ax:
                         for i, point in enumerate(hover_points):
@@ -120,7 +118,6 @@ def fifth_second_dev():
                 dictionary_of_variables['h_lines_second_5'] = h_lines_second_5  # Збереження пунктирних ліній / Storing dashed lines
                 dictionary_of_variables['plot_fifth_second'] = plot_fifth_second  # Збереження графіку другої похідної / Storing the second derivative graph
                 dictionary_of_variables['inflection_points_scatter_5'] = inflection_points_scatter_5  # Збереження точок перегину / Storing inflection points
-                dictionary_of_variables['inflection_points_label_5'] = inflection_points_label_5  # Збереження лейблу з точками перегину / Storing the label with inflection points
 
                 # except Exception as e:
                 #     print(f"Помилка другої дробової похідної: {e}")  # Виведення повідомлення про помилку другої дробової похідної / Displaying message about the second fractional derivative error
@@ -139,10 +136,6 @@ def fifth_second_dev():
             for point in inflection_points_scatter_5:
                 point.remove()  # Видалення точок перегину / Removing inflection points
             inflection_points_scatter_5.clear()
-            
-        for label in inflection_points_label_5:
-            label.remove()  # Видалення кожного підпису / Removing each label
-        inflection_points_label_5.clear()
 
         if ox_points_second_5:
             for point in ox_points_second_5:

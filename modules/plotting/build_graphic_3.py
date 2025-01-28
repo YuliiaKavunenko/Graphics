@@ -59,12 +59,7 @@ def build_third_func():
             plot, = ax.plot(x_vals, y_vals, label=f'y = (х²-{a}²)/(х)', color='red')
             dictionary_of_variables['plots'].append(plot)  # Додавання графіку до списку / Adding the plot to the list
 
-            ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
-            legend = ax.legend()
-            for text in legend.get_texts():
-                
-                text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
-            canvas.draw()  # Оновлення графіка / Redrawing the canvas
+            
             if a == 0:
                 domain = "(-∞; 0) ∪ (0; ∞) " # Виключити x = 0
                 domain_text = f"1) D(y) = {domain}"
@@ -163,6 +158,13 @@ def build_third_func():
                 find_and_plot_slant_asymptote(expr, x, label_widget=slope_asymptote)
 
                 plot_horizontal_asymptotes(expr = expr)
+
+                ax.legend()  # Додавання легенди до графіка / Adding a legend to the graph
+                legend = ax.legend()
+                for text in legend.get_texts():
+                    
+                    text.set_color('red')  # Зміна кольору тексту легенди на червоний / Changing the legend text color to red
+                canvas.draw()  # Оновлення графіка / Redrawing the canvas
             # except Exception as e:
             #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
     else:

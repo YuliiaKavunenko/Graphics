@@ -123,8 +123,6 @@ def third_second_dev():
                 dictionary_of_variables['plot_third_second'] = plot_third_second  # Збереження графіку другої похідної / Storing the second derivative graph
                 dictionary_of_variables['inflection_points_third_scatter'] = inflection_points_third_scatter  # Збереження точок перегину / Storing inflection points
                 dictionary_of_variables['inflection_points_th'] = inflection_points_th  # Збереження підписів точок перегину / Storing inflection point labels
-                dictionary_of_variables['inflection_points_label'] = inflection_points_label  # Збереження лейблу з точками перегину / Storing the label with inflection points
-
     elif check == 0 and plot_third_second:  # Якщо чекбокс вимкнений і графік другої похідної існує / If the checkbox is unchecked and the second derivative plot exists
         # видалення графіка другої похідної / Removing the second derivative plot
         if plot_third_second:

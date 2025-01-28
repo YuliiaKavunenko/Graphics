@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 '''
 
 def plot_horizontal_asymptotes(expr, color='brown', linestyle='--'):
+    from ..main_elements import canvas
 
     # Символ змінної x / Symbol for the variable x
     x = sympy.symbols('x')
@@ -24,3 +25,5 @@ def plot_horizontal_asymptotes(expr, color='brown', linestyle='--'):
     # Plot horizontal asymptote as x -> -∞ if it exists
     if lim_neg_inf.is_real:
         plt.axhline(float(lim_neg_inf), color=color, linestyle=linestyle, label=f"Асимптота при x → -∞: y = {lim_neg_inf}")
+
+    canvas.draw()

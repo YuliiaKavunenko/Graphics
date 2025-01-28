@@ -16,7 +16,6 @@ def check_second_dev():
     h_lines_second = dictionary_of_variables['h_lines_second']  # Отримуємо пунктирні лінії / Get the dashed lines
 
     inflection_points_scatter = dictionary_of_variables['inflection_points_scatter'] # Список для точок перегину / List for inflection points
-    inflection_points_l = dictionary_of_variables['inflection_points_l'] # Список для підписів точок перегину / List for inflection points labels
     if check == 1:  # Якщо перевірка активна / If the check is active
         a = a_3.get()
         b = b_3.get()
@@ -60,7 +59,6 @@ def check_second_dev():
                                     xytext=(0, -15),
                                     ha='center', color='blue',
                                     visible=False)  # Initially invisible
-                        inflection_points_l.append(label_point_inflection)
                         hover_annotations.append(label_point_inflection)
                     def on_hover(event):
                         if event.inaxes == ax:
@@ -116,7 +114,6 @@ def check_second_dev():
                 dictionary_of_variables['ox_points_second'] = ox_points_second
                 dictionary_of_variables['h_lines_second'] = h_lines_second
                 dictionary_of_variables['inflection_points_scatter'] = inflection_points_scatter
-                dictionary_of_variables['inflection_points_l'] = inflection_points_l
 
                 # except Exception as e:
                 #     print(f"Помилка третьої похідної: {e}")  # Виведення повідомлення про помилку третьої похідної / Outputting message about third derivative error
@@ -146,12 +143,6 @@ def check_second_dev():
             for scatter in inflection_points_scatter:
                 scatter.remove()
             inflection_points_scatter.clear()
-
-        # Видалення тексту точки перегину / Removing inflection points text
-        if inflection_points_l:
-            for label in inflection_points_l:
-                label.remove()
-            inflection_points_l.clear()
             
         # Оновлення легенди / Updating the legend
         ax.legend().remove()
