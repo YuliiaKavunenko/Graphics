@@ -2,6 +2,7 @@ import sympy, numpy
 from ..main_elements import *
 from ..variables_constants import *
 from ..data_calculation import points_ox_oy, find_inflection_points, find_convexity_intervals
+from textwrap import wrap
 # функція для побудови і виконання дослідження похідної у'' другого графіку функції / Function for constructing and analyzing the second derivative of the second graph function
 def drob_second_dev():
     from .plot_constant_function import plot_constant_function
@@ -81,7 +82,9 @@ def drob_second_dev():
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку другої похідної функції / Plotting the second derivative function graph
-                plot_3_2, = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_3_2, = ax.plot(x_vals, y_vals, label=f"y'' = {wrapped_label}", color='blue')
                 plots_2d.append(plot_3_2)  # Додавання графіку до списку графіків / Adding the plot to the list of plots
 
                 # побудова точок 0х і пунктирних ліній / Plotting 0x points and dashed lines

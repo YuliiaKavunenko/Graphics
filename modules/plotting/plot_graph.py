@@ -9,7 +9,8 @@ from ..data_calculation import (
     find_intervals, 
     find_inflection_points, 
     find_convexity_intervals,
-    plot_horizontal_asymptotes
+    plot_horizontal_asymptotes,
+    find_and_plot_slant_asymptote
     )
 
 def plot_graph(ax, canvas):
@@ -24,6 +25,8 @@ def plot_graph(ax, canvas):
     function_text = input_graphic.get()
 
     if function_text.strip():
+        # base_dev_checkbox1.place(x = 25, y = 65)
+        # base_dev_checkbox2.place(x = 25, y = 110)
         x = sympy.symbols('x')
         try:
             expr = sympy.sympify(function_text)
@@ -83,6 +86,10 @@ def plot_graph(ax, canvas):
                     intervals_identity_l.configure(text="8) Проміжки знакосталості")  # не вдалося обчислити інтервали знакосталості / unable to calculate sign intervals
 
             else:
+                # build_colors_labels()
+                # main_graphic_label.place(x = 25, y = 20)
+                # base_dev_checkbox1.place(x = 25, y = 65)
+                # base_dev_checkbox2.place(x = 25, y = 110)
                 dev_expr = sympy.diff(expr, x)
                 second_dev_expr = sympy.diff(dev_expr, x)
                 func = sympy.lambdify(x, expr, 'numpy')
@@ -236,6 +243,10 @@ def plot_graph(ax, canvas):
                     canvas.draw_idle()
 
                 canvas.mpl_connect('motion_notify_event', on_hover)
+                # Пошук і побудова косої асимптоти / Finding and plotting the slant asymptote
+                slant_asymptote_label = slope_asymptote  # Рівняння асимптоти / Equation of the asymptote
+                find_and_plot_slant_asymptote(expr, x, label_widget=slope_asymptote)
+
                 plot_horizontal_asymptotes(expr = expr)
 
                 canvas.draw()

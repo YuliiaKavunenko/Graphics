@@ -1,5 +1,6 @@
 import sympy, numpy
 from ..main_elements import *
+from textwrap import wrap
 from ..data_calculation import points_ox_oy,find_intervals
 from ..variables_constants import dictionary_of_variables
 # Функція для побудови і дослідження похідної у' четвертого графіку функції / Function to construct and analyze the derivative of the fourth function plot
@@ -124,8 +125,9 @@ def fourth_first_dev():
                 # Побудова графіку похідної / Plot the derivative graph
                 x_vals = numpy.linspace(-100, 100, 4000)  # Генерація x-значень / Generate x-values
                 y_vals = func(x_vals)  # Обчислення y-значень похідної / Calculate y-values for the derivative
-
-                plot_fourth_first = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_fourth_first = ax.plot(x_vals, y_vals, label=f"y' = {wrapped_label}", color='green')
 
                 # Пошук точок перетину з віссю Ox / Find intersection points with the x-axis
                 points_0x_0y = points_ox_oy(dev_of_function, 'green', label=False, lines=True, include_oy=False)

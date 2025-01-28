@@ -209,28 +209,28 @@ second_dev_seventh.configure(
     checkmark_color = text_color, # колір галочки / checkmark color
     command = seventh_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
 )
-# чекбокси базових функцій
-base_dev_checkbox1.configure(
-    bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
-    fg_color = input_color, # колір фону інпуту / input background color
-    hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
-    border_width = 2, # ширина рамки чекбоксу / checkbox border width
-    font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
-    text_color = text_color, # колір тексту чекбоксу / checkbox text color
-    border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
-    checkmark_color = text_color, # колір галочки / checkmark color
-    command = seventh_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
-)
-base_dev_checkbox2.configure(
-    bg_color = frame_background, # колір фону чекбоксу / checkbox background color
-    text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
-    fg_color = input_color, # колір фону інпуту / input background color
-    hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
-    border_width = 2, # ширина рамки чекбоксу / checkbox border width
-    font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
-    text_color = text_color, # колір тексту чекбоксу / checkbox text color
-    border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
-    checkmark_color = text_color, # колір галочки / checkmark color
-    command = seventh_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
-)
+# # чекбокси базових функцій
+# base_dev_checkbox1.configure(
+#     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
+#     text = "Графік першої похідної y'", # текст на чекбоксі / checkbox text
+#     fg_color = input_color, # колір фону інпуту / input background color
+#     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
+#     border_width = 2, # ширина рамки чекбоксу / checkbox border width
+#     font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
+#     text_color = text_color, # колір тексту чекбоксу / checkbox text color
+#     border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
+#     checkmark_color = text_color, # колір галочки / checkmark color
+#     command = base_first_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
+# )
+# base_dev_checkbox2.configure(
+#     bg_color = frame_background, # колір фону чекбоксу / checkbox background color
+#     text = "Графік другої похідної y''", # текст на чекбоксі / checkbox text
+#     fg_color = input_color, # колір фону інпуту / input background color
+#     hover_color=checkbox_hover_color, # колір чекбоксу при наведенні / checkbox hover color
+#     border_width = 2, # ширина рамки чекбоксу / checkbox border width
+#     font = ("Roboto Slab", 15), # шрифт тексту чекбоксу / checkbox text font
+#     text_color = text_color, # колір тексту чекбоксу / checkbox text color
+#     border_color = input_border_color, # колір рамки чекбоксу / checkbox border color
+#     checkmark_color = text_color, # колір галочки / checkmark color
+#     command = base_second_dev # команда для виконання при натисканні чекбоксу / command to execute on checkbox press
+# )

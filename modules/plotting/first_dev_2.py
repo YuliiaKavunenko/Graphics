@@ -1,4 +1,5 @@
 import sympy, numpy
+from textwrap import wrap
 from ..main_elements import *
 from ..data_calculation import points_ox_oy,find_intervals
 from ..variables_constants import dictionary_of_variables
@@ -137,7 +138,9 @@ def drob_first_dev():
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку похідної функції / Plotting the derivative function graph
-                plot_2_2 = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_2_2 = ax.plot(x_vals, y_vals, label=f"y' = {wrapped_label}", color='green')
                 plots_2d.append(plot_2_2)  # Додавання графіку до списку графіків / Adding the plot to the list of plots
 
                 ax.legend()  # Виведення легенди на графіку / Displaying the legend on the graph

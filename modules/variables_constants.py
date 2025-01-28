@@ -122,4 +122,16 @@ dictionary_of_variables = {
     'panning': False,
     'start_x': 0,
     'start_y': 0,
+
+    'base_first_dev'  : [], 
+    'base_first_ox' : [], 
+    'base_first_lines' : [],   
+    'base_first_local_max' : None, 
+    'base_first_local_min'  : None,    
+
+    'base_second_dev' : [], 
+    'base_second_ox' : [],  
+    'base_second_lines' : [],    
+    'base_second_inflection_points' : [], 
+
 }

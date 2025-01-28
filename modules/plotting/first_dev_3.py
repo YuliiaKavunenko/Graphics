@@ -1,5 +1,6 @@
 import sympy, numpy
 from ..main_elements import *
+from textwrap import wrap
 from ..data_calculation import points_ox_oy,find_intervals
 from ..variables_constants import dictionary_of_variables
 # функція для побудови і виконання дослідження похідної у' третього графіку функції / Function for constructing and analyzing the first derivative of the third graph function
@@ -116,8 +117,9 @@ def third_first_dev():
 
                 x_vals = numpy.linspace(-100, 100, 4000)  # Визначення діапазону значень x / Defining the range of x values
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
-
-                plot_third_first = ax.plot(x_vals, y_vals, label=f"y' = {rounded_derivative}", color='green')  # Побудова графіку першої похідної / Plotting the first derivative graph
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_third_first = ax.plot(x_vals, y_vals, label=f"y' = {wrapped_label}", color='green')  # Побудова графіку першої похідної / Plotting the first derivative graph
                 # plots.append(plot)
 
                 # Пошук точок перетину з Ox / Finding intersection points with Ox

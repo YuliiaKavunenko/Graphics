@@ -9,6 +9,7 @@ def clean_button():
     green_gr.place_forget()
     blue_gr.place_forget()
 
+
     first_dev.deselect()
     second_dev.deselect()
     first_dev_fdrob.deselect()
@@ -23,6 +24,8 @@ def clean_button():
     second_dev_sixth.deselect()
     first_dev_seventh.deselect()
     second_dev_seventh.deselect()
+    base_dev_checkbox1.deselect()
+    base_dev_checkbox2.deselect()
     
     a_1.delete(0,"end")  # очищаємо поле для коефіцієнта a / clearing the field for coefficient a
     b_1.delete(0,"end")  # очищаємо поле для коефіцієнта b / clearing the field for coefficient b
@@ -100,6 +103,8 @@ def clean_button():
     second_dev_fifth.place_forget()
     first_dev_sixth.place_forget()
     second_dev_sixth.place_forget()
+    base_dev_checkbox1.place_forget()
+    base_dev_checkbox2.place_forget()
 
 
     a1_seventh.delete(0,"end")
@@ -117,6 +122,9 @@ def clean_for_functions():
     red_gr.place_forget()
     green_gr.place_forget()
     blue_gr.place_forget()
+
+    base_dev_checkbox1.place_forget()
+    base_dev_checkbox2.place_forget()
 
     first_dev.deselect()
     second_dev.deselect()

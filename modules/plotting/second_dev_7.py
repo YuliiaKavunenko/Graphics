@@ -3,6 +3,8 @@ from ..main_elements import *
 from ..variables_constants import *
 from ..data_calculation import points_ox_oy, find_inflection_points, find_convexity_intervals
 from .plot_constant_function import plot_constant_function
+from textwrap import wrap
+
 # функція для побудови і виконання дослідження похідної у'' другого графіку функції / Function for constructing and analyzing the second derivative of the second graph function
 def seventh_second_dev():
     check = second_dev_seventh.get()  # Отримання значення чекбоксу / Getting the value of the checkbox
@@ -78,7 +80,9 @@ def seventh_second_dev():
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку другої похідної функції / Plotting the second derivative function graph
-                plot_seventh_second = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_seventh_second = ax.plot(x_vals, y_vals, label=f"y'' = {wrapped_label}", color='blue')
                 
                 # plots_2d.append(plot_3_2)  # Додавання графіку до списку графіків / Adding the plot to the list of plots
 
@@ -124,8 +128,6 @@ def seventh_second_dev():
                 line.remove()
             plot_seventh_second.clear()
             canvas.draw()
-        # plot_3_2.remove()
-        # plots_2d.remove(plot_3_2)
 
         # видалення точок 0х, пунктирних ліній і точок перегину / Removing 0x points, dashed lines, and inflection points
         if inflection_points_scatter_7:

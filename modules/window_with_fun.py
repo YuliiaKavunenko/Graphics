@@ -279,6 +279,7 @@ def clean_old_gr():
     from .plotting import clean_button
 
     clean_button()
+    
     seventh_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної сьомої функції / clearing the label text for the first derivative of the seventh function
     seventh_s_dev_label.configure(text = "y'' = очікування введення даних")  # очищаємо текст лейблу другої похідної сьомої функції / clearing the label text for the second derivative of the seventh function
     fifth_f_dev_label.configure(text = "y' = очікування введення даних")  # очищаємо текст лейблу першої похідної п'ятої функції / clearing the label text for the first derivative of the fifth function

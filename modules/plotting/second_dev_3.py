@@ -1,6 +1,7 @@
 import sympy, numpy
 from ..main_elements import *
 from ..variables_constants import *
+from textwrap import wrap
 from ..data_calculation import points_ox_oy, find_inflection_points, find_convexity_intervals
 # функція для побудови і виконання дослідження похідної у'' першого графіку функції / Function for constructing and analyzing the second derivative of the first graph function
 def third_second_dev():
@@ -41,7 +42,9 @@ def third_second_dev():
                 y_vals = func(x_vals)  # Обчислення значень y для відповідних x / Calculating y values for the corresponding x values
 
                 # Побудова графіку другої похідної / Plotting the second derivative graph
-                plot_third_second = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_third_second = ax.plot(x_vals, y_vals, label=f"y'' = {wrapped_label}", color='blue')
 
                 # пошук точок перегину / Finding inflection points
                 inflection_points = find_inflection_points(second_dev_of_function)

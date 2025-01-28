@@ -1,6 +1,7 @@
 import sympy, numpy
 from ..main_elements import *
 from ..variables_constants import *
+from textwrap import wrap
 from ..data_calculation import points_ox_oy, find_inflection_points, find_convexity_intervals
 # Функція для побудови і виконання дослідження похідної у'' четвертого графіку функції / Function to construct and study the second derivative of the fourth graph of the function
 def fourth_second_dev():
@@ -43,8 +44,9 @@ def fourth_second_dev():
             else:
                 x_vals = numpy.linspace(-100, 100, 4000)  # Генерація значень x від -10 до 10 / Generating x values from -10 to 10
                 y_vals = func(x_vals)  # Обчислення значень функції для заданих x / Computing function values for given x
-
-                plot_fourth_second = ax.plot(x_vals, y_vals, label=f"y'' = {rounded_derivative}", color='blue')  # Побудова нового графіка другої похідної / Plotting the new second derivative graph
+                label = f"{rounded_derivative}"
+                wrapped_label = '\n'.join(wrap(label, 60))
+                plot_fourth_second = ax.plot(x_vals, y_vals, label=f"y'' = {wrapped_label}", color='blue')  # Побудова нового графіка другої похідної / Plotting the new second derivative graph
                 # plots.append(plot)
                 
                 # Пошук точок перегину / Finding inflection points
