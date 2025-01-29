@@ -28,7 +28,7 @@ def find_and_plot_slant_asymptote(expr, x_symbol, label_widget = None):
         asymptote_func = sympy.lambdify(x_symbol, asymptote_expr, 'numpy')
 
         # Будуємо асимптоту / Plot the asymptote
-        x_vals = numpy.linspace(-10, 10, 400)  # Генеруємо значення x від -10 до 10 / Generate x values from -10 to 10
+        x_vals = numpy.linspace(-100, 100, 4000)  # Генеруємо значення x від -10 до 10 / Generate x values from -10 to 10
         y_vals = asymptote_func(x_vals)  # Обчислюємо значення y для асимптоти / Compute the y values for the asymptote
 
         ax.plot(x_vals, y_vals, linestyle='--', color='brown', label=f"y = {k:.2f}x + {b:.2f}")  # Додаємо асимптоту на графік / Add the asymptote to the graph

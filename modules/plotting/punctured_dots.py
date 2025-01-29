@@ -1,8 +1,5 @@
 import sympy
 from ..main_elements import *
-import numpy as np
-import matplotlib.pyplot as plt
-from sympy import symbols, limit, oo, sympify
 
 # Функція для знаходження і побудови асимптот та виколотих точок / Function for finding and plotting asymptotes and punctured points
 def punctured_dots(function):

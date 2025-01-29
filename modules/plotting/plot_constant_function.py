@@ -5,7 +5,7 @@ plots = []
 # функція для побудови функцій-констант / function for constructing constant functions
 def plot_constant_function(a, color):
     # створення значень x в діапазоні від -10 до 10 / creating x values in the range from -10 to 10
-    x_vals = numpy.linspace(-10, 10, 400)
+    x_vals = numpy.linspace(-100, 100, 4000)
     # створення значень y, які дорівнюють a для кожного значення x / creating y values equal to a for each x value
     y_vals = [a] * len(x_vals)
     # побудова графіка константної функції / plotting the constant function
