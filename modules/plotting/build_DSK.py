@@ -31,7 +31,6 @@ def build_DSK():
     ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
     ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
 
-    # Убираем привязку меток осей к положению графика
     ax.xaxis.set_label_coords(1.05, 0.5)  # Фіксуємо мітку "x" справа від холста, по центру
     ax.yaxis.set_label_coords(0.5, 1.05)  # Фіксуємо мітку "y" зверху від холста, по центру
 

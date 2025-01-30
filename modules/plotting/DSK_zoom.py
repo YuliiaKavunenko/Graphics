@@ -16,7 +16,7 @@ start_y = 0
 def zoom(event=None, key=None):
     global panning, start_x, start_y
 
-    # Обработка перемещения (панорамирования) графика
+    # обробка переміщення графіку
     if event and event.name == "button_press_event" and event.button == 1:  # Левая кнопка мыши
         if event.xdata is not None and event.ydata is not None:  # Проверка на None
             panning = True
@@ -38,13 +38,13 @@ def zoom(event=None, key=None):
             canvas.draw()
         return
 
-    # Обработка масштабирования через колесо мыши или кнопки
+    # обробка збільшення і зменшення графіку через мишку і кнопки
     if key in ('+', '-') or (event and event.name == "scroll_event"):
-        # Получаем текущие границы осей
+        # отримуємо границі осей
         x_min, x_max = ax.get_xlim()
         y_min, y_max = ax.get_ylim()
 
-        # Определяем коэффициент масштабирования
+        # встановлюємо коєфіцієнт маштабування
         if key == '+':
             scale_factor = 0.9
         elif key == '-':
@@ -54,17 +54,17 @@ def zoom(event=None, key=None):
         else:
             return
 
-        # Рассчитываем новые границы для осей
+        # рахуємо нові границі для осей
         x_range = (x_max - x_min) * scale_factor
         y_range = (y_max - y_min) * scale_factor
 
-        # Центрируем масштабирование относительно текущего окна
+        # центруємо маштабування вібносно вікна
         x_center = (x_max + x_min) / 2
         y_center = (y_max + y_min) / 2
 
-        # Обновляем границы осей
+        #оновлення границь осей
         ax.set_xlim([x_center - x_range / 2, x_center + x_range / 2])
         ax.set_ylim([y_center - y_range / 2, y_center + y_range / 2])
 
-        # Обновляем график
+        # перемалювання графіку
         canvas.draw()

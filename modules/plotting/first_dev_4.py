@@ -151,9 +151,7 @@ def fourth_first_dev():
                 dictionary_of_variables['ox_points_fourth_first'] = ox_points_fourth_first
                 dictionary_of_variables['h_lines_fourth_first'] = h_lines_fourth_first
                 dictionary_of_variables['local_max_fourth_first'] = local_max_fourth_first
-                dictionary_of_variables['local_max_text_fourth_first'] = local_max_text_fourth_first
                 dictionary_of_variables['local_min_fourth_first'] = local_min_fourth_first
-                dictionary_of_variables['local_min_text_fourth_first'] = local_min_text_fourth_first
                 
                 # Приклад обробки винятків при знаходженні першої дробової похідної / Example of exception handling in finding the first fractional derivative
                 # except Exception as e:

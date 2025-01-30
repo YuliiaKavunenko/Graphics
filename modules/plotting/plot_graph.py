@@ -94,7 +94,7 @@ def plot_graph(ax, canvas):
                 second_dev_expr = sympy.diff(dev_expr, x)
                 func = sympy.lambdify(x, expr, 'numpy')
 
-                x_vals = numpy.linspace(-100, 100, 4000)
+                x_vals = numpy.linspace(-100, 100, 40000)
                 y_vals = func(x_vals)
 
                 ax.plot(x_vals, y_vals, label=f'y = {function_text}', color='red')
