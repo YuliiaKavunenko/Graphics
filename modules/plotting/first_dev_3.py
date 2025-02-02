@@ -24,9 +24,7 @@ def third_first_dev():
             dev_of_function = sympy.diff(function, x)  # Обчислення першої похідної функції / Calculating the first derivative of the function
             rounded_derivative = dev_of_function  
             for atom in dev_of_function.atoms():
-                # Если атом является числом с плавающей точкой
                 if atom.is_Float:
-                    # Заменяем его на округлённое значение
                     rounded_derivative = rounded_derivative.xreplace({atom: round(atom, 2)})
             if isinstance(dev_of_function, sympy.Number):  # Якщо вираз є числом / If the expression is a number
                 plot_constant_function(float(dev_of_function), 'green')  # Побудова графіка для константи / Plotting the graph for the constant
