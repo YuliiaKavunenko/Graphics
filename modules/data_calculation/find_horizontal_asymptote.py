@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
     Функція знаходить і будує горизонтальні асимптоти для заданої функції.
 '''
 
-def plot_horizontal_asymptotes(expr, color='brown', linestyle='--'):
+def plot_horizontal_asymptotes(expr, color='orange', linestyle='--'):
     from ..main_elements import canvas
 
     # Символ змінної x / Symbol for the variable x
@@ -19,11 +19,11 @@ def plot_horizontal_asymptotes(expr, color='brown', linestyle='--'):
     # Побудова горизонтальної асимптоти при x -> +∞, якщо вона існує
     # Plot horizontal asymptote as x -> +∞ if it exists
     if lim_pos_inf.is_real:
-        plt.axhline(float(lim_pos_inf), color=color, linestyle=linestyle, label=f"Асимптота при x → +∞: y = {lim_pos_inf}")
+        plt.axhline(float(lim_pos_inf), color = color, linestyle = linestyle, linewidth = 2,label = f"Асимптота при x → +∞: y = {lim_pos_inf}")
 
     # Побудова горизонтальної асимптоти при x -> -∞, якщо вона існує
     # Plot horizontal asymptote as x -> -∞ if it exists
     if lim_neg_inf.is_real:
-        plt.axhline(float(lim_neg_inf), color=color, linestyle=linestyle, label=f"Асимптота при x → -∞: y = {lim_neg_inf}")
+        plt.axhline(float(lim_neg_inf), color = color, linestyle = linestyle, linewidth = 2, label = f"Асимптота при x → -∞: y = {lim_neg_inf}")
 
     canvas.draw()

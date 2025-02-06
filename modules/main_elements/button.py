@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from .windows import main
-from .frame import frame_first
+from .frame import frame_first, frame_for_options
 
 # Ініціалізація змінної tooltip_window / Initializing the tooltip_window variable
 from ..variables_constants import dictionary_of_variables
@@ -154,3 +154,11 @@ button_minus = ctk.CTkButton(
 )
 button_minus.bind("<Enter>", lambda event: show_tooltip_with_delay(event, "Зменшення маштабу ДСК"))
 button_minus.bind("<Leave>", hide_tooltip) 
+
+posibnik_button = ctk.CTkButton(
+    master= frame_for_options,
+    width= 327,
+    height = 40
+)
+posibnik_button.bind("<Enter>", lambda event: show_tooltip_with_delay(event, "Відкриття посібника користувача"))
+posibnik_button.bind("<Leave>", hide_tooltip) 

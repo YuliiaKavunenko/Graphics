@@ -62,14 +62,26 @@ def find_intervals(first_dev, function):
     # Пошук глобального максимуму і мінімуму (на визначеній області)
     global_max = "не існує"
     global_min = "не існує"
-    try:
-        domain = sympy.calculus.util.continuous_domain(function, x, sympy.S.Reals)
-        if domain.is_finite:
-            boundary_values = [(pt, function.subs(x, pt).evalf()) for pt in domain]
-            global_max = max(boundary_values, key=lambda t: t[1])
-            global_min = min(boundary_values, key=lambda t: t[1])
-    except:
-        pass
+
+    # Знаходимо область значень функції
+    possible_values = []
+    for point in critical_points:
+        if point.is_real and -100 <= point <= 100:
+            possible_values.append((float(point), float(function.subs(x, point).evalf())))
+
+    # Значення функції на межах x = -100 і x = 100
+    bound_values = [(-100, function.subs(x, -100).evalf()), (100, function.subs(x, 100).evalf())]
+    possible_values.extend(bound_values)
+
+    # Визначення глобальних екстремумів
+    if possible_values:
+        max_point, max_value = max(possible_values, key=lambda t: t[1])
+        min_point, min_value = min(possible_values, key=lambda t: t[1])
+        
+        if max_point not in [-100, 100]:
+            global_max = (max_point, max_value)
+        if min_point not in [-100, 100]:
+            global_min = (min_point, min_value)
 
     # Замінюємо -∞ та ∞ на символи
     formatted_intervals = []

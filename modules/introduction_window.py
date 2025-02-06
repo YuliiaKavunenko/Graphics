@@ -27,7 +27,7 @@ input_textholder_color = "#CAA37D"
 # колір при наведенні на кнопку scroll frame (меню усіх базових функцій) / color when hovering over the scroll frame button (menu of all basic functions)
 hover_color_menu = "#F3E4D5"
 # колір при наведенні на кнопку / color when hovering over the button
-button_hover_color = "#8B7166"
+button_hover_color = "#4D362C"
 # колір при наведенні на checkbox / color when hovering over the checkbox
 checkbox_hover_color = "#EBCDAE"
 
@@ -163,7 +163,4 @@ def introduction():
         command = open_document_window, # команда для виконання при натисканні кнопки / command to execute on button press        
     )
     
-    # встановлюємо, що запуск відбувається по двійному кліку на титульний додаток / set the start to occur on a double-click on the title application
-    # intrd_window.bind("<Double-Button-1>", open_main_window)
-    # запуск титульного додатку / run the title application
     intrd_window.mainloop()

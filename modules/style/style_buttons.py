@@ -1,6 +1,7 @@
 from ..main_elements import *
 from ..plotting import *
 from ..window_with_fun import functions_window
+from ..document_window import open_manual
 
 # кольори для елементів у вікні  / colors for elements in the window
 # колір для фону вікна / color for window background
@@ -22,7 +23,7 @@ input_textholder_color = "#CAA37D"
 # колір при наведенні на кнопку scroll frame (меню усіх базових функцій) / color when hovering over the scroll frame button (menu of all basic functions)
 hover_color_menu = "#F3E4D5"
 # колір при наведенні на кнопку / color when hovering over the button
-button_hover_color = "#8B7166"
+button_hover_color = "#4D362C"
 # колір при наведенні на checkbox / color when hovering over the checkbox
 checkbox_hover_color = "#EBCDAE"
 
@@ -52,7 +53,7 @@ get_grachic_1.configure(
 
 # кнопка для очищення графіку / button to clear the graph
 clean_graphic.configure(
-    text='очистити', # текст на кнопці / text on the button
+    text='Очистити', # текст на кнопці / text on the button
     fg_color=button_color, # колір кнопки / button color
     text_color=text_button_color, # колір тексту кнопки / button text color
     hover_color=button_hover_color, # колір кнопки при наведенні / button hover color
@@ -156,5 +157,18 @@ button_minus.configure(
     font=("Roboto Slab", 15), # шрифт тексту кнопки / button text font
 )
 
-button_plus.configure(command=lambda: zoom(key='+'))
-button_minus.configure(command=lambda: zoom(key='-'))
+button_plus.configure(command = lambda: zoom(key='+'))
+button_minus.configure(command = lambda: zoom(key='-'))
+
+# кнопка для відкриття посібника користувача з вікна програмної частини / button to open the user manual in the program window
+posibnik_button.configure(
+    bg_color = frame_background, # фоновий колір кнопки / button background color
+    text = 'Посібник користувача', # текст на кнопці / text on the button
+    fg_color = button_color, # колір кнопки / button color
+    text_color = text_button_color, # колір тексту кнопки / button text color
+    hover_color = button_hover_color, # колір кнопки при наведенні / button hover color
+    corner_radius = 10, # радіус скруглення кутів кнопки / button corner radius
+    font = ("Roboto Slab", 15), # шрифт тексту кнопки / button text font
+    command = lambda: open_manual() # команда для виконання при натисканні кнопки / command to execute on button press
+)
+ 

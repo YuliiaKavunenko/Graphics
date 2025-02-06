@@ -107,6 +107,8 @@ def run_main():
 
     button_plus.place(x = 625, y = 15)
     button_minus.place(x = 580, y = 15)
+
+    posibnik_button.place(x = 16, y = 11)
     # запускаємо додаток у роботу / start the application
     main.protocol("WM_DELETE_WINDOW", on_close)
     main.deiconify()

@@ -30,7 +30,7 @@ input_textholder_color = "#CAA37D"
 # колір при наведенні на кнопку scroll frame (меню усіх базових функцій) / color when hovering over the scroll frame button (menu of all basic functions)
 hover_color_menu = "#F3E4D5"
 # колір при наведенні на кнопку / color when hovering over the button
-button_hover_color = "#8B7166"
+button_hover_color = "#4D362C"
 # колір при наведенні на checkbox / color when hovering over the checkbox
 checkbox_hover_color = "#EBCDAE"
 # шлях до поточної директорії / path to the current directory
@@ -179,7 +179,7 @@ def run_document():
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
     button_it.place(x = 20, y = 319)
     # створюємо кнопку ctk.CTkButton для повернення до титульної сторінки / 
-    button_it = ctk.CTkButton(master = document_window, width = 252, height = 60, text="Повернутися до\nтитульного вікна",
+    button_it = ctk.CTkButton(master = document_window, width = 252, height = 60, text="Повернутися до\nпопереднього вікна",
                                   fg_color = button_color, text_color = text_button_color, hover_color = button_hover_color, font = ("Roboto Slab", 20),
                                   command = lambda: document_window.destroy())
     # розташовуємо кнопку на вказаних координатах / places the button at the specified coordinates
@@ -188,3 +188,9 @@ def run_document():
 
     # запускаємо головний цикл обробки подій вікна / starts the main event loop of the window
     document_window.mainloop()
+
+def open_manual():
+    document_window = run_document()
+    display_document(document_window, os.path.join(PATH, "user_posibnik.pdf"), 
+                    label_starttext = document_window.winfo_children()[0], 
+                    label_text = "Посібник користувача")
