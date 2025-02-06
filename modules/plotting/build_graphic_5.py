@@ -39,11 +39,11 @@ def build_fifth_func():
             
                 # Розміщення чекбоксів / Placing checkboxes
                 if a1 != 0:
-                    first_dev_fifth.place(x = 25, y = 65)
+                    first_dev_fifth.place(x = 25, y = 116)
                     first_dev_fifth.deselect()
-                    second_dev_fifth.place(x = 25, y = 110)
+                    second_dev_fifth.place(x = 25, y = 161)
                     second_dev_fifth.deselect()
-                    main_graphic_label.place(x=25, y=20)
+                    main_graphic_label.place(x=25, y = 71)
                     # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
                     build_colors_labels()
                     expr = (x**2 + a1) / (x**2 - a2)  # Визначення виразу функції / Defining the function expression

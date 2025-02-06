@@ -44,12 +44,12 @@ def build_sixth_func():
                     
                 else:
                     # Розміщення чекбоксів / Placing checkboxes
-                    first_dev_sixth.place(x = 25, y = 65)
+                    first_dev_sixth.place(x = 25, y = 116)
                     first_dev_sixth.deselect()
-                    second_dev_sixth.place(x = 25, y = 110)
+                    second_dev_sixth.place(x = 25, y = 161)
                     second_dev_sixth.deselect()
 
-                    main_graphic_label.place(x=25, y=20)
+                    main_graphic_label.place(x=25, y = 71)
             
                     # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
                     build_colors_labels()

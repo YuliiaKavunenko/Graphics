@@ -47,11 +47,11 @@ def build_graphic_1():
                 main_graphic_label.place(x=25, y=20)
                 constant_function_label.place(x = 0, y = 60)
             else:
-                first_dev.place(x = 25, y = 65)
+                first_dev.place(x = 25, y = 116)
                 first_dev.deselect()
-                second_dev.place(x = 25, y = 110)
+                second_dev.place(x = 25, y = 161)
                 second_dev.deselect()
-                main_graphic_label.place(x = 25, y = 20)
+                main_graphic_label.place(x = 25, y = 71)
                 build_colors_labels()  # розміщуємо кольорові лейбли / placing colored labels
 
             # видаляємо значення в полях похідних, щоб уникнути помилок повторення символів / deleting values in derivative fields to avoid symbol repetition errors

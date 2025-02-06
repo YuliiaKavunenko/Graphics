@@ -32,12 +32,12 @@ def build_seventh_func():
             a = float(a)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
             # Розміщення чекбоксів / Placing checkboxes
             if a != 0:
-                first_dev_seventh.place(x = 25, y = 65)
+                first_dev_seventh.place(x = 25, y = 116)
                 first_dev_seventh.deselect()
-                second_dev_seventh.place(x = 25, y = 110)
+                second_dev_seventh.place(x = 25, y = 161)
                 second_dev_seventh.deselect()
 
-                main_graphic_label.place(x=25, y=20)
+                main_graphic_label.place(x = 25, y = 71)
                 
                 # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
                 build_colors_labels()

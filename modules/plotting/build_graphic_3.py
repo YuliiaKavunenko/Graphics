@@ -31,11 +31,11 @@ def build_third_func():
             a = float(a)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
             # Розміщення чекбоксів / Placing checkboxes
             if a != 0:
-                first_dev_sdrob.place(x=25, y=65)
+                first_dev_sdrob.place(x=25, y = 116)
                 first_dev_sdrob.deselect()
-                second_dev_sdrob.place(x=25, y=110)
+                second_dev_sdrob.place(x = 25, y = 161)
                 second_dev_sdrob.deselect()
-                main_graphic_label.place(x=25, y=20)
+                main_graphic_label.place(x = 25, y = 71)
                 build_colors_labels()  # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
             else:
                 red_gr.place(x = 1, y = 20)

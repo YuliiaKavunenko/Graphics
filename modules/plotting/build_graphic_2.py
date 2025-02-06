@@ -38,12 +38,12 @@ def build_drob_graphic():
             else:
 
                 # Розміщення чекбоксів / Placing checkboxes
-                first_dev_fdrob.place(x=25, y=65)
+                first_dev_fdrob.place(x=25, y = 116 )
                 first_dev_fdrob.deselect()
-                second_dev_fdrob.place(x=25, y=110)
+                second_dev_fdrob.place(x=25, y = 161)
                 second_dev_fdrob.deselect()
 
-                main_graphic_label.place(x=25, y=20)
+                main_graphic_label.place(x=25, y = 71)
                 # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
                 build_colors_labels()
 

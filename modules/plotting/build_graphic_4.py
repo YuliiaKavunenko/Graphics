@@ -28,12 +28,12 @@ def build_fourth_func():
         try:
             a = float(a)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
             # Розміщення чекбоксів / Placing checkboxes
-            first_dev_fourth.place(x=25, y=65)
+            first_dev_fourth.place(x=25, y = 116)
             first_dev_fourth.deselect()
-            second_dev_fourth.place(x=25, y=110)
+            second_dev_fourth.place(x=25, y = 161)
             second_dev_fourth.deselect()
 
-            main_graphic_label.place(x=25, y=20)
+            main_graphic_label.place(x = 25, y = 71)
             build_colors_labels()  # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
             
         except ValueError:
