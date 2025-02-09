@@ -29,7 +29,7 @@ image_name = 'error.png'
 def show_error_window(error_message):
     from .plotting import clean_button
     error_window = ctk.CTkToplevel()
-    error_window.title(" ")
+    error_window.title("Помилка")
     error_window.resizable(False, False)
 
     error_window.update_idletasks()

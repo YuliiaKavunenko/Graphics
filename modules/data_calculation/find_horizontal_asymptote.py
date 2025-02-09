@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
     Функція знаходить і будує горизонтальні асимптоти для заданої функції.
 '''
 
-def plot_horizontal_asymptotes(expr, color='orange', linestyle='--'):
+def plot_horizontal_asymptotes(expr, color='#ff6b00', linestyle='--'):
     from ..main_elements import canvas
 
     # Символ змінної x / Symbol for the variable x

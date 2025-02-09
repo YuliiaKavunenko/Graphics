@@ -118,7 +118,7 @@ def run_document():
     # створюємо новий екземпляр вікна ctk.CTk / creates a new instance of ctk.CTk window
     document_window = ctk.CTkToplevel(intrd_window)
     # встановлюємо заголовок вікна "Документація" / sets the window title to "Документація"
-    document_window.title("Випускна робота. Документація")
+    document_window.title("Теоретична частина")
     # забороняємо зміну розмірів вікна / disables window resizing
     document_window.resizable(False, False)
     # налаштовуємо колір фону вікна / configures the window background color

@@ -17,7 +17,7 @@ def run_main():
     ctk.set_default_color_theme("dark-blue")
 
     # Встановлюємо назву для вікна / Set window title
-    main.title("Випускна робота. Додаток")
+    main.title("Програмна частина")
     # Задаємо ширину для вікна / Set window width
     window_width = 1400
     # Задаємо висоту для вікна / Set window height

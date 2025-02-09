@@ -61,7 +61,7 @@ def functions_window():
     # робимо, щоб не можна було змінити розмір вікна / making the window size unchangeable
     window_with_fun.resizable(False, False)
     # задаємо назву для вікна / setting the window title
-    window_with_fun.title("Вікно вибору функції для дослідження")
+    window_with_fun.title("Вибір функції для дослідження")
     # задаємо колір фону для вікна / setting the background color for the window
     window_with_fun.configure(
         fg_color = background,
