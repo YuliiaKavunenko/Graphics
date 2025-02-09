@@ -62,7 +62,7 @@ def build_graphic_1():
             a_3.delete(0,"end")
             b_3.delete(0,"end")
         except ValueError:
-            show_error_window("Помилка! Всі коефіцієнти повинні бути числами!")
+            show_error_window(" ! Всі коефіцієнти повинні бути числами!")
 
         expr = a*x**3 + b*x**2 + c*x + d  # створюємо вираз для функції / creating the expression for the function
         if isinstance(expr, sympy.Number):  # перевіряємо, чи є вираз числом / checking if the expression is a number
@@ -117,7 +117,7 @@ def build_graphic_1():
 
                 intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # оновлюємо лейбл для інтервалів знакосталості / update the label for sign intervals
             except Exception as e:
-                print(f"Помилка обчислення проміжків знакосталості: {e}")  # помилка під час обчислення інтервалів знакосталості / error calculating sign intervals
+                print(f"  обчислення проміжків знакосталості: {e}")  #   під час обчислення інтервалів знакосталості / error calculating sign intervals
                 intervals_identity_l.configure(text="8) Проміжки знакосталості")  # не вдалося обчислити інтервали знакосталості / unable to calculate sign intervals
 
         else:
@@ -188,7 +188,7 @@ def build_graphic_1():
 
                 intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # оновлюємо лейбл для інтервалів знакосталості / update the label for sign intervals
             except Exception as e:
-                print(f"Помилка обчислення проміжків знакосталості: {e}")  # помилка під час обчислення інтервалів знакосталості / error calculating sign intervals
+                print(f"  обчислення проміжків знакосталості: {e}")  #   під час обчислення інтервалів знакосталості / error calculating sign intervals
                 intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # не вдалося обчислити інтервали знакосталості / unable to calculate sign intervals
 
             punctured_asymptots_text = punctured_dots(expr)  # перевіряємо наявність точок розриву у функції / check for punctured points in the function
@@ -201,4 +201,4 @@ def build_graphic_1():
                 text.set_color('red')  # встановлюємо червоний колір тексту легенди / setting the legend text color to red
             canvas.draw()  # перерисовуємо холст / redrawing the canvas
     else:
-        show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')
+        show_error_window(' ! Для початку введіть усі коєфіцієнти!')

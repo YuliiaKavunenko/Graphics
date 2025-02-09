@@ -116,7 +116,7 @@ def check_second_dev():
                 dictionary_of_variables['inflection_points_scatter'] = inflection_points_scatter
 
                 # except Exception as e:
-                #     print(f"Помилка третьої похідної: {e}")  # Виведення повідомлення про помилку третьої похідної / Outputting message about third derivative error
+                #     print(f"  третьої похідної: {e}")  # Виведення повідомлення про помилку третьої похідної / Outputting message about third derivative error
     elif check == 0:  # Якщо перевірка не активна і графік є у списку / If the check is not active and the plot is in the list
         # видаляємо графік другої похідної / remove the second derivative plot
         if plot_3 in plots:

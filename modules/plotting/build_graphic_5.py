@@ -34,7 +34,7 @@ def build_fifth_func():
             a1 = float(a1)  # Перетворення a у число з плаваючою крапкою / Converting a to a float
             a2 = float(a2)  # Перетворення b у число з плаваючою крапкою / Converting b to a float
             if a1 != a2:
-                show_error_window('Помилка! Коєфіцієнти "а" повинні бути однаковими!')
+                show_error_window(' ! Коєфіцієнти "а" повинні бути однаковими!')
             else:
             
                 # Розміщення чекбоксів / Placing checkboxes
@@ -140,7 +140,7 @@ def build_fifth_func():
 
                             intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # Налаштування тексту мітки для проміжків знакосталості / Setting the text for the sign constancy intervals label
                         except Exception as e:
-                            print(f"Помилка обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
+                            print(f"  обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
                             intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # Виведення повідомлення про неможливість обчислення / Displaying message about inability to calculate
 
                         # Пошук і побудова косої асимптоти / Finding and plotting the slant asymptote
@@ -158,7 +158,7 @@ def build_fifth_func():
                         canvas.draw()  # Оновлення графіка / Redrawing the canvas
 
                         # except Exception as e:
-                        #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
+                        #     print(f"  першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
                 else:
                     expr = 1
                     red_gr.place(x = 1, y = 20)
@@ -192,7 +192,7 @@ def build_fifth_func():
                     canvas.draw()  # Оновлення графіка / Updating the canvas
 
         except ValueError:
-            show_error_window("Помилка! Коєфіцієнти повинні бути числами!")
+            show_error_window(" ! Коєфіцієнти повинні бути числами!")
         
     else:
-        show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')
+        show_error_window(' ! Для початку введіть усі коєфіцієнти!')

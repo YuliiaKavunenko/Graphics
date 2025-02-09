@@ -68,18 +68,18 @@ def introduction():
         master = intrd_window, 
         width = 800, 
         height = 65, 
-        text = "Дніпровський науковий ліцей інформаційних\nтехнологій Дніпровської міської ради"
+        text = "Міністерство освіти і науки України\nДепартамент освіти і науки Дніпропетровської облдержадміністрації\nКомунальний позашкільний навчальний заклад\n«Мала академія науки учнівської молоді» Дніпропетровської обласної ради»"
     )
     # створюємо Label для відображення теми випускної роботи на титульному вікні / create a Label to display the graduation project topic on the title window
     proj_title_l = ctk.CTkLabel(
         master = intrd_window, 
         width = 800, height = 98, 
-        text = "ВИПУСКНА РОБОТА\nна тему:\n“Дослідження графіків функцій  за допомогою похідної”"
+        text = "Дослідження графіків функцій  за допомогою похідної"
         )
     # задаємо стилі для Label / set styles for the Label
     school_name_l.configure(
         fg_color = background, 
-        font = ("Roboto Slab", 22), 
+        font = ("Roboto Slab", 18), 
         text_color = text_color, 
         anchor = "center"
         )

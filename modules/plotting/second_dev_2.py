@@ -120,7 +120,7 @@ def drob_second_dev():
                 dictionary_of_variables['inflection_points_scatter'] = inflection_points_scatter  # Збереження точок перегину / Storing inflection points
 
                 # except Exception as e:
-                #     print(f"Помилка другої дробової похідної: {e}")  # Виведення повідомлення про помилку другої дробової похідної / Displaying message about the second fractional derivative error
+                #     print(f"  другої дробової похідної: {e}")  # Виведення повідомлення про помилку другої дробової похідної / Displaying message about the second fractional derivative error
 
     elif check == 0 and plot_3_2 in plots_2d:  # Якщо чекбокс вимкнений і графік існує у списку / If the checkbox is unchecked and the plot exists in the list
         # видалення графіка / Removing the plot

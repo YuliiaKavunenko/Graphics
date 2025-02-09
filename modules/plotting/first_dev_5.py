@@ -156,7 +156,7 @@ def fifth_first_dev():
 
                 # Приклад обробки винятків при знаходженні першої дробової похідної / Example of exception handling in finding the first fractional derivative
                 # except Exception as e:
-                #     print(f"Помилка першої дробовох похідної: {e}")  # Виведення повідомлення про помилку / Printing error message
+                #     print(f"  першої дробовох похідної: {e}")  # Виведення повідомлення про помилку / Printing error message
 
     # Перевірка стану check і наявності графіка / Checking the state of 'check' and presence of graph
     elif check == 0:  

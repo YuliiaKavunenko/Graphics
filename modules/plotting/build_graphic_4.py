@@ -37,7 +37,7 @@ def build_fourth_func():
             build_colors_labels()  # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
             
         except ValueError:
-            show_error_window("Помилка! Коєфіцієнт повинен бути числом!")
+            show_error_window(" ! Коєфіцієнт повинен бути числом!")
         
 
         expr = x / (x**2 + a)  # Визначення виразу функції / Defining the function expression
@@ -110,7 +110,7 @@ def build_fourth_func():
                     all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # Додавання кожного інтервалу до тексту / Adding each interval to the text
                 intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # Налаштування тексту мітки для проміжків знакосталості / Setting the text for the sign constancy intervals label
             except Exception as e:
-                print(f"Помилка обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
+                print(f"  обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
                 intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # Виведення повідомлення про неможливість обчислення / Displaying message about inability to calculate
 
             punctured_asymptots_text = punctured_dots(expr)  # перевіряємо наявність точок розриву у функції / check for punctured points in the function
@@ -130,7 +130,7 @@ def build_fourth_func():
             canvas.draw()  # Оновлення графіка / Redrawing the canvas
 
             # except Exception as e:
-            #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
+            #     print(f"  першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
 
     else:
-        show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')
+        show_error_window(' ! Для початку введіть усі коєфіцієнти!')

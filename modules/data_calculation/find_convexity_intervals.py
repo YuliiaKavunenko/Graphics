@@ -17,7 +17,7 @@ def find_convexity_intervals(expr):
             numerical_roots = sympy.nroots(expr, n=100, maxsteps=500)
             critical_points.update(root for root in numerical_roots if root.is_real)
         except Exception as e:
-            print(f"помилка: {e}")
+            print(f" : {e}")
 
     # Додаємо потенційні розриви (де знаменники дорівнюють нулю)
     denominators = [denom for denom in expr.as_numer_denom()[1].as_ordered_factors() if denom.has(x)]

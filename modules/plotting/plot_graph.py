@@ -82,7 +82,7 @@ def plot_graph(ax, canvas):
 
                     intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # оновлюємо лейбл для інтервалів знакосталості / update the label for sign intervals
                 except Exception as e:
-                    print(f"Помилка обчислення проміжків знакосталості: {e}")  # помилка під час обчислення інтервалів знакосталості / error calculating sign intervals
+                    print(f"  обчислення проміжків знакосталості: {e}")  #   під час обчислення інтервалів знакосталості / error calculating sign intervals
                     intervals_identity_l.configure(text="8) Проміжки знакосталості")  # не вдалося обчислити інтервали знакосталості / unable to calculate sign intervals
 
             else:
@@ -198,7 +198,7 @@ def plot_graph(ax, canvas):
                         all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"
                     intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")
                 except Exception as e:
-                    print(f"Помилка обчислення проміжків знакосталості: {e}")
+                    print(f"  обчислення проміжків знакосталості: {e}")
                     intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")
 
                 punctured_dots(expr)
@@ -251,7 +251,7 @@ def plot_graph(ax, canvas):
 
                 canvas.draw()
         except:
-            show_error_window(error_message = "Помилка! Було введено некоректні дані. Перевірте функцію ще раз.")
+            show_error_window(error_message = " ! Було введено некоректні дані. Перевірте функцію ще раз.")
 
 def build_graphic():
     plot_graph(ax, canvas)

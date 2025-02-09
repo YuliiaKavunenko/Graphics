@@ -154,7 +154,7 @@ def check_first_dev():
             dictionary_of_variables['h_lines_first'] = h_lines_first
             dictionary_of_variables['plots'] = plots
             # except Exception as e:
-            #     print(f"Помилка другого графіку: {e}")  # Виведення повідомлення про помилку другого графіку / Displaying message about second graph error
+            #     print(f"  другого графіку: {e}")  # Виведення повідомлення про помилку другого графіку / Displaying message about second graph error
 
             canvas.draw()  # Оновлення графіку / Redrawing the canvas
     elif check == 0:

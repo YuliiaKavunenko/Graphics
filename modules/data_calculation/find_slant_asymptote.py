@@ -42,6 +42,6 @@ def find_and_plot_slant_asymptote(expr, x_symbol, label_widget = None):
         canvas.draw()  # Оновлюємо графік / Update the canvas
 
     except Exception as e:
-        print(f"Помилка: {e}")  # Виведення повідомлення про помилку / Print the error message
+        print(f" : {e}")  # Виведення повідомлення про помилку / Print the error message
         if label_widget:
             label_widget.configure(text="11) Похилої асимптоти не існує")  # Оновлюємо текст лейблу при помилці / Update the label text on error

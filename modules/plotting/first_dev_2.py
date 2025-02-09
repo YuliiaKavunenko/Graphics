@@ -156,7 +156,7 @@ def drob_first_dev():
                 # third_first_dev()  # Виклик функції третьої похідної / Calling the third derivative function
 
                 # except Exception as e:
-                #     print(f"Помилка першої дробової похідної: {e}")  # Виведення повідомлення про помилку обчислення першої дробової похідної / Displaying message about first fractional derivative calculation error
+                #     print(f"  першої дробової похідної: {e}")  # Виведення повідомлення про помилку обчислення першої дробової похідної / Displaying message about first fractional derivative calculation error
 
     elif check == 0 and plot_2_2 in plots_2d:  # Якщо чекбокс вимкнений і графік існує у списку / If the checkbox is unchecked and the plot exists in the list
         # видалення графіка / Removing the plot

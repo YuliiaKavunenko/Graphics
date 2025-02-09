@@ -42,7 +42,7 @@ def build_seventh_func():
                 # Виклик функції для налаштування кольорових міток / Calling the function to set up color labels
                 build_colors_labels()
         except ValueError:
-            show_error_window("Помилка! Коєфіцієнт повинен бути числом!")
+            show_error_window(" ! Коєфіцієнт повинен бути числом!")
         expr = (x**2 + x + a)/x  # Визначення виразу функції / Defining the function expression
         if a != 0:
             if isinstance(expr, sympy.Number):  # Якщо вираз є числом / If the expression is a number
@@ -108,7 +108,7 @@ def build_seventh_func():
 
                     intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # Налаштування тексту мітки для проміжків знакосталості / Setting the text for the sign constancy intervals label
                 except Exception as e:
-                    print(f"Помилка обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
+                    print(f"  обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
                     intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # Виведення повідомлення про неможливість обчислення / Displaying message about inability to calculate
 
                 # Пошук і побудова косої асимптоти / Finding and plotting the slant asymptote
@@ -126,7 +126,7 @@ def build_seventh_func():
                 canvas.draw()  # Оновлення графіка / Redrawing the canvas
 
                 # except Exception as e:
-                #     print(f"Помилка першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
+                #     print(f"  першого графіку: {e}")  # Виведення повідомлення про помилку побудови першого графіку / Displaying message about the first graph building error
         else:
             expr = (x**2 + x + 0)/x
             func = sympy.lambdify(x, expr, 'numpy')  # Перетворення виразу у функцію для обчислень / Converting the expression to a function for calculations
@@ -168,9 +168,9 @@ def build_seventh_func():
                     all_sign_intervals_text += f"{sign} при х ∈ {interval}\n"  # Додавання кожного інтервалу до тексту / Adding each interval to the text
                 intervals_identity_l.configure(text=f"8) Проміжки знакосталості:\n{all_sign_intervals_text}")  # Налаштування тексту мітки для проміжків знакосталості / Setting the text for the sign constancy intervals label
             except Exception as e:
-                print(f"Помилка обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
+                print(f"  обчислення проміжків знакосталості: {e}")  # Виведення повідомлення про помилку обчислення проміжків знакосталості / Displaying message about sign constancy intervals calculation error
                 intervals_identity_l.configure(text="8) Проміжки знакосталості:\nнеможливо обчислити")  # Виведення повідомлення про неможливість обчислення / Displaying message about inability to calculate
 
             canvas.draw()  # Оновлення графіка / Updating the canvas
     else:
-        show_error_window('Помилка! Для початку введіть усі коєфіцієнти!')
+        show_error_window(' ! Для початку введіть усі коєфіцієнти!')

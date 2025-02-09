@@ -163,7 +163,7 @@ button_minus.configure(command = lambda: zoom(key='-'))
 # кнопка для відкриття посібника користувача з вікна програмної частини / button to open the user manual in the program window
 posibnik_button.configure(
     bg_color = frame_background, # фоновий колір кнопки / button background color
-    text = 'Посібник користувача', # текст на кнопці / text on the button
+    text = 'Документація', # текст на кнопці / text on the button
     fg_color = button_color, # колір кнопки / button color
     text_color = text_button_color, # колір тексту кнопки / button text color
     hover_color = button_hover_color, # колір кнопки при наведенні / button hover color

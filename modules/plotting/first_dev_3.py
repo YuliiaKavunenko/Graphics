@@ -141,7 +141,7 @@ def third_first_dev():
                 dictionary_of_variables['local_min_third_first'] = local_min_third_first  # Збереження точок локального мінімуму / Saving local minimum points
 
                 # except Exception as e:
-                #     print(f"Помилка першої дробової похідної: {e}")  # Виведення повідомлення про помилку першої похідної / Displaying message about the first derivative error
+                #     print(f"  першої дробової похідної: {e}")  # Виведення повідомлення про помилку першої похідної / Displaying message about the first derivative error
 
     elif check == 0 and plot_third_first:  # Якщо чекбокс вимкнений і графік першої похідної існує / If the checkbox is unchecked and the first derivative plot exists
         # видалення графіка першої похідної / Removing the first derivative plot
